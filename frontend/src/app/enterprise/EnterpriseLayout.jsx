@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import "./EnterpriseLayout.css";
 
 function EnterpriseLayout() {
   return (
