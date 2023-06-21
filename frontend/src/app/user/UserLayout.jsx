@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import "./UserLayout.css";
 
-function UserLayout() {
+export default function UserLayout() {
   return (
     <>
       <header>ma nav</header>
@@ -10,4 +10,3 @@ function UserLayout() {
     </>
   );
 }
-export default UserLayout;
