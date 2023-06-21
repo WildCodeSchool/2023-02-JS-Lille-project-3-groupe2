@@ -12,8 +12,6 @@ import CandidateSpacePage from "./pages/candidate/CandidateSpacePage";
 import CandidateApplicationFormPage from "./pages/candidate/CandidateApplicationFormPage";
 import EnterpriseSpacePage from "./pages/enterprise/EnterpriseSpacePage";
 import "./Utils.scss";
-import EntrepriseHome from "./pages/enterprise/EnterpriseHome";
-import CandidateHome from "./pages/candidate/CandidateHome";
 import DefaultLayout from "./app/default/DefaultLayout";
 
 const router = createBrowserRouter([
@@ -31,7 +29,7 @@ const router = createBrowserRouter([
     path: "enterprise",
     element: <EnterpriseLayout />,
     children: [
-      { path: "", element: <EntrepriseHome /> },
+      { path: "", element: <DefaultHome /> },
 
       { path: "offer", element: <OfferPage /> },
       { path: "my_space/:id", element: <EnterpriseSpacePage /> },
@@ -41,7 +39,7 @@ const router = createBrowserRouter([
     path: "candidate",
     element: <CandidateLayout />,
     children: [
-      { path: "", element: <CandidateHome /> },
+      { path: "", element: <DefaultHome /> },
 
       { path: "offer", element: <OfferPage /> },
       { path: "my_space/:id", element: <CandidateSpacePage /> },
