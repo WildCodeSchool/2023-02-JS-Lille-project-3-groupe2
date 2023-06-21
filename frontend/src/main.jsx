@@ -1,29 +1,25 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import UserLayout from "./app/user/UserLayout";
 import CandidateLayout from "./app/candidate/CandidateLayout";
 import EnterpriseLayout from "./app/enterprise/EnterpriseLayout";
 import StaffLayout from "./app/staff/StaffLayout";
-import DefaultHome from "./pages/user/DefaultHome";
+import DefaultHome from "./pages/default/DefaultHome";
 import OfferPage from "./pages/shared/OfferPage";
-import RegisterPage from "./pages/user/RegisterPage";
-import LoginPage from "./pages/user/LoginPage";
+import RegisterPage from "./pages/default/RegisterPage";
+import LoginPage from "./pages/default/LoginPage";
 import CandidateSpacePage from "./pages/candidate/CandidateSpacePage";
 import CandidateApplicationFormPage from "./pages/candidate/CandidateApplicationFormPage";
 import EnterpriseSpacePage from "./pages/enterprise/EnterpriseSpacePage";
 import "./Utils.scss";
 import EntrepriseHome from "./pages/enterprise/EnterpriseHome";
 import CandidateHome from "./pages/candidate/CandidateHome";
+import DefaultLayout from "./app/default/DefaultLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DefaultHome />,
-  },
-  {
-    path: "user",
-    element: <UserLayout />,
+    element: <DefaultLayout />,
     children: [
       { path: "", element: <DefaultHome /> },
       { path: "login", element: <LoginPage /> },

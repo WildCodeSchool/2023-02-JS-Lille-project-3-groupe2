@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-export default function UserLayout() {
+export default function DefaultLayout() {
   return (
     <>
       <header>Externatic</header>
