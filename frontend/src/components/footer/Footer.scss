@@ -1,6 +1,6 @@
 @import "../../Utils.scss";
 .footer_enterprise {
-  background-color: $primary-color-candidate;
+  background-color: $primary-color-enterprise;
 }
 footer {
   display: flex;
@@ -9,7 +9,7 @@ footer {
   width: 100%;
   font-size: 1rem;
   font-weight: 900;
-  background-color: $primary-color-enterprise;
+  background-color: $primary-color-candidate;
   color: $mono-white;
   padding: 2%;
   .footer_part1 {
