@@ -17,17 +17,14 @@ $special-color-enterprise: #b3cce6;
 $mono-black: #141414;
 $mono-white: #f5f5f5;
 
-// You have to use dvw for all the text
+//TODO ADD font-size REM
 @mixin title {
-  font-size: 4vmax;
   font-weight: 900;
 }
 @mixin under_title {
-  font-size: 3vmax;
   font-weight: 600;
 }
 @mixin text {
-  font-size: 2vmax;
   font-weight: 500;
 }
 
