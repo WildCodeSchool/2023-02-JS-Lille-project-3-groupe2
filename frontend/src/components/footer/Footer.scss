@@ -1,4 +1,7 @@
 @import "../../Utils.scss";
+.footer_enterprise {
+  background-color: $primary-color-candidate;
+}
 footer {
   display: flex;
   flex-direction: column;

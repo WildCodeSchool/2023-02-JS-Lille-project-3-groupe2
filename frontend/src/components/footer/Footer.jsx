@@ -1,9 +1,14 @@
 import { FaSquareTwitter, FaLinkedin } from "react-icons/fa6";
-import "./DefaultFooter.scss";
+import "./Footer.scss";
+import PropTypes from "prop-types";
 
-export default function Footer() {
+export default function Footer({ type }) {
   return (
-    <footer>
+    <footer
+      className={
+        type === "default" ? "" : type === "enterprise" && "footer_enterprise"
+      }
+    >
       <div className="footer_part1">
         <p className="footer_text1">
           Externatic, cabinet de recrutement informatique Externatic est un
@@ -41,3 +46,6 @@ export default function Footer() {
     </footer>
   );
 }
+Footer.propTypes = {
+  type: PropTypes.string.isRequired,
+};

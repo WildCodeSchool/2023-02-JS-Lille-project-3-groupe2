@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import DefaultFooter from "../../components/footer/DefaultFooter";
+import Footer from "../../components/footer/Footer";
 
 export default function DefaultLayout() {
   return (
     <>
       <header>Externatic</header>
       <Outlet />
-      <DefaultFooter />
+      <Footer type="default" />
     </>
   );
 }
