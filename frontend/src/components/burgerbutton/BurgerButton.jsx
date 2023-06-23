@@ -45,7 +45,7 @@ export default function BurgerButton({ type }) {
       padding: "0.8em",
     },
     bmItem: {
-      display: "inline-block",
+      display: "block",
     },
     bmOverlay: {
       background: "rgba(0, 0, 0, 0.3)",
@@ -93,12 +93,12 @@ export default function BurgerButton({ type }) {
       padding: "0.8em",
     },
     bmItem: {
-      display: "inline-block",
+      display: "block",
     },
     bmOverlay: {
       background: "rgba(0, 0, 0, 0.3)",
     },
-    Button_container_candidate: {
+    Button_container_enterprise: {
       height: "100px",
     },
   };
