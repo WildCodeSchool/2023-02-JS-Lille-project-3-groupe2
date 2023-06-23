@@ -1,0 +1,15 @@
+@import "../../Utils.scss";
+
+.video-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 5%;
+}
+
+.title-bold {
+  color: $secondary-color-candidate;
+}
