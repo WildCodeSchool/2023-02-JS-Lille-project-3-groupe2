@@ -1,0 +1,57 @@
+
+
+
+.jobOfferCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
+  border-radius: 0.5rem;
+  min-width: 30%;
+  min-height: 20%;
+  max-width: 30%; 
+  max-height: 20%;
+  }
+
+
+
+.jobOfferCardImg{
+ padding: 5%;
+  width: 40%;
+  height: auto;
+  
+}
+
+.jobOfferCardLi{
+  padding-left:10%;
+}
+
+.jobOfferCardUl {
+  display: flex;
+  flex-direction: row;
+  text-align: end;
+  
+
+  
+}
+
+.jobOfferCardNameCompany {
+  font-size: 1.5em;
+  padding-top: 1em;
+  text-align: center;
+  padding-left: 1em;
+}
+
+.jobOfferCardTitle {
+    font-size : 1em;
+  padding-left: 1em;
+}
+
+.jobOfferCardCity {
+  font-size: 1em;
+  padding-left: 1em;
+}
+
+.jobOfferCardXp {
+  font-size: 1em;
+  padding-left: 1em;
+}

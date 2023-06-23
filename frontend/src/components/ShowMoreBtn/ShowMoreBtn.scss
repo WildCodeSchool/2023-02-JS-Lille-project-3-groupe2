@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;600&display=swap");
+.showMoreBtnContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+}
+
+.ShowMoreBtn {
+  text-align: center;
+  background-color: #611959;
+  color: #F5F5F5;
+  padding: 0.5em;
+  margin-right: 3.2em;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  width: 12em;
+  height: 2.4em;
+  font-size: large;
+  box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
+}
+
+.ShowMoreBtn:hover {
+  background-color: #922685;
+}

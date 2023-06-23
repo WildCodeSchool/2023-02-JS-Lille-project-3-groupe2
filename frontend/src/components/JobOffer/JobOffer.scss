@@ -1,0 +1,25 @@
+.AjustJobOfferCardAndBtn{
+  display: flex;
+  flex-direction: column;
+  margin-left: 15em;
+  margin-right: 15em;
+  align-items: center;
+  
+}
+.JobOfferBtn {
+  display: flex;
+  align-items: center;
+  
+}
+
+.JobOfferContainer{
+  
+  height: auto;
+  margin-bottom: 1em;
+ 
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: none;
+ 
+  gap: 1.5em;
+} 
