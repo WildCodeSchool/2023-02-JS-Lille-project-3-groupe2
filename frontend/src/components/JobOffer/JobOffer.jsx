@@ -1,8 +1,8 @@
 import React from "react";
 import Auchan from "../../assets/Auchan.jpg";
 import Adeo from "../../assets/Adeo.png";
-import Goweb from "../../assets/goweb.png";
-import Lyreco from "../../assets/lyreco.jpeg";
+import Goweb from "../../assets/goweb1.jpg";
+import Lyreco from "../../assets/lyreco2.jpeg";
 import Ibm from "../../assets/ibm1.jpg";
 import Wcs from "../../assets/wcs.png";
 import "../../Utils.scss";
