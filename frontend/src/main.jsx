@@ -14,6 +14,7 @@ import EnterpriseSpacePage from "./pages/enterprise/EnterpriseSpacePage";
 import "./Utils.scss";
 import DefaultLayout from "./app/default/DefaultLayout";
 import ErrorPage from "./pages/shared/ErrorPage";
+import EnterpriseHome from "./pages/enterprise/EnterpriseHome";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
 
     children: [
-      { path: "", element: <DefaultHome /> },
+      { path: "", element: <EnterpriseHome /> },
 
       { path: "offer", element: <OfferPage /> },
       { path: "my_space/:id", element: <EnterpriseSpacePage /> },
