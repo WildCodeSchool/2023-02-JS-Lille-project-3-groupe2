@@ -13,11 +13,13 @@ import CandidateApplicationFormPage from "./pages/candidate/CandidateApplication
 import EnterpriseSpacePage from "./pages/enterprise/EnterpriseSpacePage";
 import "./Utils.scss";
 import DefaultLayout from "./app/default/DefaultLayout";
+import ErrorPage from "./pages/shared/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <DefaultLayout />,
+    errorElement: <ErrorPage />,
     children: [
       { path: "", element: <DefaultHome /> },
       { path: "login", element: <LoginPage /> },
@@ -28,6 +30,8 @@ const router = createBrowserRouter([
   {
     path: "enterprise",
     element: <EnterpriseLayout />,
+    errorElement: <ErrorPage />,
+
     children: [
       { path: "", element: <DefaultHome /> },
 
@@ -38,6 +42,8 @@ const router = createBrowserRouter([
   {
     path: "candidate",
     element: <CandidateLayout />,
+    errorElement: <ErrorPage />,
+
     children: [
       { path: "", element: <DefaultHome /> },
 
