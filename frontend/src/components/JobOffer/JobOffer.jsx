@@ -56,9 +56,6 @@ const testJobOfferData = [
   },
 ];
 export default function JobOffer() {
-  const handleShowMoreBtn = (e) => {
-    console.log('Bouton "Voir plus" cliqué !');
-  };
   return (
     <div className="AjustJobOfferCardAndBtn">
       <div className="JobOfferContainer">
@@ -74,7 +71,7 @@ export default function JobOffer() {
         ))}
       </div>
       <div className="=JobOfferBtn">
-        <ShowMoreBtn onClick={handleShowMoreBtn} />
+        <ShowMoreBtn />
       </div>
     </div>
   );

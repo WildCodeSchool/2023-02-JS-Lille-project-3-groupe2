@@ -1,7 +1,7 @@
-export default function ShowMoreBtn({ onClick }) {
+export default function ShowMoreBtn() {
   return (
     <div className="showMoreBtnContainer">
-      <button className="ShowMoreBtn" onClick={{ onClick }}>
+      <button type="button" className="ShowMoreBtn">
         Voir plus...
       </button>
     </div>

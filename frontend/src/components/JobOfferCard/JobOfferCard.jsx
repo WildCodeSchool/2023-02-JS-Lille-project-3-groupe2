@@ -1,6 +1,7 @@
 import React from "react";
 import "../../Utils.scss";
 import "./JobOfferCard.scss";
+import Proptypes from "prop-types";
 
 export default function JobOfferCard({
   image,
@@ -30,3 +31,11 @@ export default function JobOfferCard({
     </div>
   );
 }
+
+JobOfferCard.propTypes = {
+  image: Proptypes.string.isRequired,
+  nameCompany: Proptypes.string.isRequired,
+  jobTitle: Proptypes.string.isRequired,
+  city: Proptypes.string.isRequired,
+  experienceTime: Proptypes.string.isRequired,
+};
