@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
+import Navbar from "../../components/navbar/Navbar";
 
 function CandidateLayout() {
   return (
     <>
-      <header>ma nav</header>
+      {/* NavBar Goes Here */}
+      <Navbar type="default" />
       <Outlet />
       <Footer type="default" />
     </>

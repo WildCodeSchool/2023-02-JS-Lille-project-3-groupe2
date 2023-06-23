@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
+import Navbar from "../../components/navbar/Navbar";
 
 function EnterpriseLayout() {
   return (
     <>
-      <header>ma nav</header>
+      {/* NavBar Goes Here */}
+      <Navbar type="enterprise" />
       <Outlet />
       <Footer type="enterprise" />
     </>
