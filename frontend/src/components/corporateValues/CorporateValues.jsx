@@ -4,8 +4,8 @@ import { FiUsers, FiRefreshCw, FiTrendingUp } from "react-icons/fi";
 import "./CorporateValues.scss";
 
 export default function CorporateValues() {
-  const matchMobile = useMediaQuery("only screen and (max-width: 450px)");
-  const matchDesktop = useMediaQuery("only screen and (min-width: 450px)");
+  const matchMobile = useMediaQuery("only screen and (max-width: 750px)");
+  const matchDesktop = useMediaQuery("only screen and (min-width: 750px)");
 
   if (matchMobile)
     return (
