@@ -1,5 +1,16 @@
 @import "../../Utils.scss";
 
+//CSS changed for role 'enterprise
+
+.role_enterprise {
+  .title-values-mobile {
+    color: $secondary-color-enterprise;
+  }
+  .title-values-desktop {
+    color: $primary-color-enterprise;
+  }
+}
+
 //media query and CSS for MOBILE
 
 .container-values-mobile {
