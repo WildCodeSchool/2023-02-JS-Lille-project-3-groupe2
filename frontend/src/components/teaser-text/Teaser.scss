@@ -1,0 +1,57 @@
+@import "../../Utils.scss";
+
+.containerSearch {
+  display: flex;
+  flex-direction: column;
+  background-image: url("/2023-02-JS-Lille-project-3-groupe2-externatic/frontend/src/assets/imageldb.jpg");
+  font-size: 100%;
+}
+
+.img1 {
+  font-size: 50px;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  margin-right: 50%;
+  margin-left: 9%;
+  margin-bottom: 10%;
+  background-color: #611959;
+  border-radius: 7px;
+  margin-top: -2%;
+  z-index: 100;
+}
+
+.search input {
+  width: 300px;
+  border: 1px solid #d8d8d8;
+  padding: 5px;
+  font-size: 11pt;
+  margin: 10px;
+  border-radius: 7px;
+}
+
+.search-bar {
+  max-width: 80%;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.search button {
+  padding: 5px 8px;
+  border: 1px solid #d0d0d0;
+  color: #444444;
+  border-radius: 7px;
+}
+
+.search button:hover {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.buttonSearch {
+  display: flex;
+  align-self: center;
+}
