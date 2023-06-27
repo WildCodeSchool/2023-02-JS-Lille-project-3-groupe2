@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:weight@900&display=swap");
+
+* {
+  font-family: "League Spartan", "sans-serif";
+  padding: 0;
+  margin: 0;
+}
+
+$primary-color-candidate: #611959;
+$secondary-color-candidate: #922685;
+$special-color-candidate: #b22ea3;
+
+$primary-color-enterprise: #3d78b8;
+$secondary-color-enterprise: #6697cc;
+$special-color-enterprise: #b3cce6;
+
+$mono-black: #141414;
+$mono-white: #f5f5f5;
+
+//TODO ADD font-size REM
+@mixin title {
+  font-weight: 900;
+}
+@mixin under_title {
+  font-weight: 600;
+}
+@mixin text {
+  font-weight: 500;
+}
+
+@mixin border {
+  border-radius: 0.5rem;
+}
+
+@mixin shadow {
+  box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
+}

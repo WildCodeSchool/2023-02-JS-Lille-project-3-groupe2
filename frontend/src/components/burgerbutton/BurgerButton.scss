@@ -1,0 +1,14 @@
+@import "../../Utils.scss";
+
+.burger_links {
+  text-decoration: none;
+  color: $mono-white;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 900;
+  text-decoration: underline 0.15em rgba(255, 255, 255, 0);
+  transition: text-decoration-color 300ms;
+  &:hover {
+    text-decoration-color: $mono-white;
+  }
+}

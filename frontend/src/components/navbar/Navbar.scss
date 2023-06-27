@@ -1,0 +1,32 @@
+@import "../../Utils.scss";
+.navbar_default {
+  border-bottom: solid;
+  border-color: $primary-color-candidate;
+  display: flex;
+  flex-direction: row;
+  .navbar_img_parent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    img {
+      width: 10rem;
+    }
+  }
+}
+
+.navbar_enterprise {
+  border-bottom: solid;
+  border-color: $primary-color-enterprise;
+  display: flex;
+  flex-direction: row;
+  .navbar_img_parent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    img {
+      width: 10rem;
+    }
+  }
+}

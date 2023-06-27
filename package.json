@@ -29,5 +29,10 @@
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
     "husky": "^8.0.3"
+  },
+  "dependencies": {
+    "react-burger-menu": "^3.0.9",
+    "react-icons": "^4.10.1",
+    "sass": "^1.63.5"
   }
 }
