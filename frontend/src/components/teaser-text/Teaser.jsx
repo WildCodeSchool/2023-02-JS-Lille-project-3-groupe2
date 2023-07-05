@@ -22,7 +22,7 @@ function Teaser() {
         />
         <div className="buttonSearch">
           <button type="button">
-            <FaSearch />
+            <FaSearch className="loupe" />
           </button>
         </div>
       </div>
