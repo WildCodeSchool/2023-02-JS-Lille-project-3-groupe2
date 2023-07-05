@@ -9,10 +9,16 @@ export default function DescriptionOffer() {
         <div className="title-head-offer">
           <h1>Développeur Web FullStack</h1>
           <h3>
-            <FiMapPin /> Situé à Lille
+            <span>
+              <FiMapPin />
+            </span>{" "}
+            Situé à Lille
           </h3>
           <h3>
-            <IoSchoolOutline /> ≥ 3 ans d'expérience
+            <span>
+              <IoSchoolOutline />
+            </span>{" "}
+            ≥ 3 ans d'expérience
           </h3>
         </div>
         <div className="img-offer-page">
@@ -20,6 +26,7 @@ export default function DescriptionOffer() {
         </div>
       </div>
       <div className="description-offer-page">
+        <h2>Description du poste :</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis
           libero at dolor tincidunt consectetur. Proin eleifend blandit tellus
@@ -30,6 +37,23 @@ export default function DescriptionOffer() {
           Vestibulum vestibulum libero non turpis blandit, vel luctus dui
           bibendum. Pellentesque elementum nulla finibus, malesuada diam quis,
           imperdiet purus.
+        </p>
+
+        <p>
+          Nulla dictum lacus sem, vel blandit neque tincidunt sit amet. Morbi
+          nec ornare quam, et rhoncus elit. Nulla pretium ante quis purus
+          condimentum, at hendrerit mi tempus. Nulla urna sem, molestie
+          efficitur ullamcorper vel, fringilla a velit. Curabitur viverra dolor
+          ut nibh ullamcorper faucibus. Duis maximus euismod vehicula. Praesent
+          nibh magna, interdum a turpis a, pretium lacinia libero. Vestibulum
+          ultricies iaculis quam ac rhoncus. Mauris lectus leo, volutpat ac
+          neque in, molestie scelerisque lorem. Quisque congue odio non libero
+          tincidunt, et tempus nisi vestibulum. Duis vehicula sodales leo id
+          suscipit. Class aptent taciti sociosqu ad litora torquent per conubia
+          nostra, per inceptos himenaeos. Mauris ac dolor tincidunt, elementum
+          justo ut, feugiat nulla. Vestibulum ante ipsum primis in faucibus orci
+          luctus et ultrices posuere cubilia curae; Pellentesque nec semper
+          massa, in consectetur elit.
         </p>
       </div>
     </div>
