@@ -1,15 +1,43 @@
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;600&display=swap");
-.showMoreBtnContainer {
+@import "../../Utils";
+
+.showMoreBtnContainerEnterprise {
   display: flex;
-  justify-content: center;
   width: 100%;
+  margin-left: 21.2em;
   
 }
 
-.ShowMoreBtn {
+.ShowMoreBtnEnterprise {
   text-align: center;
-  background-color: #611959;
-  color: #F5F5F5;
+  background-color: $primary-color-enterprise;
+  color: $mono-white;
+  padding: 0.5em;
+  margin-right: 3.2em;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  width: 12em;
+  height: 2.4em;
+  font-size: text;
+  box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
+}
+
+.ShowMoreBtnEnterprise:hover {
+  background-color: $secondary-color-enterprise;
+}
+
+.showMoreBtnContainerDefault {
+  display: flex;
+  width: 100%;
+  margin-left: 21.2em;
+  
+}
+
+.ShowMoreBtnDefault {
+  text-align: center;
+  background-color: $primary-color-candidate;
+  color: $mono-white;
   padding: 0.5em;
   margin-right: 3.2em;
   border: none;
@@ -21,6 +49,6 @@
   box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
 }
 
-.ShowMoreBtn:hover {
+.ShowMoreBtnDefault:hover {
   background-color: #922685;
 }

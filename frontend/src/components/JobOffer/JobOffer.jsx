@@ -24,7 +24,7 @@ const testJobOfferData = [
     nameCompany: "Adéo",
     jobTitle: "Dev Fullstack Java",
     city: "Lezennes (59)",
-    experienceTime: "1 an ",
+    experienceTime: "1 an d'entretien",
   },
   {
     image: Goweb,
