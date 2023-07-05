@@ -6,7 +6,7 @@ export default function ShowMoreBtn({ type }) {
   if (type === "default")
     return (
       <div className="showMoreBtnContainerDefault">
-        <button type="default" className="ShowMoreBtnDefault">
+        <button type="button" className="ShowMoreBtnDefault">
           Voir plus...
         </button>
       </div>
@@ -14,7 +14,7 @@ export default function ShowMoreBtn({ type }) {
   if (type === "enterprise")
     return (
       <div className="showMoreBtnContainerEnterprise">
-        <button type="enterprise" className="ShowMoreBtnEnterprise">
+        <button type="button" className="ShowMoreBtnEnterprise">
           Voir plus...
         </button>
       </div>
