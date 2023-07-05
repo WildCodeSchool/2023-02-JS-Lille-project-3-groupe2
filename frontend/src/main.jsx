@@ -44,6 +44,8 @@ const router = createBrowserRouter([
       { path: "my_space/:id", element: <EnterpriseSpacePage /> },
     ],
   },
+  { path: "error", element: <ErrorPage /> },
+
   {
     path: "candidate",
     element: <CandidateLayout />,
