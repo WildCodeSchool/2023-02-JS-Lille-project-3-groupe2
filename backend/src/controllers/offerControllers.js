@@ -49,6 +49,26 @@ const edit = (req, res) => {
     });
 };
 
+const selectOfferByDateOrCity = (req, res) => {
+  const offer = req.body;
+
+  offer.id = parseInt(req.params.id, 10);
+
+  models.offer
+    .selectOffersByDateOrCity(offer)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.send(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const destroy = (req, res) => {
   const offer = req.body;
   offer.id = parseInt(req.params.id, 10);
@@ -73,4 +93,5 @@ module.exports = {
   read,
   edit,
   destroy,
+  selectOfferByDateOrCity,
 };

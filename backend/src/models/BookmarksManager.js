@@ -15,6 +15,22 @@ class BookmarksManager extends AbstractManager {
     ]);
   }
 
+  async add(candidateId, offerId) {
+    try {
+      await this.database.beginTransaction();
+
+      const query =
+        "INSERT INTO bookmarks (candidate_ID, offer_ID) VALUES (?, ?)";
+
+      await this.database.query(query, [candidateId, offerId]);
+
+      await this.database.commit();
+    } catch (error) {
+      await this.database.rollback();
+      throw error;
+    }
+  }
+
   update(bookmarks) {
     return this.database.query(
       `

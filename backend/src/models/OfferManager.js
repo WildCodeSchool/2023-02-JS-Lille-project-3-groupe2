@@ -38,6 +38,28 @@ class OfferManager extends AbstractManager {
       [id]
     );
   }
+
+  async selectOffersByDateOrCity(date, city) {
+    try {
+      await this.database.beginTransaction();
+
+      const query = `
+        SELECT *
+        FROM ${this.table}
+        INNER JOIN address ON offer.address_ID = address.ID
+        WHERE offer.offer_date >= ? OR address.city = ?
+        ORDER BY offer.offer_date DESC`;
+
+      const result = await this.database.query(query, [date, city]);
+
+      await this.database.commit();
+
+      return result;
+    } catch (error) {
+      await this.database.rollback();
+      throw error;
+    }
+  }
 }
 
 module.exports = OfferManager;
