@@ -1,18 +1,17 @@
 import "./ProfilCard.scss";
 import { FiEdit } from "react-icons/fi";
+import { AiOutlineSmile } from "react-icons/ai";
 
 export default function ProfilCard() {
   return (
     <div className="profil-card-container">
       <div className="container-left-profil">
-        <img
-          src="./src/assets/portrait-homme-riant_23-2148859448.jpg"
-          alt="profil"
-        />
+        <img src="./src/assets/photocv1.1.jpg" alt="profil" />
+        <p>[ Ajouter une citation qui parle de vous ! ]</p>
       </div>
       <div className="container-right-profil">
         <h2>
-          Bonjour <span>Clément</span> !
+          Bonjour <span>Tessa</span> ! <AiOutlineSmile />
         </h2>
         <div className="item-profil">
           <h3>
@@ -24,7 +23,7 @@ export default function ProfilCard() {
           <h3>
             <li>En tant que :</li>
           </h3>
-          <p>Développeur, Manager ...</p>
+          <p>Développeuse Web FullSatck</p>
         </div>
         <div className="item-profil">
           <h3>
