@@ -6,6 +6,7 @@ function CandidateLayout() {
     <>
       <header>ma nav</header>
       <Outlet />
+
       <Footer type="default" />
     </>
   );
