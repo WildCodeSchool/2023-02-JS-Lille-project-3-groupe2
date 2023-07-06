@@ -18,7 +18,7 @@
 .bm-menu {
   position: fixed;
   top: 0;
-  z-index: 999;
+  z-index: 999 !important;
   width: 20rem;
 }
 
@@ -29,7 +29,7 @@
 }
 .bm-cross {
   position: fixed !important;
-  z-index: 999;
+  z-index: 99998 !important;
 }
 #react-burger-cross-btn {
   position: absolute !important;
