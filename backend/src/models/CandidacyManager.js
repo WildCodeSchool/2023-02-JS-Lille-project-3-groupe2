@@ -9,16 +9,16 @@ class CandidacyManager extends AbstractManager {
     return this.database.query(`SELECT * FROM ${this.table}`);
   }
 
-  findByCity(city) {
-    return this.database.query(`SELECT * FROM ${this.table} WHERE city = ?`, [
-      city,
+  find(id) {
+    return this.database.query(`SELECT * FROM ${this.table} WHERE id = ?`, [
+      id,
     ]);
   }
 
   update(candidacy) {
     return this.database.query(
       `
-      UPDATE ${this.table} SET email_contact = ?, application_date = ?, status = ?, cv_url = ?, motivation_letter_url = ? WHERE id = ?`,
+      UPDATE ${this.table} SET email_contact = ?, candidacy_date = ?, status = ?, cv_url = ?, motivation_letter_url = ? WHERE id = ?`,
       [
         candidacy.email_contact,
         candidacy.application_date,

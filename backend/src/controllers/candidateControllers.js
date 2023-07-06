@@ -29,6 +29,25 @@ const read = (req, res) => {
     });
 };
 
+const create = (req, res) => {
+  const candidate = req.body;
+  candidate.id = parseInt(req.params.id, 10);
+
+  models.candidate
+    .add(candidate)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.send(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const edit = (req, res) => {
   const candidate = req.body;
 
@@ -72,5 +91,6 @@ module.exports = {
   browse,
   read,
   edit,
+  create,
   destroy,
 };

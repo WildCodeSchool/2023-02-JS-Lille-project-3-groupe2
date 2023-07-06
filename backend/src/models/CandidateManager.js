@@ -23,12 +23,57 @@ class CandidateManager extends AbstractManager {
         candidate.lastname,
         candidate.firstname,
         candidate.birthdate,
-        candidate.phone_number,
+        candidate.phoneNumber,
         candidate.about,
         candidate.picture_url,
         candidate.id,
       ]
     );
+  }
+
+  async add(candidate) {
+    try {
+      await this.database.beginTransaction();
+
+      const query1 =
+        "INSERT INTO candidates (lastname, firstname, birthdate, phoneNumber) VALUES (?, ?, ?, ?)";
+      const query2 =
+        "INSERT INTO address (street_number, street_type, street_name, city, postal_code, department, region, country, candidate_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      const query3 =
+        "INSERT INTO auth (candidate_ID, register_email, password) VALUES (?, ?, ?)";
+
+      const result1 = await this.database.query(query1, [
+        candidate.lastname,
+        candidate.firstname,
+        candidate.birthdate,
+        candidate.phoneNumber,
+      ]);
+
+      const candidateId = result1.insertId;
+
+      await this.database.query(query2, [
+        candidate.street_number,
+        candidate.street_type,
+        candidate.street_name,
+        candidate.city,
+        candidate.postal_code,
+        candidate.department,
+        candidate.region,
+        candidate.country,
+        candidateId,
+      ]);
+
+      await this.database.query(query3, [
+        candidateId,
+        candidate.register_email,
+        candidate.password,
+      ]);
+
+      await this.database.commit();
+    } catch (error) {
+      await this.database.rollback();
+      throw error;
+    }
   }
 
   delete(id) {
