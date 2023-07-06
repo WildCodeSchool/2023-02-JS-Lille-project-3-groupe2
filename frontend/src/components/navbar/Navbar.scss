@@ -2,29 +2,36 @@
 .navbar_default {
   border-bottom: solid;
   border-color: $primary-color-candidate;
-  display: flex;
-  flex-direction: row;
   height: 7rem;
   position: sticky;
   top: 0;
   width: 100%;
+  background-color: white;
+  justify-content: center;
 
   .logo_navbar {
     height: 7rem;
-    mix-blend-mode: color-burn;
-    margin: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 .navbar_enterprise {
-  border-bottom: solid;
   border-color: $primary-color-enterprise;
-  display: flex;
+  border-bottom: solid;
+  height: 7rem;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  justify-content: center;
   flex-direction: row;
 
   .logo_navbar {
     height: 7rem;
-    mix-blend-mode: color-burn;
-    margin: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
