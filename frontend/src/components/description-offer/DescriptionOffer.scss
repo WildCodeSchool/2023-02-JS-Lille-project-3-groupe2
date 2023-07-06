@@ -1,5 +1,12 @@
 @import "../../Utils.scss";
 
+.role_descriptionOffer_enterprise {
+  span {
+    color: $secondary-color-enterprise;
+    margin-right: 2%;
+  }
+}
+
 .container-offer-page {
   display: flex;
   flex-direction: column;
