@@ -58,3 +58,27 @@
     color: $primary-color-candidate;
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .profil-card-container {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    width: 90%;
+    padding: 3%;
+
+    .container-left-profil {
+      img {
+        height: 40%;
+        margin-bottom: 20%;
+      }
+    }
+
+    .button-container-modal {
+      margin-top: auto;
+      margin-left: 1%;
+      font-size: x-large;
+      color: $primary-color-candidate;
+    }
+  }
+}
