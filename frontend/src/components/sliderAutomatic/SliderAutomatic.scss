@@ -5,8 +5,8 @@
   place-items: center;
   overflow: hidden;
   width: 100%;
-  z-index: -1;
-
+  z-index: 1;
+  mix-blend-mode: multiply;
   .slide-track {
     display: flex;
     width: calc(250px * 16);

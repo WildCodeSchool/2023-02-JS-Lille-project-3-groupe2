@@ -5,11 +5,11 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: white;
+  background-color: $mono-white;
   justify-content: center;
 
   .logo_navbar {
-    height: 7rem;
+    height: 8rem;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -32,5 +32,10 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .logo_navbar {
+    visibility: hidden;
   }
 }
