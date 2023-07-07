@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import automotiveCells from "../../assets/automotiveCells.png";
 import iadvize from "../../assets/iadvize.png";
 import iris from "../../assets/iris.png";
@@ -55,7 +56,10 @@ export default function SliderAutomatic() {
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {logosLoop.map((logo, index) => (
-          <div className={`slide ${index === currentSlide ? "active" : ""}`}>
+          <div
+            key={uuidv4()}
+            className={`slide ${index === currentSlide ? "active" : ""}`}
+          >
             <img className="img-partner" src={logo} alt="logo-partner" />
           </div>
         ))}
