@@ -1,4 +1,5 @@
 import "./InformationCard.scss";
+import { FiEdit } from "react-icons/fi";
 
 export default function InformationCard() {
   return (
@@ -8,7 +9,9 @@ export default function InformationCard() {
       </div>
       <h2>. . .</h2>
       <div className="container-global-information">
-        <h3>Tessa Fondeur</h3>
+        <div className="name-information">
+          <h3>Tessa Fondeur</h3>
+        </div>
         <div className="information">
           <h3>Adresse :</h3>
           <p>46 Rue des Champignons 59000 Lille</p>
@@ -25,6 +28,9 @@ export default function InformationCard() {
           <h3>Mot de passe :</h3>
           <p>********</p>
         </div>
+      </div>
+      <div className="btn-container-modal">
+        <FiEdit />
       </div>
     </div>
   );
