@@ -6,10 +6,13 @@ import "./DefaultHome.scss";
 
 import Teaser from "../../components/teaser-text/Teaser";
 
+import JobOffer from "../../components/JobOffer/JobOffer";
+
 export default function DefaultHome() {
   return (
     <div className="defaultHomeBody">
       <Teaser />
+      <JobOffer />
       <CorporateValues />
       <Video />
       <SliderAutomatic />

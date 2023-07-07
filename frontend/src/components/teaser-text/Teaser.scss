@@ -6,6 +6,7 @@
   flex-direction: column;
   background-image: url("/2023-02-JS-Lille-project-3-groupe2-externatic/frontend/src/assets/imageldb.jpg");
   align-items: center;
+  margin-bottom: 7%;
 }
 
 .search {
@@ -13,7 +14,6 @@
   justify-content: center;
   background-color: $primary-color-candidate;
   margin-top: -3rem;
-  margin-bottom: 10%;
   padding: 0.5rem;
   @include border;
   min-width: 60%;
