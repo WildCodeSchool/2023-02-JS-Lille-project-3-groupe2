@@ -5,15 +5,21 @@ class CandidacyManager extends AbstractManager {
     super({ table: "candidacy" });
   }
 
+  // find all candidacy
+
   findAll() {
     return this.database.query(`SELECT * FROM ${this.table}`);
   }
+
+  // find a candidacy by id
 
   find(id) {
     return this.database.query(`SELECT * FROM ${this.table} WHERE id = ?`, [
       id,
     ]);
   }
+
+  // update a candidacy
 
   update(candidacy) {
     return this.database.query(
@@ -29,6 +35,8 @@ class CandidacyManager extends AbstractManager {
       ]
     );
   }
+
+  // delete a candidacy
 
   delete(id) {
     return this.database.query(

@@ -5,15 +5,21 @@ class CandidateManager extends AbstractManager {
     super({ table: "candidate" });
   }
 
+  // find all candidate
+
   findAll() {
     return this.database.query(`SELECT * FROM ${this.table}`);
   }
+
+  // find a canidate by id
 
   find(id) {
     return this.database.query(`SELECT * FROM ${this.table} WHERE id = ?`, [
       id,
     ]);
   }
+
+  // update candidate information
 
   async update(candidateId, updatedData) {
     try {
@@ -59,13 +65,15 @@ class CandidateManager extends AbstractManager {
     }
   }
 
+  // get all bookmarks for a candidate
+
   async getBookmarks(candidateId) {
     try {
       const query = `
-        SELECT o.ID, o.title, o.descriptions, o.offer_date
-        FROM offers o
-        INNER JOIN bookmarks b ON o.ID = b.offer_ID
-        WHERE b.candidate_ID = ?`;
+      SELECT o.ID, o.title, o.descriptions, o.offer_date
+      FROM externatic.offer o
+      INNER JOIN externatic.bookmarks b ON o.ID = b.offer_ID
+      WHERE b.candidate_ID = ? `;
 
       const results = await this.database.query(query, [candidateId]);
       return results;
@@ -80,27 +88,29 @@ class CandidateManager extends AbstractManager {
       await this.database.beginTransaction();
 
       const query1 =
-        "INSERT INTO candidates (lastname, firstname, birthdate, phoneNumber) VALUES (?, ?, ?, ?)";
+        "INSERT INTO candidate (lastname, firstname, birthdate, phoneNumber, about, pictureUrl) VALUES (?, ?, ?, ?, ?, ?)";
       const query2 =
-        "INSERT INTO address (street_number, street_type, street_name, city, postal_code, department, region, country, candidate_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        "INSERT INTO address (streetNumber, streetType, streetName, city, postalCode, department, region, country, candidateId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
       const query3 =
-        "INSERT INTO auth (candidate_ID, register_email, password) VALUES (?, ?, ?)";
+        "INSERT INTO auth (candidateId, registerEmail, password) VALUES (?, ?, ?)";
 
       const result1 = await this.database.query(query1, [
         candidate.lastname,
         candidate.firstname,
         candidate.birthdate,
         candidate.phoneNumber,
+        candidate.about,
+        candidate.pictureUrl,
       ]);
 
       const candidateId = result1.insertId;
 
       await this.database.query(query2, [
-        candidate.street_number,
-        candidate.street_type,
-        candidate.street_name,
+        candidate.streetNumber,
+        candidate.streetType,
+        candidate.streetName,
         candidate.city,
-        candidate.postal_code,
+        candidate.postalCode,
         candidate.department,
         candidate.region,
         candidate.country,
@@ -109,7 +119,7 @@ class CandidateManager extends AbstractManager {
 
       await this.database.query(query3, [
         candidateId,
-        candidate.register_email,
+        candidate.registerEmail,
         candidate.password,
       ]);
 
@@ -119,6 +129,8 @@ class CandidateManager extends AbstractManager {
       throw error;
     }
   }
+
+  // delete a candidate
 
   delete(id) {
     return this.database.query(

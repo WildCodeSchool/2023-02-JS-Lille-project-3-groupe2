@@ -48,10 +48,9 @@ const edit = (req, res) => {
       res.sendStatus(500);
     });
 };
-
+// this requeste should be valide with sacha
 const selectOfferByDateOrCity = (req, res) => {
   const offer = req.body;
-
   offer.id = parseInt(req.params.id, 10);
 
   models.offer
@@ -68,6 +67,7 @@ const selectOfferByDateOrCity = (req, res) => {
       res.sendStatus(500);
     });
 };
+// finish here for validate
 
 const destroy = (req, res) => {
   const offer = req.body;

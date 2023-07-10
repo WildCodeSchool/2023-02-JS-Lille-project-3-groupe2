@@ -9,9 +9,9 @@ class OfferManager extends AbstractManager {
     return this.database.query(`SELECT * FROM ${this.table}`);
   }
 
-  findByTitle(title) {
-    return this.database.query(`SELECT * FROM ${this.table} WHERE title = ?`, [
-      title,
+  findByTitle(id) {
+    return this.database.query(`SELECT * FROM ${this.table} WHERE id = ?`, [
+      id,
     ]);
   }
 

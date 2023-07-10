@@ -11,15 +11,15 @@ const ValidateUser = (req, res, next) => {
     department,
     region,
     country,
-    email,
+    registerEmail,
     phoneNumber,
     about,
     pictureUrl,
   } = req.body;
 
-  const emailRegex = /[a-z0-9._]+@[a-z0-9-]+\.[a-z]{2,3}/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-  const phoneRegex = /^\d{ 2}(\.\d{ 2 }) { 4 } $/;
+  const phoneRegex = /^\d{2}\.\d{2}\.\d{2}\.\d{2}\.\d{2}$/;
 
   const errors = [];
 
@@ -90,10 +90,10 @@ const ValidateUser = (req, res, next) => {
   }
 
   if (department == null) {
-    errors.push({ field: "departement", message: "this field is required" });
+    errors.push({ field: "department", message: "this field is required" });
   } else if (department.length >= 100) {
     errors.push({
-      field: "departement",
+      field: "department",
       message: "Should contain less than 100 characters",
     });
   }
@@ -116,9 +116,9 @@ const ValidateUser = (req, res, next) => {
     });
   }
 
-  if (!emailRegex.test(email)) {
+  if (!emailRegex.test(registerEmail)) {
     errors.push({ field: "email", message: "Invalid email" });
-  } else if (email == null) {
+  } else if (registerEmail == null) {
     errors.push({ field: "email", message: "this field is required" });
   }
 
