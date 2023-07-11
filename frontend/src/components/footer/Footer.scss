@@ -12,10 +12,12 @@ footer {
   background-color: $primary-color-candidate;
   color: $mono-white;
   padding: 2% 0 2% 0;
+  z-index: 100;
   .footer_part1 {
     width: 80%;
     text-align: center;
     margin-bottom: 2rem;
+    z-index: 100;
   }
 
   .footer_part2 {
@@ -23,6 +25,8 @@ footer {
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 2rem;
+    z-index: 100;
+
     .footer_text2 {
       margin-left: 5%;
     }
@@ -39,6 +43,8 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 100;
+
     .footer_text4 {
       text-align: center;
       margin-bottom: 0.5rem;

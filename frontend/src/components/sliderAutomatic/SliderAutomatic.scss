@@ -7,6 +7,7 @@
   width: 100%;
   z-index: 1;
   mix-blend-mode: multiply;
+
   .slide-track {
     display: flex;
     width: calc(250px * 16);
@@ -14,6 +15,7 @@
     animation: scroll 30s linear infinite;
     -webkit-animation: perspective 100%;
     perspective: 100%;
+    z-index: 1;
   }
   @keyframes scroll {
     0% {
@@ -34,15 +36,14 @@
     align-items: center;
     padding: 10px;
     aspect-ratio: 3/2;
+    z-index: 1;
   }
   .img-partner {
     width: 100%;
-
-    .img-partner:hover {
-      transform: translateZ(20px);
-    }
+    z-index: 1;
   }
 }
+
 .slider::before,
 .slider::after {
   background: linear-gradient(
