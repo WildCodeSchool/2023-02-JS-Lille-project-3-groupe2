@@ -38,6 +38,7 @@ class BookmarksManager extends AbstractManager {
       [bookmarks.bookmarks_date, bookmarks.id]
     );
   }
+  // link with candidate????
 
   delete(id) {
     return this.database.query(

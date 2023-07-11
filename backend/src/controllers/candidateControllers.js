@@ -47,7 +47,9 @@ const create = (req, res) => {
     .catch((err) => {
       if (err.code === "ER_DUP_ENTRY") {
         res.status(409).send("Account already exist");
-      } else { res.sendStatus(500); }
+      } else {
+        res.sendStatus(500);
+      }
     });
 };
 
