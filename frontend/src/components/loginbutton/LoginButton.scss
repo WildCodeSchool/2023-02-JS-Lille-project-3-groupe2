@@ -31,12 +31,17 @@
 
   .dropdown-container {
     display: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $primary-color-candidate;
     li {
       background-color: $mono-white;
       display: flex;
+
       &:first-child {
         border-bottom-style: solid;
         border-width: 1px;
+        border-color: $primary-color-candidate;
       }
       a {
         padding: 1rem 0;
