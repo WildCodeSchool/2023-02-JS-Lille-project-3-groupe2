@@ -31,20 +31,23 @@ const read = (req, res) => {
 
 const create = (req, res) => {
   const candidate = req.body;
+  candidate.accountType = "candidate";
   candidate.id = parseInt(req.params.id, 10);
 
   models.candidate
     .add(candidate)
+
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.sendStatus(500);
       } else {
-        res.send(204);
+        res.status(200).send("Account created");
       }
     })
     .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
+      if (err.code === "ER_DUP_ENTRY") {
+        res.status(409).send("Account already exist");
+      } else { res.sendStatus(500); }
     });
 };
 

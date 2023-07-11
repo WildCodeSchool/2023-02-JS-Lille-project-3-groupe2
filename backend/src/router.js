@@ -11,8 +11,9 @@ router.get("/offer", offerControllers.browse);
 router.get("/offer/:id", offerControllers.read);
 router.get("/candidate", candidateControllers.browse);
 router.get("/candidate/:id", candidateControllers.read);
-router.get("/candidate/:id", candidateControllers.getAllMyBookmarks);
+router.get("/candidate/:id/bookmarks", candidateControllers.getAllMyBookmarks);
 router.get("/offer", offerControllers.selectOfferByDateOrCity);
+// selectofferby.. a faire avec sacha
 router.put("/offer/:id", offerControllers.edit);
 /* router.put(
   "/candidate/:id",
@@ -21,10 +22,16 @@ router.put("/offer/:id", offerControllers.edit);
 ); */
 
 router.post(
-  "/candidate",
+  "/register",
   ValidateUser.ValidateUser,
   hashedCandidatePassword.hashCandidatePassword,
   candidateControllers.create
+);
+
+router.post(
+  "/login",
+  hashedCandidatePassword.getUserByEmailWithPasswordAndPassToNext,
+  hashedCandidatePassword.verifyPassword
 );
 
 module.exports = router;

@@ -8,20 +8,42 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 DROP SCHEMA IF EXISTS `externatic`;
 CREATE SCHEMA IF NOT EXISTS `externatic` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `externatic` ;
-
+-- -----------------------------------------------------
+-- Table `externatic`.`compte`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `externatic`.`auth` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `register_email` VARCHAR(100) NOT NULL UNIQUE,
+  `password` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`ID`,`register_email`,`password`)
+) ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `externatic`.`candidat`
--- ----------------------------------------------------type_comptetype_compte-
+-- ----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `externatic`.`candidate` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ID`)
+  `auth_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_auth_candidate_idx` (`auth_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_auth_candidate`
+    FOREIGN KEY (`auth_ID`)
+    REFERENCES `externatic`.`auth` (`ID`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `externatic`.`entreprise`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `externatic`.`enterprise` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ID`)
+  `auth_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_auth_enterprise_idx` (`auth_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_auth_enterprise`
+    FOREIGN KEY (`auth_ID`)
+    REFERENCES `externatic`.`auth` (`ID`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -29,7 +51,14 @@ CREATE TABLE IF NOT EXISTS `externatic`.`enterprise` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `externatic`.`staff` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ID`)
+  `auth_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_auth_staff_idx` (`auth_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_auth_staff`
+    FOREIGN KEY (`auth_ID`)
+    REFERENCES `externatic`.`auth` (`ID`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
 )
 ENGINE = InnoDB;
 -- -----------------------------------------------------
@@ -91,37 +120,6 @@ CREATE TABLE IF NOT EXISTS `externatic`.`address` (
 ) ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `externatic`.`compte`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `externatic`.`auth` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `candidate_ID` INT,
-  `enterprise_ID` INT,
-  `staff_ID` INT,
-  `register_email` VARCHAR(100) NOT NULL UNIQUE,
-  `password` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`ID`,`register_email`,`password`),
-  INDEX `fk_candidate_id_idx` (`candidate_ID` ASC) VISIBLE,
-  CONSTRAINT `fk_candidate_auth`
-    FOREIGN KEY (`candidate_ID`)
-    REFERENCES `externatic`.`candidate` (`ID`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  INDEX `fk_enterprise_id_idx` (`enterprise_ID` ASC) VISIBLE,
-  CONSTRAINT `fk_enterprise_compte`
-    FOREIGN KEY (`enterprise_ID`)
-    REFERENCES `externatic`.`enterprise` (`ID`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  INDEX `fk_staff_id_idx` (`staff_ID` ASC) VISIBLE,
-  CONSTRAINT `fk_staff_auth`
-    FOREIGN KEY (`staff_ID`)
-    REFERENCES `externatic`.`staff` (`ID`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION
-)
-ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `externatic`.`candidature`
@@ -255,7 +253,89 @@ ADD COLUMN account_type VARCHAR(100) NOT NULL,
 ADD COLUMN creation_date DATETIME DEFAULT NOW();
 
 
+-- Insertion des données dans la table "auth"
+INSERT INTO externatic.auth (register_email, password, active, account_type, creation_date)
+VALUES
+  ('john@example.com', 'password123', TRUE, 'candidat', NOW()),
+  ('alice@example.com', 'password456', TRUE, 'candidat', NOW()),
+  ('robert@example.com', 'password789', TRUE, 'candidat', NOW()),
+  ('emma@example.com', 'password123', TRUE, 'candidat', NOW()),
+  ('michael@example.com', 'password456', TRUE, 'candidat', NOW()),
+  ('contact@abc.com', 'password123', TRUE, 'entreprise', NOW()),
+  ('contact@xyz.com', 'password456', TRUE, 'entreprise', NOW()),
+  ('contact@123.com', 'password789', TRUE, 'entreprise', NOW()),
+  ('contact@xyza.com', 'password123', TRUE, 'entreprise', NOW()),
+  ('contact@abcd.com', 'password456', TRUE, 'entreprise', NOW()),
+  ('jane@example.com', 'password789', TRUE, 'staff', NOW());
 
+
+INSERT INTO externatic.candidate (auth_ID, lastname, firstname, birthdate, phone_number, about, picture_url)
+VALUES
+(1, 'John', 'Smith', '1985-01-01', '0123456789', 'À propos du candidat 1', 'http://example.com/photo1.jpg'),
+(2, 'Alice', 'Johnson', '1990-02-15', '9876543210', 'À propos du candidat 2', 'http://example.com/photo2.jpg'),
+(3, 'Robert', 'Davis', '1988-06-30', '0123456789', 'À propos du candidat 3', 'http://example.com/photo3.jpg'),
+(4, 'Emma', 'Wilson', '1995-12-10', '9876543210', 'À propos du candidat 4', 'http://example.com/photo4.jpg'),
+(5, 'Michael', 'Brown', '1992-04-05', '0123456789', 'À propos du candidat 5', 'http://example.com/photo5.jpg'),
+(6, 'Emily', 'Miller', '1987-09-20', '9876543210', 'À propos du candidat 6', 'http://example.com/photo6.jpg'),
+(7, 'Daniel', 'Johnson', '1993-11-25', '0123456789', 'À propos du candidat 7', 'http://example.com/photo7.jpg'),
+(8, 'Sophia', 'Davis', '1998-07-08', '9876543210', 'À propos du candidat 8', 'http://example.com/photo8.jpg'),
+(9, 'Alexander', 'Taylor', '1991-03-15', '0123456789', 'À propos du candidat 9', 'http://example.com/photo9.jpg'),
+(10, 'Olivia', 'Thomas', '1996-05-12', '9876543210', 'À propos du candidat 10', 'http://example.com/photo10.jpg');
+
+-- Insertion des données dans la table "enterprise"
+INSERT INTO externatic.enterprise (auth_ID, siret, social_denomination, trade_name, contact_email, phone_number, company_type, other_information, kbis_url, logo_url, website)
+VALUES
+(11, '123456789', 'Entreprise ABC', 'ABC', 'contact@abc.com', '0123456789', 'SAS', 'Informations supplémentaires 1', 'http://example.com/kbis1.pdf', 'http://example.com/logo1.jpg', 'http://www.abc1.com'),
+(1, '987654321', 'Entreprise XYZ', 'XYZ', 'contact@xyz.com', '9876543210', 'SARL', 'Informations supplémentaires 2', 'http://example.com/kbis2.pdf', 'http://example.com/logo2.jpg', 'http://www.xyz2.com'),
+(2, '246813579', 'Entreprise 123', '123', 'contact@123.com', '0123456789', 'SAS', 'Informations supplémentaires 3', 'http://example.com/kbis3.pdf', 'http://example.com/logo3.jpg', 'http://www.1233.com'),
+(3, '135792468', 'Entreprise XYZ', 'XYZ', 'contact@xyz.com', '9876543210', 'SARL', 'Informations supplémentaires 4', 'http://example.com/kbis4.pdf', 'http://example.com/logo4.jpg', 'http://www.xyz4.com'),
+(4, '864209753', 'Entreprise ABC', 'ABC', 'contact@abc.com', '0123456789', 'SAS', 'Informations supplémentaires 5', 'http://example.com/kbis5.pdf', 'http://example.com/logo5.jpg', 'http://www.abc5.com');
+
+-- Insertion des données dans la table "staff"
+INSERT INTO externatic.staff (auth_ID, lastname, firstname, contact_email, phone_number, picture_url)
+VALUES
+(11, 'Jane', 'Smith', 'jane@example.com', '9876543210', 'http://example.com/photo.jpg');
+
+-- Insertion des données dans la table "address"
+INSERT INTO externatic.address (street_number, street_type, street_name, city, postal_code, department, region, country, candidate_ID, enterprise_ID, staff_ID, offer_ID)
+VALUES
+('123', 'Rue', 'Example 1', 'Paris', '75000', 'Île-de-France', 'Île-de-France', 'France', 1, NULL, NULL, NULL),
+('456', 'Rue', 'Example 2', 'Paris', '75000', 'Île-de-France', 'Île-de-France', 'France', 2, NULL, NULL, NULL),
+('789', 'Rue', 'Example 3', 'Paris', '75000', 'Île-de-France', 'Île-de-France', 'France', NULL, 1, NULL, NULL),
+('012', 'Rue', 'Example 4', 'Paris', '75000', 'Île-de-France', 'Île-de-France', 'France', 4, NULL, NULL, NULL),
+('345', 'Rue', 'Example 5', 'Paris', '75000', 'Île-de-France', 'Île-de-France', 'France', 5, NULL, NULL, NULL),
+('678', 'Rue', 'Example 6', 'Paris', '75000', 'Île-de-France', 'Île-de-France', 'France', 6, NULL, NULL, NULL),
+('901', 'Rue', 'Example 7', 'Paris', '75000', 'Île-de-France', 'Île-de-France', 'France', 7, NULL, NULL, NULL),
+('234', 'Rue', 'Example 8', 'Paris', '75000', 'Île-de-France', 'Île-de-France', 'France', 8, NULL, NULL, NULL),
+('567', 'Rue', 'Example 9', 'Paris', '75000', 'Île-de-France', 'Île-de-France', 'France', 9, NULL, NULL, NULL);
+
+  
+  INSERT INTO offer (enterprise_ID, title, min_salary, max_salary, descriptions, visibility, offer_date)
+VALUES 
+  (1, 'Offre d\'emploi 1', '30000', '50000', 'Description de l\'annonce 1', TRUE, NOW()),
+  (2, 'Offre d\'emploi 2', '30000', '50000', 'Description de l\'annonce 2', TRUE, NOW()),
+  (3, 'Offre d\'emploi 3', '30000', '50000', 'Description de l\'annonce 3', TRUE, NOW()),
+  (4, 'Offre d\'emploi 4', '30000', '50000', 'Description de l\'annonce 4', TRUE, NOW()),
+  (5, 'Offre d\'emploi 5', '30000', '50000', 'Description de l\'annonce 5', TRUE, NOW());
+
+-- Insertion des données dans la table "candidature"
+INSERT INTO candidacy (offer_ID, candidate_ID, email_contact, application_date, status, cv_url, motivation_letter_url)
+VALUES 
+  (1, 1, 'john@example.com', NOW(), 'En attente', 'http://example.com/cv1.pdf', 'http://example.com/motivation1.pdf'),
+  (2, 2, 'alice@example.com', NOW(), 'En attente', 'http://example.com/cv2.pdf', 'http://example.com/motivation2.pdf'),
+  (3, 3, 'robert@example.com', NOW(), 'En attente', 'http://example.com/cv3.pdf', 'http://example.com/motivation3.pdf'),
+  (4, 4, 'emma@example.com', NOW(), 'En attente', 'http://example.com/cv4.pdf', 'http://example.com/motivation4.pdf'),
+  (5, 5, 'michael@example.com', NOW(), 'En attente', 'http://example.com/cv5.pdf', 'http://example.com/motivation5.pdf');
+
+
+-- Insertion des données dans la table "favoris"
+INSERT INTO bookmarks (candidate_ID, offer_ID, enterprise_ID, bookmark_date)
+VALUES 
+  (1, 1, 1, NOW()),
+  (2, 2, 2, NOW()),
+  (3, 3, 3, NOW()),
+  (4, 4, 4, NOW()),
+  (5, 5, 5, NOW());
 
 
 

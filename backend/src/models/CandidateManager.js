@@ -84,17 +84,23 @@ class CandidateManager extends AbstractManager {
   }
 
   async add(candidate) {
+    const query1 =
+      "INSERT INTO auth (register_email, password, account_type) VALUES ( ?, ?, ?)";
+    const query2 =
+      "INSERT INTO candidate (auth_ID, lastname, firstname, birthdate, phone_number, about, picture_url) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    const query3 =
+      "INSERT INTO address (street_number, street_type, street_name, city, postal_code, department, region, country, candidate_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     try {
-      await this.database.beginTransaction();
+      const [result1] = await this.database.query(query1, [
+        candidate.registerEmail,
+        candidate.hashedPassword,
+        candidate.accountType,
+      ]);
 
-      const query1 =
-        "INSERT INTO candidate (lastname, firstname, birthdate, phoneNumber, about, pictureUrl) VALUES (?, ?, ?, ?, ?, ?)";
-      const query2 =
-        "INSERT INTO address (streetNumber, streetType, streetName, city, postalCode, department, region, country, candidateId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-      const query3 =
-        "INSERT INTO auth (candidateId, registerEmail, password) VALUES (?, ?, ?)";
+      const authID = result1.insertId;
 
-      const result1 = await this.database.query(query1, [
+      const [result2] = await this.database.query(query2, [
+        authID,
         candidate.lastname,
         candidate.firstname,
         candidate.birthdate,
@@ -102,10 +108,9 @@ class CandidateManager extends AbstractManager {
         candidate.about,
         candidate.pictureUrl,
       ]);
+      const candidateID = result2.insertId;
 
-      const candidateId = result1.insertId;
-
-      await this.database.query(query2, [
+      const [result3] = await this.database.query(query3, [
         candidate.streetNumber,
         candidate.streetType,
         candidate.streetName,
@@ -114,19 +119,12 @@ class CandidateManager extends AbstractManager {
         candidate.department,
         candidate.region,
         candidate.country,
-        candidateId,
+        candidateID,
       ]);
-
-      await this.database.query(query3, [
-        candidateId,
-        candidate.registerEmail,
-        candidate.password,
-      ]);
-
-      await this.database.commit();
-    } catch (error) {
-      await this.database.rollback();
-      throw error;
+      return [result3];
+    } catch (err) {
+      console.error(err);
+      throw err;
     }
   }
 

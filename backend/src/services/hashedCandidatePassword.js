@@ -24,4 +24,57 @@ const hashCandidatePassword = async (req, res, next) => {
   }
 };
 
-module.exports = { hashCandidatePassword };
+const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
+  const { email } = req.body;
+
+  this.database
+    .query("select * from auth where email = ?", [email])
+    // user [password, email, candidate_ID, enterprise_ID, staff_ID, ID]
+    .then(([users]) => {
+      if (users[0] != null) {
+        [req.user] = users;
+
+        // for this [req.user] = users, needed to do this by eslint
+
+        next();
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error retrieving data from database");
+    });
+};
+
+const verifyPassword = (req, res) => {
+  argon2
+    .verify(req.user.password, req.body.password)
+    .then((isVerified) => {
+      if (isVerified) {
+        this.database
+          .query("select * from candidate where id = ?", [
+            req.user.candidate_ID,
+          ])
+          .then((result) => {
+            res.json(result);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).send("Error retrieving data from database");
+          });
+      } else {
+        res.sendStatus(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+module.exports = {
+  hashCandidatePassword,
+  getUserByEmailWithPasswordAndPassToNext,
+  verifyPassword,
+};
