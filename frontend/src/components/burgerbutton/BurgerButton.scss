@@ -15,3 +15,23 @@
 .bm-burger-bars-hover {
   opacity: 90% !important;
 }
+.bm-menu {
+  position: fixed;
+  top: 0;
+  z-index: 999 !important;
+  width: 20rem;
+}
+
+.bm-menu-wrap {
+  position: fixed;
+  top: 0;
+  z-index: 999 !important;
+}
+.bm-cross {
+  position: fixed !important;
+  z-index: 99998 !important;
+}
+#react-burger-cross-btn {
+  position: absolute !important;
+  z-index: 99999 !important;
+}

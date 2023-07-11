@@ -2,31 +2,39 @@
 .navbar_default {
   border-bottom: solid;
   border-color: $primary-color-candidate;
-  display: flex;
-  flex-direction: row;
-  .navbar_img_parent {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    img {
-      width: 10rem;
-    }
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: $mono-white;
+  justify-content: center;
+
+  .logo_navbar {
+    height: 6.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 .navbar_enterprise {
-  border-bottom: solid;
   border-color: $primary-color-enterprise;
-  display: flex;
+  border-bottom: solid;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  justify-content: center;
   flex-direction: row;
-  .navbar_img_parent {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    img {
-      width: 10rem;
-    }
+
+  .logo_navbar {
+    height: 6.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .logo_navbar {
+    visibility: hidden;
   }
 }

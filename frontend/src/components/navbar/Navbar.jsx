@@ -10,14 +10,13 @@ export default function Navbar({ type }) {
   if (type === "default")
     return (
       <nav className="navbar_default">
-        <div className="test">
-          {" "}
-          <BurgerButton type="default" />
-        </div>
-        <div className="navbar_img_parent">
-          {" "}
-          <img src={externaticCandidate} alt="externatic_logo" />
-        </div>{" "}
+        <BurgerButton type="default" />
+
+        <img
+          className="logo_navbar"
+          src={externaticCandidate}
+          alt="externatic_logo"
+        />
         <LoginButton />
       </nav>
     );
@@ -25,10 +24,12 @@ export default function Navbar({ type }) {
     return (
       <nav className="navbar_enterprise">
         <BurgerButton type="enterprise" />
-        <div className="navbar_img_parent">
-          {" "}
-          <img src={externaticEnterprise} alt="externatic_logo" />
-        </div>
+
+        <img
+          className="logo_navbar"
+          src={externaticEnterprise}
+          alt="externatic_logo"
+        />
         <LoginButton />
       </nav>
     );

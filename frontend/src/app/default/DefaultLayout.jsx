@@ -8,6 +8,7 @@ export default function DefaultLayout() {
       {/* NavBar Goes Here */}
       <Navbar type="default" />
       <Outlet />
+
       <Footer type="default" />
     </>
   );

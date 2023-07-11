@@ -1,0 +1,121 @@
+@import "../../Utils.scss";
+
+//CSS changed for role 'enterprise
+
+.role_enterprise {
+  .title-values-mobile {
+    color: $secondary-color-enterprise;
+  }
+  .title-values-desktop {
+    color: $primary-color-enterprise;
+  }
+}
+
+//media query and CSS for MOBILE
+
+.container-values-mobile {
+  display: flex;
+  flex-direction: column;
+  margin: 10% 20% 10% 20%;
+}
+
+.image-text-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img-values-mobile {
+  object-fit: cover;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.title-values-mobile {
+  display: flex;
+  flex-direction: row;
+  color: $secondary-color-candidate;
+  align-content: center;
+  h2 {
+    margin: 0 1rem 1rem 0;
+  }
+}
+
+.icon-react-mobile {
+  min-width: 2rem;
+  font-size: 2rem;
+  margin-top: -0.5rem;
+}
+
+.presentation-text-mobile {
+  border-radius: 0rem 0rem 0.5rem 0.5rem;
+}
+.p-mobile {
+  font-size: 1.3rem;
+  // letter-spacing: 0.1rem;
+  margin-bottom: 5rem;
+  line-height: 1.5rem;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+//media query and CSS for DESKTOP
+
+.container-values-desktop {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 7%;
+}
+
+.image-text-desktop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 2%;
+  gap: 2%;
+  width: 100%;
+}
+
+.img-values-desktop {
+  width: 30%;
+  border-radius: 0.5rem;
+  box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
+  object-fit: cover;
+}
+
+.title-values-desktop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1rem;
+
+  color: $secondary-color-candidate;
+
+  h2 {
+    margin: 1rem;
+    font-size: 2rem;
+  }
+}
+
+.icon-react-desktop {
+  min-width: 2rem;
+  font-size: 2rem;
+  margin-top: -0.5rem;
+  margin-right: 1rem;
+}
+
+.presentation-text-desktop {
+  width: 30%;
+  border-radius: 0.5rem;
+  box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
+}
+
+.p-desktop {
+  font-size: 1.5rem;
+  margin: 1rem 2rem 2rem 2rem;
+  // letter-spacing: 0.1rem;
+  line-height: 1.9rem;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}

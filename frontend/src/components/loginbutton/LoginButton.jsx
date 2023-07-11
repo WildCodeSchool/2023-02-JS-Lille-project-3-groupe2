@@ -18,7 +18,7 @@ function LoginButton() {
             className="login_button"
             onClick={toggleDropdown}
           >
-            Login
+            Connexion
           </button>
         </li>
         {dropdownOpen && (

@@ -1,0 +1,82 @@
+@import "../../Utils.scss";
+
+.containerSearch {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url("/2023-02-JS-Lille-project-3-groupe2-externatic/frontend/src/assets/imageldb.jpg");
+  align-items: center;
+  margin-bottom: 7%;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  background-color: $primary-color-candidate;
+  margin-top: -3rem;
+  padding: 0.5rem;
+  @include border;
+  min-width: 60%;
+}
+
+.search input {
+  border: 1px solid #d8d8d8;
+  margin-right: 0.5rem;
+  @include border;
+  flex: 1;
+  font-size: 1rem;
+  text-indent: 0.5rem;
+}
+.imageHomepage {
+  min-width: 70%;
+}
+.search input:focus {
+  outline: none;
+}
+
+.search button {
+  font-size: 100%;
+  border: none;
+  color: #444444;
+  padding: 1rem;
+  @include border;
+  background-color: $primary-color-candidate;
+}
+
+.search button:hover {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.loupe {
+  color: $mono-white;
+}
+@media only screen and (max-width: 750px) {
+  .search {
+    width: 80%;
+    margin-top: -2rem;
+  }
+  .containerSearch {
+    img {
+      width: 100%;
+    }
+  }
+
+  .search-bar {
+    float: left;
+  }
+
+  .search input {
+    width: 100%;
+    flex: 1 1 auto;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .search {
+    flex-direction: column;
+    button {
+      width: auto;
+      float: left;
+      padding: 0.5rem;
+    }
+  }
+}
