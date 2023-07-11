@@ -12,26 +12,3 @@
     text-decoration-color: $mono-white;
   }
 }
-.bm-burger-bars-hover {
-  opacity: 90% !important;
-}
-.bm-menu {
-  position: fixed;
-  top: 0;
-  z-index: 90 !important;
-  width: 20rem;
-}
-
-.bm-menu-wrap {
-  position: fixed;
-  top: 0;
-  z-index: 90 !important;
-}
-.bm-cross {
-  position: fixed !important;
-  z-index: 90 !important;
-}
-#react-burger-cross-btn {
-  position: absolute !important;
-  z-index: 100 !important;
-}
