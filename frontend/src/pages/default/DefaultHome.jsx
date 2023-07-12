@@ -7,6 +7,7 @@ import "./DefaultHome.scss";
 import Teaser from "../../components/teaser-text/Teaser";
 
 import JobOffer from "../../components/JobOffer/JobOffer";
+import RegistrationCandidatepage from "../../components/registrationCandidatePage/RegistrationCandidatePage";
 
 export default function DefaultHome() {
   return (
@@ -16,6 +17,7 @@ export default function DefaultHome() {
       <CorporateValues />
       <Video />
       <SliderAutomatic />
+      <RegistrationCandidatepage />
     </div>
   );
 }
