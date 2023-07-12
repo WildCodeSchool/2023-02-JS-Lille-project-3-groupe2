@@ -68,9 +68,25 @@ const destroy = (req, res) => {
     });
 };
 
+const getUserByEmailWithPasswordAndPassToNext = async (req, res, next) => {
+  const { email } = req.body;
+  try {
+    const [account] = await models.auth.getAccountByEmail(email);
+    if (account[0] == null) {
+      res.sendStatus(404);
+    } else {
+      [req.user] = account;
+      await next();
+    }
+  } catch (error) {
+    res.status(500).send("Error retrieving data from database");
+  }
+};
+
 module.exports = {
   browse,
   read,
   edit,
   destroy,
+  getUserByEmailWithPasswordAndPassToNext,
 };

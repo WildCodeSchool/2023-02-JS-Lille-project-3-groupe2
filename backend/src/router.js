@@ -6,6 +6,7 @@ const offerControllers = require("./controllers/offerControllers");
 const candidateControllers = require("./controllers/candidateControllers");
 const ValidateUser = require("./services/ValidateUser");
 const hashedCandidatePassword = require("./services/hashedCandidatePassword");
+const authController = require("./controllers/authController");
 
 router.get("/offer", offerControllers.browse);
 router.get("/offer/:id", offerControllers.read);
@@ -30,8 +31,20 @@ router.post(
 
 router.post(
   "/login",
-  hashedCandidatePassword.getUserByEmailWithPasswordAndPassToNext,
-  hashedCandidatePassword.verifyPassword
+  authController.getUserByEmailWithPasswordAndPassToNext,
+  hashedCandidatePassword.verifyPassword,
+  hashedCandidatePassword.sendtoken
 );
+
+router.get("/show-token", (req, res) => {
+  console.info(req.cookies);
+
+  res.sendStatus(200);
+});
+router.get("/logout", (req, res) => {
+  res.clearCookie("token");
+
+  res.sendStatus(204);
+});
 
 module.exports = router;

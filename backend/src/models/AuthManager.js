@@ -22,6 +22,14 @@ class AuthManager extends AbstractManager {
       [id]
     );
   }
+
+  getAccountByEmail(email) {
+    return this.database.query(
+      `
+    SELECT * FROM ${this.table} WHERE register_email = ?`,
+      [email]
+    );
+  }
 }
 
 module.exports = AuthManager;

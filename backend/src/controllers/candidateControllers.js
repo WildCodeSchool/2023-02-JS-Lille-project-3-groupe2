@@ -31,9 +31,6 @@ const read = (req, res) => {
 
 const create = (req, res) => {
   const candidate = req.body;
-  candidate.accountType = "candidate";
-  candidate.id = parseInt(req.params.id, 10);
-
   models.candidate
     .add(candidate)
 

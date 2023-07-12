@@ -1,4 +1,6 @@
 const argon2 = require("@node-rs/argon2");
+const jwt = require("jsonwebtoken");
+const models = require("../models");
 
 const hashCandidatePassword = async (req, res, next) => {
   const { password } = req.body;
@@ -24,57 +26,71 @@ const hashCandidatePassword = async (req, res, next) => {
   }
 };
 
-const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
-  const { email } = req.body;
-
-  this.database
-    .query("select * from auth where email = ?", [email])
-    // user [password, email, candidate_ID, enterprise_ID, staff_ID, ID]
-    .then(([users]) => {
-      if (users[0] != null) {
-        [req.user] = users;
-
-        // for this [req.user] = users, needed to do this by eslint
-
-        next();
-      } else {
-        res.sendStatus(404);
+const verifyPassword = async (req, res, next) => {
+  try {
+    const isVerified = await argon2.verify(
+      req.user.password,
+      req.body.password
+    );
+    if (isVerified) {
+      delete req.body.password;
+      delete req.user.password;
+      if (req.user.account_type.toLowerCase() === "candidat") {
+        const [candidate] = await models.candidate.findCandidateByAccountId(
+          req.user.ID
+        );
+        if (candidate[0] == null) {
+          res.sendStatus(404);
+        } else {
+          res.json({ user: req.user, account: candidate });
+        }
+      } else if (req.user.account_type.toLowerCase() === "entreprise") {
+        const [enterprise] = await models.enterprise.findEnterpriseByAccountId(
+          req.user.ID
+        );
+        if (enterprise[0] == null) {
+          res.sendStatus(404);
+        } else {
+          res.json({ user: req.user, account: enterprise });
+        }
+      } else if (req.user.account_type.toLowerCase() === "staff") {
+        const [staff] = await models.staff.findStaffByAccountId(req.user.ID);
+        if (staff[0] == null) {
+          res.sendStatus(404);
+        } else {
+          res.json({ user: req.user, account: staff });
+        }
       }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error retrieving data from database");
-    });
+      next();
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
-const verifyPassword = (req, res) => {
-  argon2
-    .verify(req.user.password, req.body.password)
-    .then((isVerified) => {
-      if (isVerified) {
-        this.database
-          .query("select * from candidate where id = ?", [
-            req.user.candidate_ID,
-          ])
-          .then((result) => {
-            res.json(result);
-          })
-          .catch((err) => {
-            console.error(err);
-            res.status(500).send("Error retrieving data from database");
-          });
-      } else {
-        res.sendStatus(401);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+const sendToken = (req, res) => {
+  const token = jwt.sign({ sub: req.user.id }, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
+
+  res.cookie("token", token, {
+    maxAge: 60 * 60 * 1000,
+    httpOnly: true, // try false, and console.log(document.cookie) in frontend
+  });
+
+  res.send({
+    user: {
+      id: req.user.id,
+      username: req.user.username,
+    },
+  });
 };
 
 module.exports = {
   hashCandidatePassword,
-  getUserByEmailWithPasswordAndPassToNext,
   verifyPassword,
+  sendToken,
 };

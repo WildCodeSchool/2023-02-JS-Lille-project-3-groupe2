@@ -19,6 +19,11 @@ class CandidateManager extends AbstractManager {
     ]);
   }
 
+  findCandidateByAccountId(id) {
+    return this.database.query(`SELECT * FROM candidate where auth_ID = ?`, [
+      id,
+    ]);
+  }
   // update candidate information
 
   async update(candidateId, updatedData) {
