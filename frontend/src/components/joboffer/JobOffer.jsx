@@ -6,10 +6,9 @@ import Lyreco from "../../assets/lyreco2.jpeg";
 import Ibm from "../../assets/ibm1.jpg";
 import Wcs from "../../assets/wcs.png";
 import "../../Utils.scss";
-import JobOfferCard from "../JobOfferCard/JobOfferCard";
+import JobOfferCard from "../joboffercard/JobOfferCard";
 import "./JobOffer.scss";
-import ShowMoreBtn from "../ShowMoreBtn/ShowMoreBtn";
-import "../ShowMoreBtn/ShowMoreBtn.scss";
+import "../showmorebtn/ShowMoreBtn.scss";
 
 const testJobOfferData = [
   {
@@ -73,7 +72,6 @@ export default function JobOffer() {
           />
         ))}
       </div>
-      <ShowMoreBtn />
     </div>
   );
 }

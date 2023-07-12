@@ -1,0 +1,20 @@
+@import "../../Utils.scss";
+.SelectOrderOfferContainer {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: $primary-color-candidate;
+  flex-flow: row wrap;
+  @include border;
+  .SelectOfferContainer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.5rem;
+  }
+  span {
+    color: $mono-white;
+    font-size: large;
+    font-weight: bold;
+  }
+}

@@ -5,14 +5,11 @@
   flex-direction: column;
   background-image: url("/2023-02-JS-Lille-project-3-groupe2-externatic/frontend/src/assets/imageldb.jpg");
   align-items: center;
-  margin-bottom: 7%;
   width: 80%;
-
   img {
     width: 100%;
   }
 }
-
 .search {
   display: flex;
   justify-content: center;
@@ -22,7 +19,15 @@
   @include border;
   min-width: 60%;
 }
-
+.search-nomargin {
+  display: flex;
+  justify-content: center;
+  background-color: $primary-color-candidate;
+  padding: 0.5rem;
+  @include border;
+  min-width: 60%;
+}
+.search-nomargin input,
 .search input {
   border: 1px solid #d8d8d8;
   margin-right: 0.5rem;
@@ -34,10 +39,12 @@
 .imageHomepage {
   min-width: 80%;
 }
+.search-nomargin input:focus,
 .search input:focus {
   outline: none;
 }
 
+.search-nomargin button,
 .search button {
   font-size: 100%;
   border: none;
@@ -45,16 +52,17 @@
   padding: 1rem;
   @include border;
   background-color: $primary-color-candidate;
+  &:hover {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  }
 }
 
-.search button:hover {
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-}
 .loupe {
   color: $mono-white;
 }
 @media only screen and (max-width: 750px) {
-  .search {
+  .search,
+  .search-nomargin {
     width: 80%;
     margin-top: -2rem;
   }
@@ -68,14 +76,16 @@
     float: left;
   }
 
-  .search input {
+  .search input,
+  .search-nomargin input {
     width: 100%;
     flex: 1 1 auto;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
   }
 
-  .search {
+  .search,
+  .search-nomargin {
     flex-direction: column;
     button {
       width: auto;

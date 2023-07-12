@@ -1,9 +1,9 @@
 import React from "react";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "@react-hook/media-query";
-import "./Video-yt.scss";
+import "./VideoYt.scss";
 
-export default function Video() {
+export default function VideoYt() {
   const match = useMediaQuery("only screen and (min-width: 650px)");
   const externaticVideo =
     "https://www.youtube.com/watch?v=BYmNVsS5J58&ab_channel=Externatic-Cabinetderecrutementinformatique";

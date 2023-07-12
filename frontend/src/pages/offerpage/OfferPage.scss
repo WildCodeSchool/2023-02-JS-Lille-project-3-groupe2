@@ -1,0 +1,24 @@
+.defaultOfferPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("../../assets/background-mauve.png");
+  z-index: -1;
+  background-size: contain;
+  gap: 3rem;
+  .searchAndOrder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 80%;
+  }
+  .containerSearch {
+    margin-top: 2rem;
+  }
+  .AjustJobOfferCardAndBtn {
+    margin-bottom: 3rem;
+  }
+  .SelectOrderOfferContainer {
+  }
+}

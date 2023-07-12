@@ -106,6 +106,9 @@ export default function BurgerButton({ type }) {
     return (
       <div className="Button_container_candidate">
         <Menu noOverlay className="my-menu" styles={defaultStyle}>
+          <Link to="/" className="burger_links">
+            Accueil
+          </Link>
           <Link to="/candidate/my_space" className="burger_links">
             Mon Espace
           </Link>
@@ -125,6 +128,9 @@ export default function BurgerButton({ type }) {
     return (
       <div className="Button_container_candidate">
         <Menu noOverlay className="my-menu" styles={enterpriseStyle}>
+          <Link to="/" className="burger_links">
+            Accueil
+          </Link>
           <Link to="/enterprise/my_space" className="burger_links">
             Mon Espace
           </Link>
