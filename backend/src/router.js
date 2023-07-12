@@ -33,7 +33,7 @@ router.post(
   "/login",
   authController.getUserByEmailWithPasswordAndPassToNext,
   hashedCandidatePassword.verifyPassword,
-  hashedCandidatePassword.sendtoken
+  hashedCandidatePassword.sendToken
 );
 
 router.get("/show-token", (req, res) => {

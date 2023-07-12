@@ -42,7 +42,9 @@ const verifyPassword = async (req, res, next) => {
         if (candidate[0] == null) {
           res.sendStatus(404);
         } else {
-          res.json({ user: req.user, account: candidate });
+          [req.candidate] = candidate;
+          /* res.json({ user: req.user, account: candidate }); */
+          next();
         }
       } else if (req.user.account_type.toLowerCase() === "entreprise") {
         const [enterprise] = await models.enterprise.findEnterpriseByAccountId(
@@ -51,17 +53,18 @@ const verifyPassword = async (req, res, next) => {
         if (enterprise[0] == null) {
           res.sendStatus(404);
         } else {
-          res.json({ user: req.user, account: enterprise });
+          /* res.json({ user: req.user, account: enterprise }); */
+          next();
         }
       } else if (req.user.account_type.toLowerCase() === "staff") {
         const [staff] = await models.staff.findStaffByAccountId(req.user.ID);
         if (staff[0] == null) {
           res.sendStatus(404);
         } else {
-          res.json({ user: req.user, account: staff });
+          /* res.json({ user: req.user, account: staff }); */
+          next();
         }
       }
-      next();
     } else {
       res.sendStatus(404);
     }
@@ -72,19 +75,18 @@ const verifyPassword = async (req, res, next) => {
 };
 
 const sendToken = (req, res) => {
-  const token = jwt.sign({ sub: req.user.id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+  const token = jwt.sign({ sub: req.user.ID }, process.env.JWT_SECRET, {
+    expiresIn: "120min",
   });
 
   res.cookie("token", token, {
-    maxAge: 60 * 60 * 1000,
-    httpOnly: true, // try false, and console.log(document.cookie) in frontend
+    maxAge: 120 * 60 * 1000,
+    httpOnly: true,
   });
-
-  res.send({
+  res.json({
     user: {
-      id: req.user.id,
-      username: req.user.username,
+      auth: req.user,
+      infos: req.candidate,
     },
   });
 };
