@@ -26,3 +26,8 @@
   color: #611959;
   font-weight: bold;
 }
+@media (max-width: 600px) {
+  .container-legal-notice {
+    width: 85%;
+  }
+}
