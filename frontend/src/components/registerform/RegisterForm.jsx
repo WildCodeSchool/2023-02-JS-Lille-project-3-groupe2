@@ -1,7 +1,7 @@
 import React from "react";
-import "./RegistrationCandidatePage.scss";
+import "./RegisterForm.scss";
 
-function RegistrationCandidatepage() {
+export default function RegisterForm() {
   return (
     <div className="container-global-inscription-candidat">
       <h1 className="title-inscription-candidat">Inscris-toi</h1>
@@ -95,5 +95,3 @@ function RegistrationCandidatepage() {
     </div>
   );
 }
-
-export default RegistrationCandidatepage;

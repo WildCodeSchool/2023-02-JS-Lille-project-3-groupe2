@@ -1,9 +1,10 @@
 import React from "react";
-import "./PageLoginCandidat.scss";
+import { Link } from "react-router-dom";
+import "./LoginForm.scss";
 import iconGoogle from "../../assets/iconGoogle.png";
 import iconLinkedin from "../../assets/iconLinkedin.png";
 
-export default function PageLogin() {
+export default function LoginForm() {
   return (
     <div className="container-global">
       <form className="container-form-login">
@@ -42,7 +43,7 @@ export default function PageLogin() {
 
         <div className="container-text-btnValidate">
           <div className="forget-account-or-password">
-            <span>Vous n'avez pas de compte?</span>
+            <Link to="/register"> Vous n'avez pas de compte?</Link>
             <br />
             <span>Mot de passe oublier?</span>
           </div>
