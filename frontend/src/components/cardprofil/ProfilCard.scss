@@ -1,0 +1,84 @@
+@import "../../Utils.scss";
+
+.profil-card-container {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  padding: 1%;
+  background-color: $mono-white;
+  border-radius: 10px;
+  box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
+  height: 50%;
+
+  .container-left-profil {
+    width: 35%;
+    margin-right: 5%;
+    text-align: center;
+
+    img {
+      height: 60%;
+      margin-bottom: 10%;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
+      width: 100%;
+    }
+  }
+
+  .container-right-profil {
+    width: 50%;
+    margin: 3%;
+
+    h2 {
+      margin-bottom: 7%;
+
+      span {
+        color: $primary-color-candidate;
+      }
+    }
+
+    .item-profil {
+      margin-bottom: 7%;
+
+      h3 {
+        margin-bottom: 3%;
+      }
+
+      p {
+        font-size: large;
+        color: $secondary-color-candidate;
+      }
+    }
+  }
+
+  .button-container-modal {
+    margin-top: auto;
+    margin-left: 1%;
+    font-size: xx-large;
+    color: $primary-color-candidate;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .profil-card-container {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    width: 90%;
+    padding: 3%;
+
+    .container-left-profil {
+      img {
+        height: 40%;
+        margin-bottom: 20%;
+      }
+    }
+
+    .button-container-modal {
+      margin-top: auto;
+      margin-left: 1%;
+      font-size: x-large;
+      color: $primary-color-candidate;
+    }
+  }
+}

@@ -4,31 +4,25 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CandidateLayout from "./app/candidate/CandidateLayout";
 import EnterpriseLayout from "./app/enterprise/EnterpriseLayout";
 import StaffLayout from "./app/staff/StaffLayout";
-import DefaultHome from "./pages/default/DefaultHome";
-import OfferPage from "./pages/shared/OfferPage";
-import RegisterPage from "./pages/default/RegisterPage";
-import LoginPage from "./pages/default/LoginPage";
-import CandidateSpacePage from "./pages/candidate/CandidateSpacePage";
-import CandidateApplicationFormPage from "./pages/candidate/CandidateApplicationFormPage";
-import EnterpriseSpacePage from "./pages/enterprise/EnterpriseSpacePage";
+
 import "./Utils.scss";
-import DefaultLayout from "./app/default/DefaultLayout";
-import ErrorPage from "./pages/shared/ErrorPage";
-import EnterpriseHome from "./pages/enterprise/EnterpriseHome";
+
+import ErrorPage from "./pages/errorpage/ErrorPage";
+import HomePage from "./pages/homepage/HomePage";
+import LoginPage from "./pages/loginpage/LoginPage";
+import OfferPage from "./pages/offerpage/OfferPage";
+import RegisterPage from "./pages/registerpage/RegisterPage";
+import CandidateSpacePage from "./pages/spacepage/CandidateSpacePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DefaultLayout />,
+    element: <CandidateLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "", element: <DefaultHome /> },
+      { path: "", element: <HomePage /> },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
-      {
-        path: "register/:type",
-        element: <RegisterPage />,
-      },
       { path: "offer", element: <OfferPage /> },
     ],
   },
@@ -38,10 +32,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
 
     children: [
-      { path: "", element: <EnterpriseHome /> },
+      { path: "", element: <HomePage /> },
 
       { path: "offer", element: <OfferPage /> },
-      { path: "my_space/:id", element: <EnterpriseSpacePage /> },
+      { path: "my_space/:id", element: <CandidateSpacePage /> },
     ],
   },
   { path: "error", element: <ErrorPage /> },
@@ -52,14 +46,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
 
     children: [
-      { path: "", element: <DefaultHome /> },
+      { path: "", element: <HomePage /> },
 
       { path: "offer", element: <OfferPage /> },
       { path: "my_space/:id", element: <CandidateSpacePage /> },
-      {
-        path: "candidate_applicationform",
-        element: <CandidateApplicationFormPage />,
-      },
     ],
   },
   {

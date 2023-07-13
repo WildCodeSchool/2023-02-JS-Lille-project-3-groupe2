@@ -25,10 +25,10 @@ function LoginButton() {
           <li className="dropdown-container">
             <ul>
               <li>
-                <Link to="/register/candidate"> candidat</Link>
+                <Link to="/login"> Candidat</Link>
               </li>
               <li>
-                <Link to="/register/enterprise"> enterprise</Link>
+                <Link to="/login"> Entreprise</Link>
               </li>
             </ul>
           </li>
