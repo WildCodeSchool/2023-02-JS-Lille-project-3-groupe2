@@ -49,6 +49,24 @@ const edit = (req, res) => {
     });
 };
 
+const create = (req, res) => {
+  const bookmarks = req.body;
+  models.bookmarks
+    .add(bookmarks)
+
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(500);
+      } else {
+        res.status(200).send("bookmark created");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const destroy = (req, res) => {
   const bookmarks = req.body;
   bookmarks.id = parseInt(req.params.id, 10);
@@ -71,6 +89,7 @@ const destroy = (req, res) => {
 module.exports = {
   browse,
   read,
+  create,
   edit,
   destroy,
 };

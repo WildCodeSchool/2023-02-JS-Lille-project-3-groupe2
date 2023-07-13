@@ -20,7 +20,7 @@ class BookmarksManager extends AbstractManager {
       await this.database.beginTransaction();
 
       const query =
-        "INSERT INTO bookmarks (candidate_ID, offer_ID) VALUES (?, ?)";
+        "INSERT INTO bookmarks (candidate_ID, offer_ID, enterprise_ID, bookmark_date) VALUES (?, ?, ?, ?)";
 
       await this.database.query(query, [candidateId, offerId]);
 

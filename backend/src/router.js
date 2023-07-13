@@ -7,15 +7,16 @@ const candidateControllers = require("./controllers/candidateControllers");
 const ValidateUser = require("./services/ValidateUser");
 const hashedCandidatePassword = require("./services/hashedCandidatePassword");
 const authController = require("./controllers/authController");
+const bookmarksController = require("./controllers/bookmarksControllers");
 
 router.get("/offer", offerControllers.browse);
 router.get("/offer/:id", offerControllers.read);
+router.put("/offer/:id", offerControllers.edit);
 router.get("/candidate", candidateControllers.browse);
 router.get("/candidate/:id", candidateControllers.read);
 router.get("/candidate/:id/bookmarks", candidateControllers.getAllMyBookmarks);
-router.get("/offer", offerControllers.selectOfferByDateOrCity);
-// selectofferby.. a faire avec sacha
-router.put("/offer/:id", offerControllers.edit);
+router.post("candidate/:id/bookmarks", bookmarksController.create);
+router.delete("candidate/:id/bookmarks", bookmarksController.destroy);
 /* router.put(
   "/candidate/:id",
   hashedCandidatePassword,

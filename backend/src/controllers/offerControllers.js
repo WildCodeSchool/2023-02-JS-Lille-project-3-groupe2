@@ -49,24 +49,6 @@ const edit = (req, res) => {
     });
 };
 // this requeste should be valide with sacha
-const selectOfferByDateOrCity = (req, res) => {
-  const offer = req.body;
-  offer.id = parseInt(req.params.id, 10);
-
-  models.offer
-    .selectOffersByDateOrCity(offer)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.send(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
 // finish here for validate
 
 const destroy = (req, res) => {
@@ -93,5 +75,4 @@ module.exports = {
   read,
   edit,
   destroy,
-  selectOfferByDateOrCity,
 };
