@@ -8,6 +8,7 @@ function CandidateLayout() {
       {/* NavBar Goes Here */}
       <Navbar type="default" />
       <Outlet />
+
       <Footer type="default" />
     </>
   );
