@@ -1,0 +1,28 @@
+.container-global-legal-notice {
+  display: flex;
+  justify-content: center;
+}
+.container-legal-notice {
+  margin-top: 50px;
+  text-align: center;
+  box-shadow: -1px 1px 5px rgb(97, 25, 89);
+  border-radius: 5px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container-legal-notice h1 {
+  color: #611959;
+}
+.container-legal-notice strong {
+  color: #922685;
+}
+.container-legal-notice a {
+  text-decoration: none;
+}
+.container-legal-notice span {
+  color: #611959;
+  font-weight: bold;
+}
