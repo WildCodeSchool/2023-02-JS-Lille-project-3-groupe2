@@ -11,8 +11,8 @@ import ErrorPage from "./pages/errorpage/ErrorPage";
 import HomePage from "./pages/homepage/HomePage";
 import LoginPage from "./pages/loginpage/LoginPage";
 import OfferPage from "./pages/offerpage/OfferPage";
-import SpacePage from "./pages/spacepage/SpacePage";
 import RegisterPage from "./pages/registerpage/RegisterPage";
+import CandidateSpacePage from "./pages/spacepage/CandidateSpacePage";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       { path: "", element: <HomePage /> },
 
       { path: "offer", element: <OfferPage /> },
-      { path: "my_space/:id", element: <SpacePage /> },
+      { path: "my_space/:id", element: <CandidateSpacePage /> },
     ],
   },
   { path: "error", element: <ErrorPage /> },
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       { path: "", element: <HomePage /> },
 
       { path: "offer", element: <OfferPage /> },
-      { path: "my_space/:id", element: <SpacePage /> },
+      { path: "my_space/:id", element: <CandidateSpacePage /> },
     ],
   },
   {

@@ -109,7 +109,7 @@ export default function BurgerButton({ type }) {
           <Link to="/" className="burger_links">
             Accueil
           </Link>
-          <Link to="/candidate/my_space" className="burger_links">
+          <Link to="/candidate/my_space/1" className="burger_links">
             Mon Espace
           </Link>
           <Link to="/candidate/offer" className="burger_links">
