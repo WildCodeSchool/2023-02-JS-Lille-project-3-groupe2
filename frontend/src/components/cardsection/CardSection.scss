@@ -1,0 +1,15 @@
+@import "../../Utils.scss";
+
+.card-section-profil {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  gap: 5rem;
+
+  .profil-card-container {
+    border: solid $secondary-color-candidate;
+  }
+  .container-information-card {
+    border: solid $secondary-color-candidate;
+  }
+}
