@@ -74,20 +74,25 @@ const verifyPassword = async (req, res, next) => {
   }
 };
 
-const sendToken = (req, res) => {
-  const token = jwt.sign({ sub: req.user.ID }, process.env.JWT_SECRET, {
-    expiresIn: "120min",
-  });
-  res.cookie("token", token, {
-    maxAge: 120 * 60 * 1000,
-    httpOnly: true,
-  });
-  res.json({
-    user: {
-      auth: req.user,
-      infos: req.candidate,
-    },
-  });
+const sendToken = async (req, res) => {
+  try {
+    const token = await jwt.sign({ sub: req.user.ID }, process.env.JWT_SECRET, {
+      expiresIn: "120min",
+    });
+    res.cookie("token", token, {
+      maxAge: 120 * 60 * 1000,
+      httpOnly: true,
+    });
+    res.json({
+      user: {
+        auth: req.user,
+        infos: req.candidate,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
 module.exports = {

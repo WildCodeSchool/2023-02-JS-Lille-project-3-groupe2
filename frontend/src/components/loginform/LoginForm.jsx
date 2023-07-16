@@ -7,23 +7,21 @@ import { useAuth } from "../../contexts/AuthContext";
 
 export default function LoginForm() {
   const navigate = useNavigate();
-
   const { login } = useAuth();
   const [accountToSend, setAccountToSend] = useState({
     email: "",
     password: "",
   });
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState({ email: "", password: "" });
-
-  const handleLogin = async (e, email, password) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError({ email: "", password: "" }); // Reset both email and password errors
 
     try {
-      const result = await login(email, password);
+      const result = await login(accountToSend.email, accountToSend.password);
+      console.info(result);
       if (result.auth.account_type === "candidat") {
         navigate("/candidate");
       } else if (result.auth.account_type === "entreprise") {
@@ -31,19 +29,18 @@ export default function LoginForm() {
       } else if (result.auth.account_type === "staff") {
         navigate("/staff");
       }
-      console.info(`LoginForm : ${result}`);
     } catch (err) {
       console.error(err);
       if (err.response) {
         if (err.response.status === 404) {
-          setError({ ...error, email: "Email incorrect" }); // Set email error for 404 status
+          setError({ ...error, email: "Email incorrect" });
         } else if (err.response.status === 401) {
-          setError({ ...error, password: "Mot de passe incorrect" }); // Set password error for 401 status
+          setError({ ...error, password: "Mot de passe incorrect" });
         } else {
-          setError({ ...error, email: "Identifiants Incorrects" }); // Fallback error for other statuses
+          setError({ ...error, email: "Identifiants Incorrects" });
         }
       } else {
-        setError({ ...error, email: "Identifiants Incorrects" }); // Fallback error for unknown errors
+        setError({ ...error, email: "Identifiants Incorrects" });
       }
     } finally {
       setLoading(false);
