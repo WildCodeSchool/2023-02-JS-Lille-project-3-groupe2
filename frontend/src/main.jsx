@@ -3,7 +3,6 @@ import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CandidateLayout from "./app/candidate/CandidateLayout";
 import EnterpriseLayout from "./app/enterprise/EnterpriseLayout";
-import StaffLayout from "./app/staff/StaffLayout";
 
 import "./Utils.scss";
 
@@ -14,19 +13,35 @@ import OfferPage from "./pages/offerpage/OfferPage";
 import RegisterPage from "./pages/registerpage/RegisterPage";
 import CandidateSpacePage from "./pages/spacepage/CandidateSpacePage";
 import { AuthProvider } from "./contexts/AuthContext";
+import PublicLayout from "./app/public/PublicLayout";
 
-const router = createBrowserRouter([
+/* TODO check if there is no token for notloffedroutesOnly | 
+Check in Candidate Layout and EnterpriseLayout if there is a token, 
+if so check if it's valid and check the role */
+
+const notLoggedRoutesOnly = [
   {
     path: "/",
-    element: <CandidateLayout />,
+    element: <PublicLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "register", element: <RegisterPage /> },
+      { path: "login", element: <LoginPage /> },
+    ],
+  },
+];
+const publicRoutes = [
+  {
+    path: "/",
+    element: <PublicLayout />,
     errorElement: <ErrorPage />,
     children: [
       { path: "", element: <HomePage /> },
-      { path: "login", element: <LoginPage /> },
-      { path: "register", element: <RegisterPage /> },
       { path: "offer", element: <OfferPage /> },
     ],
   },
+];
+const protectedRoutes = [
   {
     path: "enterprise",
     element: <EnterpriseLayout />,
@@ -48,15 +63,15 @@ const router = createBrowserRouter([
 
     children: [
       { path: "", element: <HomePage /> },
-
       { path: "offer", element: <OfferPage /> },
       { path: "my_space/:id", element: <CandidateSpacePage /> },
     ],
   },
-  {
-    path: "staff",
-    element: <StaffLayout />,
-  },
+];
+const router = createBrowserRouter([
+  ...protectedRoutes,
+  ...publicRoutes,
+  ...notLoggedRoutesOnly,
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

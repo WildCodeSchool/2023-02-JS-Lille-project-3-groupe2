@@ -1,6 +1,6 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import propTypes from "prop-types";
-// import api from "../services/api";
+import api from "../services/api";
 
 const authContext = createContext();
 
@@ -12,19 +12,26 @@ export function AuthProvider({ children }) {
     infos: null,
   });
 
-  const isLogged = () => {
-    console.log(user);
-    return user.auth && user.infos ? true : false;
-  };
+  useEffect(() => {
+    console.log("Need to check token here");
+  }, []);
+  const [token, setToken] = useState();
 
-  const Login = async (email, password) => {
-    /* Axios get here then set user Account and user Infos */
+  const isLogged = () => {};
+
+  const login = async (email, password) => {
     try {
-      //   const result = await api.get("/login");
-      //   console.info(result);
-      // set user here
+      const result = await api.post("/login", {
+        email: email,
+        password: password,
+      });
+      const { auth, infos } = result.data.user;
+
+      setUser({ auth: auth, infos: infos });
+      return result;
     } catch (err) {
       console.error(err);
+      throw err;
     }
   };
 
@@ -33,16 +40,20 @@ export function AuthProvider({ children }) {
       auth: null,
       infos: null,
     });
+    // Also need to remove token from cookie if logout otherwise it will not be able to access login page
+    setToken(null);
   };
   const value = useMemo(
     () => ({
       user,
       setUser,
-      Login,
+      login,
       Logout,
       isLogged,
+      token,
+      setToken,
     }),
-    [user, setUser, Login, Logout, isLogged]
+    [user, setUser, login, Logout, isLogged, token, setToken]
   );
 
   return <Provider value={value}>{children}</Provider>;

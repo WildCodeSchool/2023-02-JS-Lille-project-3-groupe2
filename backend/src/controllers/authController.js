@@ -76,7 +76,7 @@ const getUserByEmailWithPasswordAndPassToNext = async (req, res, next) => {
       res.sendStatus(404);
     } else {
       [req.user] = account;
-      await next();
+      next();
     }
   } catch (error) {
     res.status(500).send("Error retrieving data from database");

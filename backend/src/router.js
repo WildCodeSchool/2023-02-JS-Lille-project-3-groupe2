@@ -39,7 +39,6 @@ router.post(
 
 router.get("/show-token", (req, res) => {
   console.info(req.cookies);
-
   res.sendStatus(200);
 });
 router.get("/logout", (req, res) => {

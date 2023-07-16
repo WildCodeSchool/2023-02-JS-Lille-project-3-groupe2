@@ -66,7 +66,7 @@ const verifyPassword = async (req, res, next) => {
         }
       }
     } else {
-      res.sendStatus(404);
+      res.status(401).send("Mauvais mot de passe");
     }
   } catch (err) {
     console.error(err);
@@ -78,7 +78,6 @@ const sendToken = (req, res) => {
   const token = jwt.sign({ sub: req.user.ID }, process.env.JWT_SECRET, {
     expiresIn: "120min",
   });
-
   res.cookie("token", token, {
     maxAge: 120 * 60 * 1000,
     httpOnly: true,
