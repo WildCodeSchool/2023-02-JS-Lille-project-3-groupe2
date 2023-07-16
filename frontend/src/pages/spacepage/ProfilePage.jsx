@@ -1,9 +1,9 @@
 import ProfilCard from "../../components/cardprofil/ProfilCard";
 
 import InformationCard from "../../components/informationcard/InformationCard";
-import "./CandidateSpacePage.scss";
+import "./ProfilePage.scss";
 
-export default function CandidateSpacePage() {
+export default function ProfilePage() {
   return (
     <div className="CandidateSpacePageContainer">
       <ProfilCard />

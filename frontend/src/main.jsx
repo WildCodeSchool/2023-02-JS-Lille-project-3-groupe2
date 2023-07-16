@@ -11,9 +11,9 @@ import HomePage from "./pages/homepage/HomePage";
 import LoginPage from "./pages/loginpage/LoginPage";
 import OfferPage from "./pages/offerpage/OfferPage";
 import RegisterPage from "./pages/registerpage/RegisterPage";
-import CandidateSpacePage from "./pages/spacepage/CandidateSpacePage";
 import { AuthProvider } from "./contexts/AuthContext";
 import PublicLayout from "./app/public/PublicLayout";
+import ProfilePage from "./pages/spacepage/ProfilePage";
 
 /* TODO check if there is no token for notloffedroutesOnly | 
 Check in Candidate Layout and EnterpriseLayout if there is a token, 
@@ -51,7 +51,7 @@ const protectedRoutes = [
       { path: "", element: <HomePage /> },
 
       { path: "offer", element: <OfferPage /> },
-      { path: "my_space/:id", element: <CandidateSpacePage /> },
+      { path: "profile", element: <ProfilePage /> },
     ],
   },
   { path: "error", element: <ErrorPage /> },
@@ -64,7 +64,7 @@ const protectedRoutes = [
     children: [
       { path: "", element: <HomePage /> },
       { path: "offer", element: <OfferPage /> },
-      { path: "my_space/:id", element: <CandidateSpacePage /> },
+      { path: "profile", element: <ProfilePage /> },
     ],
   },
 ];

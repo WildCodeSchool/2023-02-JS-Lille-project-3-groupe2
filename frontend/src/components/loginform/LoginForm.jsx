@@ -31,7 +31,7 @@ export default function LoginForm() {
       } else if (result.auth.account_type === "staff") {
         navigate("/staff");
       }
-      console.log(result);
+      console.info(`LoginForm : ${result}`);
     } catch (err) {
       console.error(err);
       if (err.response) {
