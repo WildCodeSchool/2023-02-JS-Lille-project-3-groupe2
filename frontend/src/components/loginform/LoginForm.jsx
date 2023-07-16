@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./LoginForm.scss";
 import iconGoogle from "../../assets/iconGoogle.png";
 import iconLinkedin from "../../assets/iconLinkedin.png";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
   const { login } = useAuth();
   const [accountToSend, setAccountToSend] = useState({
     email: "",
@@ -22,7 +24,14 @@ export default function LoginForm() {
 
     try {
       const result = await login(email, password);
-      console.info(result);
+      if (result.auth.account_type === "candidat") {
+        navigate("/candidate");
+      } else if (result.auth.account_type === "entreprise") {
+        navigate("/enterprise");
+      } else if (result.auth.account_type === "staff") {
+        navigate("/staff");
+      }
+      console.log(result);
     } catch (err) {
       console.error(err);
       if (err.response) {

@@ -26,9 +26,9 @@ export function AuthProvider({ children }) {
         password: password,
       });
       const { auth, infos } = result.data.user;
-
-      setUser({ auth: auth, infos: infos });
-      return result;
+      await setUser({ auth: auth, infos: infos });
+      return user;
+      // return result;
     } catch (err) {
       console.error(err);
       throw err;
