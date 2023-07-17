@@ -3,8 +3,10 @@
 .card-section-profil {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 90%;
   gap: 5rem;
+  opacity: 0.9;
 
   .profil-card-container {
     border: solid $secondary-color-candidate;
