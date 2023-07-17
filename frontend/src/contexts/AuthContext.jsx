@@ -11,9 +11,16 @@ export function AuthProvider({ children }) {
     infos: null,
   });
 
+  const verifyToken = async () => {
+    try {
+      const result = await api.post("/login");
+      console.info(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    //   check if token
-    console.info("Need to check token here");
+    verifyToken();
   }, []);
 
   const login = async (email, password) => {

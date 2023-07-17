@@ -32,15 +32,12 @@ router.post(
 
 router.post(
   "/login",
+  hashedCandidatePassword.verifyToken,
   authController.getUserByEmailWithPasswordAndPassToNext,
   hashedCandidatePassword.verifyPassword,
   hashedCandidatePassword.sendToken
 );
 
-router.get("/show-token", (req, res) => {
-  console.info(req.cookies);
-  res.sendStatus(200);
-});
 router.get("/logout", (req, res) => {
   res.clearCookie("token");
 

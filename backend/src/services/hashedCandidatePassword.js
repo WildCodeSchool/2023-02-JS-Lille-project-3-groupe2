@@ -42,7 +42,7 @@ const verifyPassword = async (req, res, next) => {
         if (candidate[0] == null) {
           res.sendStatus(404);
         } else {
-          [req.candidate] = candidate;
+          [req.userInfos] = candidate;
           /* res.json({ user: req.user, account: candidate }); */
           next();
         }
@@ -73,21 +73,65 @@ const verifyPassword = async (req, res, next) => {
     res.sendStatus(500);
   }
 };
+const verifyToken = async (req, res, next) => {
+  try {
+    if (req.cookies) {
+      const token = await jwt.verify(req.cookies.token, process.env.JWT_SECRET);
+      if (token.role === "candidat") {
+        const [[userInfos]] = await models.candidate.findCandidateByAccountId(
+          token.account_ID
+        );
+        res.json({
+          userInfos,
+        });
+      } else if (token.role === "entreprise") {
+        const [userInfos] = await models.enterprise.findEnterpriseByAccountId(
+          token.account_ID
+        );
+        res.json([userInfos]);
+      } else if (token.role === "staff") {
+        const [user] = await models.staff.findStaffByAccountId(
+          token.account_ID
+        );
+        res.json([user]);
+      }
+    } else {
+      next();
+    }
+  } catch (err) {
+    if (
+      err.name === "JsonWebTokenError" &&
+      err.message === "jwt must be provided"
+    ) {
+      // Token is missing or invalid, move to the next middleware
+      next();
+    } else {
+      // Pass other errors to the error handling middleware
+      next(err);
+    }
+  }
+};
 
 const sendToken = async (req, res) => {
   try {
-    const token = await jwt.sign({ sub: req.user.ID }, process.env.JWT_SECRET, {
-      expiresIn: "120min",
-    });
+    const token = await jwt.sign(
+      {
+        account_ID: req.userInfos.auth_ID,
+        user_ID: req.userInfos.ID,
+        role: req.user.account_type,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "120min",
+      }
+    );
     res.cookie("token", token, {
       maxAge: 120 * 60 * 1000,
       httpOnly: true,
     });
     res.json({
-      user: {
-        auth: req.user,
-        infos: req.candidate,
-      },
+      userInfos: req.userInfos,
+      userAuth: req.user,
     });
   } catch (err) {
     console.error(err);
@@ -99,4 +143,5 @@ module.exports = {
   hashCandidatePassword,
   verifyPassword,
   sendToken,
+  verifyToken,
 };
