@@ -1,139 +1,376 @@
+import React, { useState } from "react";
+import { Carousel } from "primereact/carousel";
+import { Button } from "primereact/button";
+import "primereact/resources/themes/saga-blue/theme.css";
+import "primereact/resources/primereact.css";
+import "primeicons/primeicons.css";
 import "./FormCandidate.scss";
 
 export default function FormCandidate() {
-  return (
-    <div className="container-register-candidate">
-      <form className="form-candidate-container">
+  const [activeStep, setActiveStep] = useState([0]);
+
+  const steps = [
+    {
+      label: "Etape 1/5",
+      content: (
         <div className="mail-password-container">
-          <h2>bouh</h2>
+          <h2>Choisissez vos identifiants</h2>
           <div className="all-first-input">
             <div className="mail-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="email">Email :</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="johndoe@exemple.com"
+                required
+              />
             </div>
             <div className="-password-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="password">Mot de passe :</label>
+              <input type="password" id="password" required />
             </div>
             <div className="confirm-password-input">
-              <label>
-                <input />
+              <label htmlFor="confirmpassword">
+                Confirmer le mot de passe :
               </label>
+              <input type="password" id="confirmpassword" required />
             </div>
           </div>
         </div>
-
+      ),
+    },
+    {
+      label: "Etape 2/5",
+      content: (
         <div className="name-birthday-container">
-          <h2>bouh</h2>
+          <h2>Dites-nous en plus à propos de vous !</h2>
           <div className="all-second-input">
             <div className="firstname-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="firstname"> Prénom :</label>
+              <input type="text" id="firstname" placeholder="John" required />
             </div>
             <div className="lastname-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="lastname">Nom :</label>
+              <input type="text" id="lastname" placeholder="Doe" required />
             </div>
             <div className="birthday-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="birthdate">Date de naissance :</label>
+              <input
+                type="date"
+                id="birthdate"
+                min="1900-01-01"
+                max="2005-07-27"
+                required
+                pattern="\d{4}-\d{2}-\d{2}"
+              />
             </div>
           </div>
         </div>
-
+      ),
+    },
+    {
+      label: "Etape 3/5",
+      content: (
         <div className="address-container">
-          <h2>bouh</h2>
+          <h2>N'oubliez pas votre adresse postale</h2>
           <div className="all-fourth-input">
             <div className="number-way-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="numberway">N° de voirie :</label>
+              <input type="number" id="numberway" placeholder="32" required />
             </div>
             <div className="type-way-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="typeway">Type de voirie :</label>
+              <input
+                type="text"
+                id="typeway"
+                placeholder="Rue, Boulevard ..."
+                required
+              />
             </div>
             <div className="name-way-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="nameway">Nom de la voirie :</label>
+              <input
+                type="text"
+                id="nameway"
+                placeholder="Henry de la Mouette ..."
+                required
+              />
             </div>
             <div className="region-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="region">Région :</label>
+              <input
+                type="text"
+                id="region"
+                placeholder="Île de France ..."
+                required
+              />
             </div>
             <div className="department-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="department">Département :</label>
+              <input
+                type="text"
+                id="department"
+                placeholder="Val-de-Marne ..."
+                required
+              />
             </div>
             <div className="city-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="city">Ville :</label>
+              <input type="text" id="city" placeholder="Paris ..." required />
             </div>
             <div className="postal-code-input">
-              <label>
-                <input />
-              </label>
+              <label htmlFor="postalcode">Code postal :</label>
+              <input
+                type="number"
+                id="postalcode"
+                placeholder="94220 ..."
+                required
+              />
             </div>
           </div>
         </div>
-
-        <div className="contract-check-container">
-          <h2>bouh</h2>
-          <div className="all-fifth-input">
-            <div className="cdi-input">
-              <label>
-                <input />
-              </label>
-            </div>
-            <div className="cdd-input">
-              <label>
-                <input />
-              </label>
-            </div>
-            <div className="interim-input">
-              <label>
-                <input />
-              </label>
-            </div>
-            <div className="alternance-input">
-              <label>
-                <input />
-              </label>
-            </div>
-            <div className="stage-input">
-              <label>
-                <input />
-              </label>
-            </div>
-            <div className="other-input">
-              <label>
-                <input />
-              </label>
-            </div>
-          </div>
-        </div>
-
+      ),
+    },
+    {
+      label: "Etape 4/4",
+      content: (
         <div className="rgpd-check-container">
-          <h2>bouh</h2>
+          <h2>Dernière étape !</h2>
           <div className="sixth-input">
             <div className="rgpd-input">
-              <label>
-                <input />
+              <input type="checkbox" id="rgpd" value="rgpd" required />
+              <label htmlFor="rgpd">
+                En soumettant ce formulaire, vous consentez à ce que vos données
+                personnelles soient traitées conformément au Règlement général
+                sur la protection des données (RGPD). Vos informations seront
+                utilisées dans le but de traiter votre candidature à des offres
+                d'emploi et faciliter le processus de recrutement. Veuillez
+                consulter notre politique de confidentialité pour plus
+                d'informations sur la manière dont nous protégeons et utilisons
+                vos données.
               </label>
             </div>
           </div>
+        </div>
+      ),
+    },
+  ];
+
+  const handleNext = () => {
+    setActiveStep((prevStep) => prevStep + 1);
+  };
+
+  const handlePrev = () => {
+    setActiveStep((prevStep) => prevStep - 1);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Effectuez ici la logique de soumission du formulaire
+  };
+
+  const renderCarouselItem = (stepIndex) => {
+    const step = steps[stepIndex];
+    if (!step) {
+      return null; // Ou un message d'erreur approprié
+    }
+
+    return (
+      <div key={stepIndex}>
+        <h3>{step.label}</h3>
+        {step.content}
+      </div>
+    );
+  };
+
+  return (
+    <div className="container-register-candidate">
+      <form className="form-candidate-container" onSubmit={handleSubmit}>
+        <Carousel
+          value={[activeStep]}
+          numVisible={1}
+          numScroll={1}
+          orientation="vertical"
+          circular={false}
+          responsiveOptions={[
+            {
+              breakpoint: "1024px",
+              numVisible: 1,
+              numScroll: 1,
+            },
+          ]}
+          itemTemplate={renderCarouselItem}
+        />
+
+        {/* Boutons de navigation */}
+        <div className="btn-navigation">
+          {activeStep !== 0 && (
+            <Button
+              label="Précédent"
+              onClick={handlePrev}
+              className="p-button-secondary"
+            />
+          )}
+          {activeStep !== steps.length - 1 ? (
+            <Button
+              label="Suivant"
+              onClick={handleNext}
+              className="p-button-success"
+            />
+          ) : (
+            <Button
+              type="submit"
+              label="Valider"
+              className="p-button-success"
+            />
+          )}
         </div>
       </form>
     </div>
   );
 }
+
+// import "./FormCandidate.scss";
+
+// export default function FormCandidate() {
+//   return (
+//     <div className="container-register-candidate">
+//       <form className="form-candidate-container">
+//         <div className="mail-password-container">
+//           <h2>Choisissez vos identifiants</h2>
+//           <div className="all-first-input">
+//             <div className="mail-input">
+//               <label>Email :
+//                 <input type="email" placeholder="johndoe@exemple.com" required />
+//               </label>
+//             </div>
+//             <div className="-password-input">
+//               <label>Mot de passe :
+//                 <input type="password" required />
+//               </label>
+//             </div>
+//             <div className="confirm-password-input">
+//               <label>Confirmer le mot de passe :
+//                 <input type="password" required />
+//               </label>
+//             </div>
+//           </div>
+//         </div>
+
+//         <div className="name-birthday-container">
+//           <h2>Dites-nous en plus à propos de vous !</h2>
+//           <div className="all-second-input">
+//             <div className="firstname-input">
+//               <label> Prénom :
+//                 <input type="text" placeholder="John" required />
+//               </label>
+//             </div>
+//             <div className="lastname-input">
+//               <label>Nom :
+//                 <input type="text" placeholder="Doe" required />
+//               </label>
+//             </div>
+//             <div className="birthday-input">
+//               <label>Date de naissance :
+//                 <input type="date" min="1900-01-01" max="2005-07-27" required pattern="\d{4}-\d{2}-\d{2}" />
+//               </label>
+//             </div>
+//           </div>
+//         </div>
+
+//         <div className="address-container">
+//           <h2>N'oubliez pas votre adresse postale</h2>
+//           <div className="all-fourth-input">
+//             <div className="number-way-input">
+//               <label>N° de voirie :
+//                 <input type="number" placeholder="32" required />
+//               </label>
+//             </div>
+//             <div className="type-way-input">
+//               <label>Type de voirie :
+//                 <input type="text" placeholder="Rue, Boulevard ..." required />
+//               </label>
+//             </div>
+//             <div className="name-way-input">
+//               <label>Nom de la voirie :
+//                 <input type="text" placeholder="Henry de la Mouette ..." required />
+//               </label>
+//             </div>
+//             <div className="region-input">
+//               <label>Région :
+//                 <input type="text" placeholder="Île de France ..." required />
+//               </label>
+//             </div>
+//             <div className="department-input">
+//               <label>Département :
+//                 <input type="text" placeholder="Val-de-Marne ..." required />
+//               </label>
+//             </div>
+//             <div className="city-input">
+//               <label>Ville :
+//                 <input type="text" placeholder="Paris ..." required />
+//               </label>
+//             </div>
+//             <div className="postal-code-input">
+//               <label>Code postal :
+//                 <input type="number" placeholder="94220 ..." required />
+//               </label>
+//             </div>
+//           </div>
+//         </div>
+
+//         <div className="contract-check-container">
+//           <h2>Que cherchez-vous sur notre plateforme ?</h2>
+//           <div className="all-fifth-input">
+//             <div className="cdi-input">
+//               <input type="checkbox" value="contract" />
+//               <label>CDI</label>
+//             </div>
+//             <div className="cdd-input">
+//               <input type="checkbox" value="contract" />
+//               <label>CDD</label>
+//             </div>
+//             <div className="interim-input">
+//               <input type="checkbox" value="contract" />
+//               <label>INTERIM</label>
+//             </div>
+//             <div className="alternance-input">
+//               <input type="checkbox" value="contract" />
+//               <label>ALTERNANCE</label>
+//             </div>
+//             <div className="stage-input">
+//               <input type="checkbox" value="contract" />
+//               <label>STAGE</label>
+//             </div>
+//             <div className="other-input">
+//               <input type="checkbox" value="contract" />
+//               <label>AUTRE ...</label>
+//             </div>
+//           </div>
+//         </div>
+
+//         <div className="rgpd-check-container">
+//           <h2>Dernière étape !</h2>
+//           <div className="sixth-input">
+//             <div className="rgpd-input">
+//               <input type="checkbox" value="rgpd" required />
+//               <label>En soumettant ce formulaire, vous consentez à ce que vos données
+//                 personnelles soient traitées conformément au Règlement général sur
+//                 la protection des données (RGPD). Vos informations seront
+//                 utilisées dans le but de traiter votre candidature à des offres
+//                 d'emploi et faciliter le processus de recrutement. Veuillez
+//                 consulter notre politique de confidentialité pour plus
+//                 d'informations sur la manière dont nous protégeons et utilisons
+//                 vos données.</label>
+//             </div>
+//             <div className="btn-inscription-final">
+//               <button type="submit" className="btn-inscription">
+//                 VALIDER
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// }

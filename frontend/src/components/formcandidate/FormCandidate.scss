@@ -1,1 +1,40 @@
 @import "../../Utils.scss";
+
+.container-register-candidate {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .form-candidate-container {
+    display: flex;
+    flex-direction: column;
+
+    .mail-password-container,
+    .name-birthday-container,
+    .address-container,
+    .contract-check-container,
+    .rgpd-check-container {
+      margin-bottom: 20px;
+    }
+
+    .btn-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+  }
+}
+
+// Cacher le bouton précédent
+.p-carousel-prev {
+  display: none;
+}
+
+// Cacher le bouton suivant
+.p-carousel-next {
+  display: none;
+}
+
+.p-carousel-indicators {
+  display: none;
+}
