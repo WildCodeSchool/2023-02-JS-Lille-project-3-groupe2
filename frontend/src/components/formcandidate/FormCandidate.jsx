@@ -11,10 +11,10 @@ export default function FormCandidate() {
 
   const steps = [
     {
-      label: "Etape 1/5",
+      label: "Etape 1/4",
       content: (
         <div className="mail-password-container">
-          <h2>Choisissez vos identifiants</h2>
+          <h1>Choisissez vos identifiants</h1>
           <div className="all-first-input">
             <div className="mail-input">
               <label htmlFor="email">Email :</label>
@@ -25,25 +25,35 @@ export default function FormCandidate() {
                 required
               />
             </div>
-            <div className="-password-input">
+            <div className="password-input">
               <label htmlFor="password">Mot de passe :</label>
-              <input type="password" id="password" required />
+              <input
+                type="password"
+                id="password"
+                placeholder="Insérer votre mot de passe ..."
+                required
+              />
             </div>
             <div className="confirm-password-input">
               <label htmlFor="confirmpassword">
                 Confirmer le mot de passe :
               </label>
-              <input type="password" id="confirmpassword" required />
+              <input
+                type="password"
+                id="confirmpassword"
+                placeholder="Confirmer votre mot de passe ..."
+                required
+              />
             </div>
           </div>
         </div>
       ),
     },
     {
-      label: "Etape 2/5",
+      label: "Etape 2/4",
       content: (
         <div className="name-birthday-container">
-          <h2>Dites-nous en plus à propos de vous !</h2>
+          <h1>Dites-nous en plus à propos de vous !</h1>
           <div className="all-second-input">
             <div className="firstname-input">
               <label htmlFor="firstname"> Prénom :</label>
@@ -69,10 +79,10 @@ export default function FormCandidate() {
       ),
     },
     {
-      label: "Etape 3/5",
+      label: "Etape 3/4",
       content: (
         <div className="address-container">
-          <h2>N'oubliez pas votre adresse postale</h2>
+          <h1>N'oubliez pas votre adresse postale</h1>
           <div className="all-fourth-input">
             <div className="number-way-input">
               <label htmlFor="numberway">N° de voirie :</label>
@@ -135,7 +145,7 @@ export default function FormCandidate() {
       label: "Etape 4/4",
       content: (
         <div className="rgpd-check-container">
-          <h2>Dernière étape !</h2>
+          <h1>Dernière étape !</h1>
           <div className="sixth-input">
             <div className="rgpd-input">
               <input type="checkbox" id="rgpd" value="rgpd" required />
@@ -190,7 +200,6 @@ export default function FormCandidate() {
           value={[activeStep]}
           numVisible={1}
           numScroll={1}
-          orientation="vertical"
           circular={false}
           responsiveOptions={[
             {
@@ -237,7 +246,7 @@ export default function FormCandidate() {
 //     <div className="container-register-candidate">
 //       <form className="form-candidate-container">
 //         <div className="mail-password-container">
-//           <h2>Choisissez vos identifiants</h2>
+//           <h1>Choisissez vos identifiants</h1>
 //           <div className="all-first-input">
 //             <div className="mail-input">
 //               <label>Email :
@@ -258,7 +267,7 @@ export default function FormCandidate() {
 //         </div>
 
 //         <div className="name-birthday-container">
-//           <h2>Dites-nous en plus à propos de vous !</h2>
+//           <h1>Dites-nous en plus à propos de vous !</h1>
 //           <div className="all-second-input">
 //             <div className="firstname-input">
 //               <label> Prénom :
@@ -279,7 +288,7 @@ export default function FormCandidate() {
 //         </div>
 
 //         <div className="address-container">
-//           <h2>N'oubliez pas votre adresse postale</h2>
+//           <h1>N'oubliez pas votre adresse postale</h1>
 //           <div className="all-fourth-input">
 //             <div className="number-way-input">
 //               <label>N° de voirie :
@@ -320,7 +329,7 @@ export default function FormCandidate() {
 //         </div>
 
 //         <div className="contract-check-container">
-//           <h2>Que cherchez-vous sur notre plateforme ?</h2>
+//           <h1>Que cherchez-vous sur notre plateforme ?</h1>
 //           <div className="all-fifth-input">
 //             <div className="cdi-input">
 //               <input type="checkbox" value="contract" />
@@ -350,7 +359,7 @@ export default function FormCandidate() {
 //         </div>
 
 //         <div className="rgpd-check-container">
-//           <h2>Dernière étape !</h2>
+//           <h1>Dernière étape !</h1>
 //           <div className="sixth-input">
 //             <div className="rgpd-input">
 //               <input type="checkbox" value="rgpd" required />

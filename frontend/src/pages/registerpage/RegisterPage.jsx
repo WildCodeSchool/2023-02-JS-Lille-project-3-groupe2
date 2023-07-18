@@ -3,5 +3,9 @@
 import FormCandidate from "../../components/formcandidate/FormCandidate";
 
 export default function RegisterPage() {
-  return <FormCandidate />;
+  return (
+    <div className="container-page-register">
+      <FormCandidate />
+    </div>
+  );
 }
