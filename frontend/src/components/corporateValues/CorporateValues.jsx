@@ -1,19 +1,19 @@
 import React from "react";
 import { useMediaQuery } from "@react-hook/media-query";
 import { FiUsers, FiRefreshCw, FiTrendingUp } from "react-icons/fi";
-import PropTypes from "prop-types";
 import "./CorporateValues.scss";
 
-export default function CorporateValues({ role }) {
+export default function CorporateValues() {
   const matchMobile = useMediaQuery("only screen and (max-width: 1000px)");
   const matchDesktop = useMediaQuery("only screen and (min-width: 1000px)");
 
   if (matchMobile)
     return (
       <div
-        className={
-          role === "default" ? "" : role === "enterprise" && "role_enterprise"
-        }
+        // className={
+        //   role === "default" ? "" : role === "enterprise" && "role_enterprise"
+        // }
+        className="default"
       >
         <div className="container-values-mobile">
           <div className="image-text-mobile">
@@ -82,9 +82,10 @@ export default function CorporateValues({ role }) {
   if (matchDesktop)
     return (
       <div
-        className={
-          role === "default" ? "e" : role === "enterprise" && "role_enterprise"
-        }
+        // className={
+        //   role === "default" ? "" : role === "enterprise" && "role_enterprise"
+        // }
+        className="default"
       >
         <div className="container-values-desktop">
           <div className="image-text-desktop">
@@ -151,6 +152,6 @@ export default function CorporateValues({ role }) {
     );
 }
 
-CorporateValues.propTypes = {
-  role: PropTypes.string.isRequired,
-};
+// CorporateValues.propTypes = {
+//   role: PropTypes.string.isRequired,
+// };

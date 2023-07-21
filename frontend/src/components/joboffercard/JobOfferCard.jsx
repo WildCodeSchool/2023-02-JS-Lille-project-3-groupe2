@@ -11,7 +11,7 @@ export default function JobOfferCard({
   nameCompany,
   jobTitle,
   city,
-  experienceTime,
+  salary,
 }) {
   return (
     <div className="jobOfferCardContainer">
@@ -33,7 +33,7 @@ export default function JobOfferCard({
             </li>
             <li>
               <span className="jobOfferCardXp">
-                <IoSchoolOutline className="iconCards" /> {experienceTime}
+                <IoSchoolOutline className="iconCards" /> {salary}
               </span>
             </li>
           </ul>
@@ -53,5 +53,5 @@ JobOfferCard.propTypes = {
   nameCompany: Proptypes.string.isRequired,
   jobTitle: Proptypes.string.isRequired,
   city: Proptypes.string.isRequired,
-  experienceTime: Proptypes.string.isRequired,
+  salary: Proptypes.string.isRequired,
 };

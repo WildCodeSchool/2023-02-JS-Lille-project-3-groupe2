@@ -1,11 +1,13 @@
 import React from "react";
 import { slide as Menu } from "react-burger-menu";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import "./BurgerButton.scss";
+import { useAuth } from "../../contexts/AuthContext";
 
-export default function BurgerButton({ type }) {
+export default function BurgerButton() {
+  const { user } = useAuth();
+
   const defaultStyle = {
     bmBurgerButton: {
       position: "fixed",
@@ -102,14 +104,14 @@ export default function BurgerButton({ type }) {
       height: "100px",
     },
   };
-  if (type === "default")
+  if (user.userAuth.account_type === "candidat")
     return (
       <div className="Button_container_candidate">
         <Menu noOverlay className="my-menu" styles={defaultStyle}>
           <Link to="/" className="burger_links">
             Accueil
           </Link>
-          <Link to="/candidate/my_space/1" className="burger_links">
+          <Link to="/candidate/profile" className="burger_links">
             Mon Espace
           </Link>
           <Link to="/candidate/offer" className="burger_links">
@@ -124,14 +126,14 @@ export default function BurgerButton({ type }) {
         </Menu>
       </div>
     );
-  if (type === "enterprise")
+  if (user.userAuth.account_type === "entreprise")
     return (
       <div className="Button_container_candidate">
         <Menu noOverlay className="my-menu" styles={enterpriseStyle}>
           <Link to="/" className="burger_links">
             Accueil
           </Link>
-          <Link to="/enterprise/my_space" className="burger_links">
+          <Link to="/enterprise/profile" className="burger_links">
             Mon Espace
           </Link>
           <Link to="enterprise/offer" className="burger_links">
@@ -146,7 +148,25 @@ export default function BurgerButton({ type }) {
         </Menu>
       </div>
     );
+  return (
+    <div className="Button_container_candidate">
+      <Menu noOverlay className="my-menu" styles={defaultStyle}>
+        <Link to="/" className="burger_links">
+          Accueil
+        </Link>
+        <Link to="/register" className="burger_links">
+          S'inscrire
+        </Link>
+        <Link to="/offer" className="burger_links">
+          Offres d'emploi
+        </Link>
+        <Link to="/about_us" className="burger_links">
+          À propos de nous
+        </Link>
+        <Link to="/contact" className="burger_links">
+          Contact
+        </Link>
+      </Menu>
+    </div>
+  );
 }
-BurgerButton.propTypes = {
-  type: PropTypes.string.isRequired,
-};

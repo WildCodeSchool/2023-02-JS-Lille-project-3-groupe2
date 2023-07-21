@@ -1,27 +1,46 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import propTypes from "prop-types";
 import api from "../services/api";
 
 const authContext = createContext();
 
 export function AuthProvider({ children }) {
+  const [isLogin, setIsLogin] = useState(false);
   const { Provider } = authContext;
   const [user, setUser] = useState({
-    auth: null,
-    infos: null,
+    userAuth: {
+      ID: null,
+      account_type: null,
+      active: null,
+      creation_date: null,
+      password: null,
+      register_email: null,
+    },
+    userInfos: {
+      about: null,
+      auth_ID: null,
+      birthdate: null,
+      firstname: null,
+      lastname: null,
+      phone_number: null,
+      picture_url: null,
+    },
   });
 
   const verifyToken = async () => {
     try {
-      const result = await api.post("/login");
-      console.info(result);
+      const loginResult = await api.post("/login");
+      const authResult = await api.get(
+        `/auth/${loginResult.data.userInfos.auth_ID}`
+      );
+      const userAuth = authResult.data;
+      const { userInfos } = loginResult.data;
+      setUser({ userAuth, userInfos });
+      return { userAuth, userInfos };
     } catch (error) {
-      console.error(error);
+      return error;
     }
   };
-  useEffect(() => {
-    verifyToken();
-  }, []);
 
   const login = async (email, password) => {
     try {
@@ -29,29 +48,47 @@ export function AuthProvider({ children }) {
         email,
         password,
       });
-      const { auth, infos } = result.data.user;
-      setUser({ auth, infos });
-      return { auth, infos };
+      const { userAuth, userInfos } = result.data;
+      // console.log({ userAuth, userInfos });
+      setUser({ userAuth, userInfos });
+      return { userAuth, userInfos };
     } catch (err) {
       console.error(err);
       throw err;
     }
   };
 
-  const Logout = () => {
+  const logout = () => {
     setUser({
-      auth: null,
-      infos: null,
+      userAuth: {
+        ID: null,
+        account_type: null,
+        active: null,
+        creation_date: null,
+        password: null,
+        register_email: null,
+      },
+      userInfos: {
+        about: null,
+        auth_ID: null,
+        birthdate: null,
+        firstname: null,
+        lastname: null,
+        phone_number: null,
+        picture_url: null,
+      },
     });
-    // Also need to remove token from cookie if logout otherwise it will not be able to access login page
-    // setToken(null); // If needed, you can setToken here
+    api.get("/logout");
   };
 
   const value = {
     user,
     setUser,
     login,
-    Logout,
+    verifyToken,
+    logout,
+    isLogin,
+    setIsLogin,
   };
 
   return <Provider value={value}>{children}</Provider>;

@@ -9,6 +9,7 @@ const hashedCandidatePassword = require("./services/hashedCandidatePassword");
 const authController = require("./controllers/authController");
 const bookmarksController = require("./controllers/bookmarksControllers");
 
+router.get("/auth/:id", authController.read);
 router.get("/offer", offerControllers.browse);
 router.get("/offer/:id", offerControllers.read);
 router.put("/offer/:id", offerControllers.edit);
