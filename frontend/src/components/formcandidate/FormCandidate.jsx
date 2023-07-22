@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Carousel } from "primereact/carousel";
 import { Button } from "primereact/button";
+import { BsArrowRightCircle, BsArrowLeftCircle } from "react-icons/bs";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
@@ -11,7 +12,7 @@ export default function FormCandidate() {
 
   const steps = [
     {
-      label: "Etape 1/4",
+      label: "Etape 1/5",
       content: (
         <div className="mail-password-container">
           <h1>Choisissez vos identifiants</h1>
@@ -50,7 +51,7 @@ export default function FormCandidate() {
       ),
     },
     {
-      label: "Etape 2/4",
+      label: "Etape 2/5",
       content: (
         <div className="name-birthday-container">
           <h1>Dites-nous en plus à propos de vous !</h1>
@@ -79,74 +80,112 @@ export default function FormCandidate() {
       ),
     },
     {
-      label: "Etape 3/4",
+      label: "Etape 3/5",
       content: (
         <div className="address-container">
           <h1>N'oubliez pas votre adresse postale</h1>
-          <div className="all-fourth-input">
-            <div className="number-way-input">
-              <label htmlFor="numberway">N° de voirie :</label>
-              <input type="number" id="numberway" placeholder="32" required />
+          <div className="all-third-input">
+            <div className="container-right">
+              <div className="number-way-input">
+                <label htmlFor="numberway">N° de voirie :</label>
+                <input type="number" id="numberway" placeholder="32" required />
+              </div>
+              <div className="type-way-input">
+                <label htmlFor="typeway">Type de voirie :</label>
+                <input
+                  type="text"
+                  id="typeway"
+                  placeholder="Rue, Boulevard ..."
+                  required
+                />
+              </div>
+              <div className="name-way-input">
+                <label htmlFor="nameway">Nom de la voirie :</label>
+                <input
+                  type="text"
+                  id="nameway"
+                  placeholder="Henry de la Mouette ..."
+                  required
+                />
+              </div>
             </div>
-            <div className="type-way-input">
-              <label htmlFor="typeway">Type de voirie :</label>
-              <input
-                type="text"
-                id="typeway"
-                placeholder="Rue, Boulevard ..."
-                required
-              />
-            </div>
-            <div className="name-way-input">
-              <label htmlFor="nameway">Nom de la voirie :</label>
-              <input
-                type="text"
-                id="nameway"
-                placeholder="Henry de la Mouette ..."
-                required
-              />
-            </div>
-            <div className="region-input">
-              <label htmlFor="region">Région :</label>
-              <input
-                type="text"
-                id="region"
-                placeholder="Île de France ..."
-                required
-              />
-            </div>
-            <div className="department-input">
-              <label htmlFor="department">Département :</label>
-              <input
-                type="text"
-                id="department"
-                placeholder="Val-de-Marne ..."
-                required
-              />
-            </div>
-            <div className="city-input">
-              <label htmlFor="city">Ville :</label>
-              <input type="text" id="city" placeholder="Paris ..." required />
-            </div>
-            <div className="postal-code-input">
-              <label htmlFor="postalcode">Code postal :</label>
-              <input
-                type="number"
-                id="postalcode"
-                placeholder="94220 ..."
-                required
-              />
+            <div className="container-left">
+              <div className="region-input">
+                <label htmlFor="region">Région :</label>
+                <input
+                  type="text"
+                  id="region"
+                  placeholder="Île de France ..."
+                  required
+                />
+              </div>
+              <div className="department-input">
+                <label htmlFor="department">Département :</label>
+                <input
+                  type="text"
+                  id="department"
+                  placeholder="Val-de-Marne ..."
+                  required
+                />
+              </div>
+              <div className="city-input">
+                <label htmlFor="city">Ville :</label>
+                <input type="text" id="city" placeholder="Paris ..." required />
+              </div>
+              <div className="postal-code-input">
+                <label htmlFor="postalcode">Code postal :</label>
+                <input
+                  type="number"
+                  id="postalcode"
+                  placeholder="94220 ..."
+                  required
+                />
+              </div>
             </div>
           </div>
         </div>
       ),
     },
     {
-      label: "Etape 4/4",
+      label: "Etape 4/5",
+      content: (
+        <div className="contract-check-container">
+          <h1>Que recherchez-vous sur notre plateforme ?</h1>
+          <div className="all-fourth-input">
+            <div className="container-left1">
+              <div className="cdi-input">
+                <input id="cdi" type="checkbox" value="contract" />
+                <label htmlFor="cdi">CDI</label>
+              </div>
+              <div className="cdd-input">
+                <input id="cdd" type="checkbox" value="contract" />
+                <label htmlFor="cdd">CDD</label>
+              </div>
+              <div className="interim-input">
+                <input id="interim" type="checkbox" value="contract" />
+                <label htmlFor="interim">INTERIM</label>
+              </div>
+            </div>
+            <div className="container-right1">
+              <div className="alternance-input">
+                <input id="alternance" type="checkbox" value="contract" />
+                <label htmlFor="alternance">ALTERNANCE</label>
+              </div>
+              <div className="stage-input">
+                <input id="stage" type="checkbox" value="contract" />
+                <label htmlFor="stage">STAGE</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      label: "Etape 5/5",
       content: (
         <div className="rgpd-check-container">
           <h1>Dernière étape !</h1>
-          <div className="sixth-input">
+          <div className="all-fifth-input">
             <div className="rgpd-input">
               <input type="checkbox" id="rgpd" value="rgpd" required />
               <label htmlFor="rgpd">
@@ -215,14 +254,14 @@ export default function FormCandidate() {
         <div className="btn-navigation">
           {activeStep !== 0 && (
             <Button
-              label="Précédent"
+              label={<BsArrowLeftCircle />}
               onClick={handlePrev}
               className="p-button-secondary"
             />
           )}
           {activeStep !== steps.length - 1 ? (
             <Button
-              label="Suivant"
+              label={<BsArrowRightCircle />}
               onClick={handleNext}
               className="p-button-success"
             />
