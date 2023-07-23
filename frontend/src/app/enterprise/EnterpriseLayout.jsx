@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
+import "./EnterpriseLayout.scss";
 import Navbar from "../../components/navbar/Navbar";
 
 function EnterpriseLayout() {
   return (
     <div className="EnterpriseLayoutContainer">
-      {/* NavBar Goes Here */}
-      <Navbar type="enterprise" />
+      <Navbar />
       <Outlet />
-      <Footer type="enterprise" />
+      <Footer />
     </div>
   );
 }

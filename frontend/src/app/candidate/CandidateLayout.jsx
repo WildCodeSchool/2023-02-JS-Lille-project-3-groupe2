@@ -5,14 +5,11 @@ import "./CandidateLayout.scss";
 
 function CandidateLayout() {
   return (
-    <>
-      {/* NavBar Goes Here */}
-      <div className="CandidateLayoutContainer">
-        <Navbar type="default" />
-        <Outlet />
-        <Footer type="default" />
-      </div>
-    </>
+    <div className="CandidateLayoutContainer">
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </div>
   );
 }
 export default CandidateLayout;

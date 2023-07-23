@@ -1,12 +1,15 @@
 import { FaSquareTwitter, FaLinkedin } from "react-icons/fa6";
 import "./Footer.scss";
-import PropTypes from "prop-types";
+import { useAuth } from "../../contexts/AuthContext";
 
-export default function Footer({ type }) {
+export default function Footer() {
+  const { user } = useAuth();
+  const type = user.userAuth.account_type;
+
   return (
     <footer
       className={
-        type === "default" ? "" : type === "enterprise" && "footer_enterprise"
+        type === "candidat" ? "" : type === "entreprise" && "footer_enterprise"
       }
     >
       <div className="footer_part1">
@@ -46,6 +49,3 @@ export default function Footer({ type }) {
     </footer>
   );
 }
-Footer.propTypes = {
-  type: PropTypes.string.isRequired,
-};

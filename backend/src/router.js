@@ -17,6 +17,7 @@ const authController = require("./controllers/authController");
 const bookmarksController = require("./controllers/bookmarksControllers");
 const enterpriseControllers = require("./controllers/enterpriseControllers");
 
+router.get("/auth/:id", authController.read);
 router.get("/offer", offerControllers.browse);
 router.get("/offer/:id", offerControllers.read);
 router.put("/offer/:id", offerControllers.edit);
@@ -102,16 +103,12 @@ router.post(
 
 router.post(
   "/login",
+  hashedCandidatePassword.verifyToken,
   authController.getUserByEmailWithPasswordAndPassToNext,
   hashedCandidatePassword.verifyPassword,
   hashedCandidatePassword.sendToken
 );
 
-router.get("/show-token", (req, res) => {
-  console.info(req.cookies);
-
-  res.sendStatus(200);
-});
 router.get("/logout", (req, res) => {
   res.clearCookie("token");
 

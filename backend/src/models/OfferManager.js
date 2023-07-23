@@ -33,14 +33,15 @@ class OfferManager extends AbstractManager {
     a.department,
     a.region,
     a.country
-  FROM
+FROM
     externatic.offer AS o
-  JOIN
+JOIN
     externatic.enterprise AS e ON o.enterprise_ID = e.ID
-  JOIN
-    externatic.address AS a ON o.ID = a.offer_ID;
-  
-  `);
+JOIN
+    externatic.address AS a ON o.ID = a.offer_ID
+ORDER BY
+    o.offer_date DESC;
+`);
   }
 
   findByTitle(id) {
