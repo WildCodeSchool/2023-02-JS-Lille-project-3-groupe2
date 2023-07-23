@@ -6,7 +6,7 @@ import logo from "../../assets/externatic_logo_candidate.png";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function Navbar() {
-  const { login, user } = useAuth();
+  const { isLogin, user } = useAuth();
 
   return (
     <div className="navbarContainer">
@@ -33,7 +33,7 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-      {!login ? (
+      {!isLogin ? (
         <div className="loginNavbar">
           {" "}
           <button type="button">Sign in</button>
@@ -48,7 +48,6 @@ export default function Navbar() {
             <motion.button
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
-              onClick={() => console.log("test")}
             >
               {" "}
               <FiLogOut />
