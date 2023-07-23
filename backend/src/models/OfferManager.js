@@ -6,7 +6,41 @@ class OfferManager extends AbstractManager {
   }
 
   findAll() {
-    return this.database.query(`SELECT * FROM ${this.table}`);
+    return this.database.query(`SELECT
+    o.ID,
+    o.enterprise_ID,
+    e.siret,
+    e.social_denomination,
+    e.trade_name,
+    e.contact_email AS enterprise_contact_email,
+    e.phone_number AS enterprise_phone_number,
+    e.company_type,
+    e.other_information,
+    e.kbis_url,
+    e.logo_url,
+    e.website,
+    o.title,
+    o.min_salary,
+    o.max_salary,
+    o.descriptions,
+    o.visibility,
+    o.offer_date,
+    a.street_number,
+    a.street_type,
+    a.street_name,
+    a.city,
+    a.postal_code,
+    a.department,
+    a.region,
+    a.country
+  FROM
+    externatic.offer AS o
+  JOIN
+    externatic.enterprise AS e ON o.enterprise_ID = e.ID
+  JOIN
+    externatic.address AS a ON o.ID = a.offer_ID;
+  
+  `);
   }
 
   findByTitle(id) {

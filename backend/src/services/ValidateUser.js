@@ -139,7 +139,7 @@ const ValidateUser = (req, res, next) => {
     errors.push({ field: "pictureUrl", message: "this field is required" });
   } else if (pictureUrl.length >= 100) {
     errors.push({
-      field: "country",
+      field: "PictureUrl",
       message: "Should contain less than 100 characters",
     });
   }
