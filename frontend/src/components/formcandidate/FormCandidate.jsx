@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Carousel } from "primereact/carousel";
 import { Button } from "primereact/button";
 import { BsArrowRightCircle, BsArrowLeftCircle } from "react-icons/bs";
+import axios from "axios";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
@@ -9,6 +10,44 @@ import "./FormCandidate.scss";
 
 export default function FormCandidate() {
   const [activeStep, setActiveStep] = useState([0]);
+
+  const [registerFormData, setRegisterFormData] = useState({
+    registerEmail: "",
+    password: "",
+    accountType: "candidat",
+    authID: 15,
+    lastname: "",
+    firstname: "",
+    birthdate: "",
+    phoneNumber: "0606060606",
+    about: "",
+    pictureUrl: "",
+    streetNumber: "",
+    streetType: "",
+    streetName: "",
+    city: "",
+    postalCode: "",
+    department: "",
+    region: "",
+    country: "",
+    candidateID: 7,
+  });
+
+  const handleChangeData = (event) => {
+    setRegisterFormData((previousData) => ({
+      ...previousData,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleFormSubmit = () => {
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/register`, registerFormData)
+      .then(() => {})
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const steps = [
     {
@@ -23,6 +62,9 @@ export default function FormCandidate() {
               <input
                 type="email"
                 id="email"
+                name="registerEmail"
+                value={registerFormData.registerEmail}
+                onChange={handleChangeData}
                 placeholder="johndoe@exemple.com"
               />
             </div>
@@ -31,6 +73,9 @@ export default function FormCandidate() {
               <input
                 type="password"
                 id="password"
+                name="password"
+                value={registerFormData.password}
+                onChange={handleChangeData}
                 placeholder="Insérer votre mot de passe ..."
               />
             </div>
@@ -57,17 +102,35 @@ export default function FormCandidate() {
           <div className="all-second-input">
             <div className="firstname-input">
               <label htmlFor="firstname"> Prénom :</label>
-              <input type="text" id="firstname" placeholder="John" />
+              <input
+                type="text"
+                id="firstname"
+                name="firstname"
+                value={registerFormData.firstname}
+                onChange={handleChangeData}
+                placeholder="John ..."
+              />
             </div>
             <div className="lastname-input">
               <label htmlFor="lastname">Nom :</label>
-              <input type="text" id="lastname" placeholder="Doe" />
+              <input
+                type="text"
+                id="lastname"
+                name="lastname"
+                value={registerFormData.lastname}
+                onChange={handleChangeData}
+                placeholder="Doe ..."
+              />
             </div>
+
             <div className="birthday-input">
               <label htmlFor="birthdate">Date de naissance :</label>
               <input
                 type="date"
                 id="birthdate"
+                name="birthdate"
+                value={registerFormData.birthdate}
+                onChange={handleChangeData}
                 min="1900-01-01"
                 max="2005-07-27"
                 pattern="\d{4}-\d{2}-\d{2}"
@@ -87,13 +150,23 @@ export default function FormCandidate() {
             <div className="container-right">
               <div className="number-way-input">
                 <label htmlFor="numberway">N° de voirie :</label>
-                <input type="number" id="numberway" placeholder="32" />
+                <input
+                  type="number"
+                  id="numberway"
+                  name="streetNumber"
+                  value={registerFormData.streetNumber}
+                  onChange={handleChangeData}
+                  placeholder="32"
+                />
               </div>
               <div className="type-way-input">
                 <label htmlFor="typeway">Type de voirie :</label>
                 <input
                   type="text"
                   id="typeway"
+                  name="streetType"
+                  value={registerFormData.streetType}
+                  onChange={handleChangeData}
                   placeholder="Rue, Boulevard ..."
                 />
               </div>
@@ -102,7 +175,21 @@ export default function FormCandidate() {
                 <input
                   type="text"
                   id="nameway"
+                  name="streetName"
+                  value={registerFormData.streetName}
+                  onChange={handleChangeData}
                   placeholder="Henry de la Mouette ..."
+                />
+              </div>
+              <div className="country-input">
+                <label htmlFor="country">Pays :</label>
+                <input
+                  type="text"
+                  id="country"
+                  name="country"
+                  value={registerFormData.country}
+                  onChange={handleChangeData}
+                  placeholder="France ..."
                 />
               </div>
             </div>
@@ -112,6 +199,9 @@ export default function FormCandidate() {
                 <input
                   type="text"
                   id="region"
+                  name="region"
+                  value={registerFormData.region}
+                  onChange={handleChangeData}
                   placeholder="Île de France ..."
                 />
               </div>
@@ -120,16 +210,33 @@ export default function FormCandidate() {
                 <input
                   type="text"
                   id="department"
+                  name="department"
+                  value={registerFormData.department}
+                  onChange={handleChangeData}
                   placeholder="Val-de-Marne ..."
                 />
               </div>
               <div className="city-input">
                 <label htmlFor="city">Ville :</label>
-                <input type="text" id="city" placeholder="Paris ..." />
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  value={registerFormData.city}
+                  onChange={handleChangeData}
+                  placeholder="Paris ..."
+                />
               </div>
               <div className="postal-code-input">
                 <label htmlFor="postalcode">Code postal :</label>
-                <input type="number" id="postalcode" placeholder="94220 ..." />
+                <input
+                  type="number"
+                  id="postalcode"
+                  name="postalCode"
+                  value={registerFormData.postalCode}
+                  onChange={handleChangeData}
+                  placeholder="94220 ..."
+                />
               </div>
             </div>
           </div>
@@ -261,6 +368,7 @@ export default function FormCandidate() {
               type="submit"
               label="Valider"
               className="p-button-success"
+              onClick={handleFormSubmit}
             />
           )}
         </div>

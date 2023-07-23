@@ -11,7 +11,7 @@ const upload = multer({ dest: "./public/uploads/" });
 
 const offerControllers = require("./controllers/offerControllers");
 const candidateControllers = require("./controllers/candidateControllers");
-const ValidateUser = require("./services/ValidateUser");
+// const ValidateUser = require("./services/ValidateUser");
 const hashedCandidatePassword = require("./services/hashedCandidatePassword");
 const authController = require("./controllers/authController");
 const bookmarksController = require("./controllers/bookmarksControllers");
@@ -34,8 +34,8 @@ router.get("/enterprise", enterpriseControllers.browse);
 
 router.post(
   "/register",
-  ValidateUser.ValidateUser,
-  multer,
+  // ValidateUser.ValidateUser,
+  // multer,
   hashedCandidatePassword.hashCandidatePassword,
   candidateControllers.create
 );
