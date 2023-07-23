@@ -4,6 +4,7 @@ import JobOfferCard from "../joboffercard/JobOfferCard";
 
 import "../showmorebtn/ShowMoreBtn.scss";
 import api from "../../services/api";
+import "./JobOffer.scss";
 
 export default function JobOffer() {
   const [jobOffer, setJobOffer] = useState([]);

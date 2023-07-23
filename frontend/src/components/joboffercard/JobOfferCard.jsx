@@ -5,6 +5,7 @@ import Proptypes from "prop-types";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoSchoolOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
+import "./JobOfferCard.scss";
 
 export default function JobOfferCard({
   image,
