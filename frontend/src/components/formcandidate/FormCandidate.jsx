@@ -14,6 +14,7 @@ export default function FormCandidate() {
   const [registerFormData, setRegisterFormData] = useState({
     registerEmail: "",
     password: "",
+    confirmPassword: "",
     accountType: "candidat",
     authID: 15,
     lastname: "",
@@ -32,6 +33,20 @@ export default function FormCandidate() {
     country: "",
     candidateID: 7,
   });
+
+  // Password match check onBlur
+
+  const [passwordMatch, setPasswordMatch] = useState(null);
+
+  const handlePasswordBlur = () => {
+    const { password, confirmPassword } = registerFormData;
+    setPasswordMatch(password === confirmPassword);
+  };
+
+  const handleConfirmPasswordBlur = () => {
+    const { password, confirmPassword } = registerFormData;
+    setPasswordMatch(password === confirmPassword);
+  };
 
   const handleChangeData = (event) => {
     setRegisterFormData((previousData) => ({
@@ -76,6 +91,7 @@ export default function FormCandidate() {
                 name="password"
                 value={registerFormData.password}
                 onChange={handleChangeData}
+                onBlur={handlePasswordBlur}
                 placeholder="Insérer votre mot de passe ..."
               />
             </div>
@@ -86,9 +102,23 @@ export default function FormCandidate() {
               <input
                 type="password"
                 id="confirmpassword"
+                name="confirmPassword"
+                value={registerFormData.confirmPassword}
+                onChange={handleChangeData}
+                onBlur={handleConfirmPasswordBlur}
                 placeholder="Confirmer votre mot de passe ..."
               />
             </div>
+            {passwordMatch === false && (
+              <div style={{ color: "red" }}>
+                Les mots de passe ne correspondent pas.
+              </div>
+            )}
+            {passwordMatch === true && (
+              <div style={{ color: "green" }}>
+                Les mots de passe sont identiques.
+              </div>
+            )}
           </div>
         </div>
       ),
