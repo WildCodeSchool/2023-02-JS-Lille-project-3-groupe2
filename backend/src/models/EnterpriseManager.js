@@ -5,8 +5,14 @@ class EnterpriseManager extends AbstractManager {
     super({ table: "enterprise" });
   }
 
-  findAll() {
-    return this.database.query(`SELECT * FROM ${this.table}`);
+  findAllWithAdress() {
+    return this.database
+      .query(`SELECT e.ID, e.siret, e.social_denomination, e.trade_name, e.contact_email, e.phone_number, e.company_type, e.other_information, e.kbis_url, e.logo_url, e.website,
+    a.ID AS address_ID, a.street_number, a.street_type, a.street_name, a.city, a.postal_code, a.department, a.region, a.country
+FROM enterprise e
+JOIN address a ON e.ID = a.enterprise_ID;
+
+  `);
   }
 
   find(id) {
@@ -14,11 +20,19 @@ class EnterpriseManager extends AbstractManager {
       id,
     ]);
   }
+  // update entreprise avec son adresse.
 
   update(enterprise) {
     return this.database.query(
-      `
-      UPDATE ${this.table} SET siret = ?, social_denomination = ?, trade_name = ?, contact_email = ?, phone_number = ?, company_type = ?, other_information = ?, kbis_url = ?, logo_url = ?, website = ? WHERE id = ?`,
+      `UPDATE enterprise e
+      JOIN address a ON e.ID = a.enterprise_ID
+      SET e.siret = ?, e.social_denomination = ?, e.trade_name = ?, e.contact_email = ?,
+          e.phone_number = ?, e.company_type = ?, e.other_information = ?, e.kbis_url = ?,
+          e.logo_url = ?, e.website = ?,
+          a.street_number = ?, a.street_type = ?, a.street_name = ?, a.city = ?,
+          a.postal_code = ?, a.department = ?, a.region = ?, a.country = ?
+      WHERE e.ID = ?;
+      `,
       [
         enterprise.siret,
         enterprise.social_denomination,
@@ -30,6 +44,14 @@ class EnterpriseManager extends AbstractManager {
         enterprise.kbis_url,
         enterprise.logo_url,
         enterprise.website,
+        enterprise.address.street_number,
+        enterprise.address.street_type,
+        enterprise.address.street_name,
+        enterprise.address.city,
+        enterprise.address.postal_code,
+        enterprise.address.department,
+        enterprise.address.region,
+        enterprise.address.country,
         enterprise.id,
       ]
     );

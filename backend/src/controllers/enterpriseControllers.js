@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.enterprise
-    .findAll()
+    .findAllWithAdress()
     .then(([rows]) => {
       res.send(rows);
     })

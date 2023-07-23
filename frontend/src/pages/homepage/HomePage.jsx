@@ -6,7 +6,7 @@ import "./HomePage.scss";
 import Teaser from "../../components/teaser/Teaser";
 
 import JobOffer from "../../components/joboffer/JobOffer";
-import ShowMoreBtn from "../../components/showmorebtn/ShowMoreBtn";
+
 import VideoYt from "../../components/videoyt/VideoYt";
 
 export default function HomePage() {
@@ -18,7 +18,6 @@ export default function HomePage() {
     >
       <Teaser />
       <JobOffer />
-      <ShowMoreBtn />
       <CorporateValues />
       <VideoYt />
       <SliderAutomatic />

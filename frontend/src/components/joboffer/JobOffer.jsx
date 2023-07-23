@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../Utils.scss";
 import JobOfferCard from "../joboffercard/JobOfferCard";
-import "./JobOffer.scss";
+
 import "../showmorebtn/ShowMoreBtn.scss";
 import api from "../../services/api";
 

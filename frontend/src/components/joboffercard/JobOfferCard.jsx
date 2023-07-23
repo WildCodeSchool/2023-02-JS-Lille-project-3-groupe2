@@ -1,6 +1,6 @@
 import React from "react";
 import "../../Utils.scss";
-import "./JobOfferCard.scss";
+
 import Proptypes from "prop-types";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoSchoolOutline } from "react-icons/io5";

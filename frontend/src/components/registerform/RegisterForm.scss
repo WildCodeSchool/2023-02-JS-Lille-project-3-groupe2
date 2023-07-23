@@ -67,16 +67,15 @@
   margin-bottom: 30px;
 }
 .input-contract {
-    display: flex;
+  display: flex;
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .input-contract input {
-    width: 40%;
-    margin-left: 20px;
-    margin-right: 20px;
-
+  width: 40%;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .container-grid-contract {
   background-color: #922685;
@@ -129,7 +128,7 @@
   .input-a-propos {
     flex-wrap: wrap;
   }
-  .input-contract input{
+  .input-contract input {
     width: 25%;
   }
 }
@@ -191,13 +190,14 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, auto);
-    gap: 10px;}
-    .container-grid-contract input{
-        align-items: center;
-    }
-    .input-contract input{
-        width: 10%;
-      }
+    gap: 10px;
+  }
+  .container-grid-contract input {
+    align-items: center;
+  }
+  .input-contract input {
+    width: 10%;
+  }
 }
 @media (max-width: 390px) {
   .container-form-inscription-candidat {
@@ -231,16 +231,16 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, auto);
-    gap: 10px;}
-    .container-grid-contract input{
-        align-items: center;
-    }
-    .input-contract input{
-        width: 10%;
-      }
+    gap: 10px;
+  }
+  .container-grid-contract input {
+    align-items: center;
+  }
+  .input-contract input {
+    width: 10%;
+  }
 
   .checkbox-input-rgpd {
     width: 100%;
   }
-
 }
