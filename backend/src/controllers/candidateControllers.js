@@ -52,9 +52,7 @@ const create = (req, res) => {
 
 const edit = (req, res) => {
   const candidate = req.body;
-
   candidate.id = parseInt(req.params.id, 10);
-
   models.candidate
     .updateCandidate(candidate)
     .then(([result]) => {
@@ -87,11 +85,10 @@ const getAllMyBookmarks = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  const candidate = req.body;
-  candidate.id = parseInt(req.params.id, 10);
+  const candidate = parseInt(req.params.id, 10);
 
   models.candidate
-    .delete(candidate)
+    .deleteCandidate(candidate)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

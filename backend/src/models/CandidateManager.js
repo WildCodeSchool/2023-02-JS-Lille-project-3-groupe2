@@ -134,27 +134,17 @@ class CandidateManager extends AbstractManager {
   // delete a candidate
 
   async deleteCandidate(candidateID) {
-    const deleteQuery1 = "DELETE FROM address WHERE candidate_ID = ?";
-    const deleteQuery2 = "DELETE FROM candidate WHERE ID = ?";
-    const deleteQuery3 = "DELETE FROM auth WHERE auth_ID = ?";
-
     try {
-      // Assume you have candidateID from somewhere.
       const authIDQuery = "SELECT auth_ID FROM candidate WHERE ID = ?";
-      const [authIDResult] = await this.database.query(authIDQuery, [
-        candidateID,
+      const [result1] = await this.database.query(authIDQuery, [candidateID]);
+
+      const deleteCandidateQuery = "DELETE FROM candidate WHERE ID = ?";
+      const deleteAuthQuery = "DELETE FROM auth WHERE ID = ?";
+      await this.database.query(deleteCandidateQuery, [candidateID]);
+      const result2 = await this.database.query(deleteAuthQuery, [
+        result1[0].auth_ID,
       ]);
-
-      if (authIDResult.length === 0) {
-        // Candidat non trouvé
-        throw new Error("Le candidat n'existe pas dans la base de données.");
-      }
-
-      const authID = authIDResult[0].auth_ID;
-
-      await this.database.query(deleteQuery1, [candidateID]);
-      await this.database.query(deleteQuery2, [candidateID]);
-      await this.database.query(deleteQuery3, [authID]);
+      return result2;
     } catch (err) {
       console.error(err);
       throw err;
