@@ -7,7 +7,7 @@ import Ibm from "../../assets/ibm1.jpg";
 import Wcs from "../../assets/wcs.png";
 import "../../Utils.scss";
 import JobOfferCard from "../joboffercard/JobOfferCard";
-import "./JobOffer.scss";
+
 import "../showmorebtn/ShowMoreBtn.scss";
 
 const testJobOfferData = [
