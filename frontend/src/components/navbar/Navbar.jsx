@@ -1,8 +1,13 @@
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
+import { motion } from "framer-motion";
 import logo from "../../assets/externatic_logo_candidate.png";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Navbar() {
+  const { login, user } = useAuth();
+
   return (
     <div className="navbarContainer">
       <div className="logoNavbar">
@@ -28,10 +33,29 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-      <div className="loginNavbar">
-        <button type="button">Sign in</button>
-        <button type="button">Sign up</button>
-      </div>
+      {!login ? (
+        <div className="loginNavbar">
+          {" "}
+          <button type="button">Sign in</button>
+          <button type="button">Sign up</button>
+        </div>
+      ) : (
+        <div className="userNavContainer">
+          {" "}
+          <p>{user.userInfos.firstname}</p>
+          <p> {user.userInfos.lastname}</p>
+          <span>
+            <motion.button
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => console.log("test")}
+            >
+              {" "}
+              <FiLogOut />
+            </motion.button>
+          </span>
+        </div>
+      )}
     </div>
   );
 }
