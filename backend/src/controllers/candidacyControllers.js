@@ -14,13 +14,12 @@ const browse = (req, res) => {
 
 const read = (req, res) => {
   models.candidacy
-    .findByCity(req.params.id)
-
-    .then(([rows]) => {
-      if (rows[0] == null) {
+    .getCandidaciesByCandidateId(req.params.id)
+    .then((rows) => {
+      if (rows.length === 0) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        res.send(rows); // Renvoie toutes les candidatures associées au candidat
       }
     })
     .catch((err) => {
