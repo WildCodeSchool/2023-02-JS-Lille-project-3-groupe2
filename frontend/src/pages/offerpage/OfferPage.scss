@@ -1,8 +1,18 @@
 .defaultOfferPage {
+  margin-top: 10dvh;
+  position: relative;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3rem;
+  z-index: 1;
+  background-image: url("../../assets/background-mauve.png");
+  background-size: contain;
+  background-size: 110%;
+  background-position: center;
+  background-repeat: repeat-y;
+
   .searchAndOrder {
     display: flex;
     flex-direction: column;

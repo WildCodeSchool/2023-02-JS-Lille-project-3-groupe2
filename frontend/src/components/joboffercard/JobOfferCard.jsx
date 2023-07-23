@@ -4,7 +4,7 @@ import "./JobOfferCard.scss";
 import Proptypes from "prop-types";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoSchoolOutline } from "react-icons/io5";
-import { BsThreeDots } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 export default function JobOfferCard({
   image,
@@ -14,37 +14,30 @@ export default function JobOfferCard({
   salary,
 }) {
   return (
-    <div className="jobOfferCardContainer">
-      <div className="jobOfferCardContentTop">
-        <img className="jobOfferCardImg" src={image} alt="logo" />
-        <div className="jobOfferCardTitle">
-          {" "}
-          <h3 className="jobOfferCardNameCompany">{nameCompany}</h3>
-          <h5 className="jobOfferCardTitle">{jobTitle}</h5>
+    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+      <div className="jobOfferCardContainer">
+        <div className="jobOfferCardContentTop">
+          <img className="jobOfferCardImg" src={image} alt="logo" />
+          <div className="jobOfferCardTitle">
+            {" "}
+            <h3 className="jobOfferCardNameCompany">{nameCompany}</h3>
+            <h5 className="jobOfferCardTitle">{jobTitle}</h5>
+          </div>
         </div>
-      </div>
-      <div className="jobOfferCardContentMid">
-        <div className="jobOfferCardLi">
-          <ul className="JobOfferCardUl">
-            <li>
-              <span className="jobOfferCardCity">
-                <FaMapMarkerAlt className="iconCards" /> {city}
-              </span>
-            </li>
-            <li>
-              <span className="jobOfferCardXp">
-                <IoSchoolOutline className="iconCards" /> {salary}
-              </span>
-            </li>
-          </ul>
+        <div className="jobOfferCardContentMid">
+          <div className="jobOfferCardLi">
+            <span className="jobOfferCardCity">
+              <FaMapMarkerAlt className="iconCards" /> {city}
+            </span>
+
+            <span className="jobOfferCardXp">
+              <IoSchoolOutline className="iconCards" /> {salary}
+            </span>
+          </div>
         </div>
+        <div className="jobOfferCardContentBot" />
       </div>
-      <div className="jobOfferCardContentBot">
-        <button type="button">
-          <BsThreeDots />
-        </button>
-      </div>
-    </div>
+    </motion.button>
   );
 }
 

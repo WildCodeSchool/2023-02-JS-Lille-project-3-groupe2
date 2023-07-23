@@ -1,41 +1,228 @@
 @import "../../Utils.scss";
-.navbar_default {
-  border-bottom: solid;
-  border-color: $primary-color-candidate;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background-color: $mono-white;
-  justify-content: center;
-  z-index: 2;
-  .logo_navbar {
-    height: 6.5rem;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.navbar_enterprise {
-  border-color: $primary-color-enterprise;
-  border-bottom: solid;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background-color: white;
-  justify-content: center;
-  flex-direction: row;
-  z-index: 2;
-
-  .logo_navbar {
-    height: 6.5rem;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
 @media only screen and (max-width: 700px) {
-  .logo_navbar {
-    visibility: hidden;
+  .navbarContainer {
+    height: 10dvh;
+    background-color: $mono-white;
+    box-shadow: 0 4px 2px -2px $special-color-candidate;
+    z-index: 2;
+    display: flex;
+    justify-content: flex-end !important;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    opacity: 0.95;
+    .logoNavbar {
+      width: 0%;
+      display: none;
+      img {
+        display: none;
+        background-color: transparent;
+        width: clamp(10rem, 14vw, 14rem);
+      }
+    }
+    .menuNavbar {
+      display: none;
+      width: 50%;
+      font-size: clamp(1rem, 1.4vw, 1.4rem);
+      ul {
+        gap: 5%;
+        display: flex;
+        justify-content: center;
+        li {
+          list-style-type: none;
+          a {
+            color: $mono-black;
+            text-decoration: none;
+            position: relative;
+            color: $mono-black;
+            &:hover::after,
+            &:focus::after {
+              width: 100%;
+            }
+            &::after {
+              content: "";
+              position: absolute;
+              bottom: -3px;
+              left: 0;
+              width: 0%;
+              border-bottom: 2px solid $mono-black;
+              transition: 0.4s;
+            }
+          }
+        }
+      }
+    }
+    .loginNavbar {
+      width: 50% !important;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-right: 1rem;
+      button {
+        position: relative;
+        z-index: 1;
+        &:nth-of-type(1) {
+          background-color: $secondary-color-candidate;
+          border-color: $secondary-color-candidate;
+          border: solid 2px $secondary-color-candidate;
+          color: $mono-white;
+
+          &:hover {
+            color: $secondary-color-candidate;
+          }
+          &:hover::before {
+            left: 0;
+          }
+          &::before {
+            border-radius: 0.4rem;
+            content: "";
+            position: absolute;
+            background: $mono-white;
+            bottom: 0;
+            right: 0;
+            left: 100%;
+            top: 0;
+            z-index: -1;
+            transition: left 0.2s ease-in; /* Remove the delay on border-radius animation */
+          }
+        }
+        &:nth-of-type(2) {
+          background-color: $mono-white;
+          border-color: $secondary-color-candidate;
+          border: solid 2px $secondary-color-candidate;
+          color: $secondary-color-candidate;
+          &:hover {
+            color: $mono-white;
+          }
+          &:hover::before {
+            right: 0;
+            border-radius: 0.3rem;
+          }
+          &::before {
+            border-radius: 0.3rem;
+            content: "";
+            position: absolute;
+            background: $secondary-color-candidate;
+            bottom: 0;
+            right: 100%;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            transition: right 0.2s ease-in; /* Remove the delay on border-radius animation */
+          }
+        }
+      }
+    }
+  }
+}
+.navbarContainer {
+  height: 10dvh;
+  background-color: $mono-white;
+  box-shadow: 0 4px 2px -2px $special-color-candidate;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  opacity: 0.95;
+  .logoNavbar {
+    width: 25%;
+    img {
+      background-color: transparent;
+      width: clamp(10rem, 14vw, 14rem);
+    }
+  }
+  .menuNavbar {
+    width: 50%;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    ul {
+      gap: 5%;
+      display: flex;
+      justify-content: center;
+      li {
+        list-style-type: none;
+        a {
+          color: $mono-black;
+          text-decoration: none;
+          position: relative;
+          color: $mono-black;
+          &:hover::after,
+          &:focus::after {
+            width: 100%;
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0%;
+            border-bottom: 2px solid $mono-black;
+            transition: 0.4s;
+          }
+        }
+      }
+    }
+  }
+  .loginNavbar {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-right: 1rem;
+    button {
+      position: relative;
+      z-index: 1;
+      &:nth-of-type(1) {
+        background-color: $secondary-color-candidate;
+        border-color: $secondary-color-candidate;
+        border: solid 2px $secondary-color-candidate;
+        color: $mono-white;
+
+        &:hover {
+          color: $secondary-color-candidate;
+        }
+        &:hover::before {
+          left: 0;
+        }
+        &::before {
+          border-radius: 0.4rem;
+          content: "";
+          position: absolute;
+          background: $mono-white;
+          bottom: 0;
+          right: 0;
+          left: 100%;
+          top: 0;
+          z-index: -1;
+          transition: left 0.2s ease-in; /* Remove the delay on border-radius animation */
+        }
+      }
+      &:nth-of-type(2) {
+        background-color: $mono-white;
+        border-color: $secondary-color-candidate;
+        border: solid 2px $secondary-color-candidate;
+        color: $secondary-color-candidate;
+        &:hover {
+          color: $mono-white;
+        }
+        &:hover::before {
+          right: 0;
+          border-radius: 0.3rem;
+        }
+        &::before {
+          border-radius: 0.3rem;
+          content: "";
+          position: absolute;
+          background: $secondary-color-candidate;
+          bottom: 0;
+          right: 100%;
+          left: 0;
+          top: 0;
+          z-index: -1;
+          transition: right 0.2s ease-in; /* Remove the delay on border-radius animation */
+        }
+      }
+    }
   }
 }

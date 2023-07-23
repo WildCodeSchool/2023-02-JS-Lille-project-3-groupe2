@@ -1,111 +1,172 @@
 @import "../../Utils.scss";
 
-.containerSearch {
+.teaserContainer {
   display: flex;
   flex-direction: column;
-  background-image: url("/2023-02-JS-Lille-project-3-groupe2-externatic/frontend/src/assets/imageldb.jpg");
-  align-items: center;
-  width: 80%;
-  img {
+  justify-content: center;
+  min-height: 90dvh;
+  width: 90%;
+  z-index: 2;
+  .teaserTopContainer {
+    display: flex;
     width: 100%;
-  }
-}
-.search {
-  display: flex;
-  justify-content: center;
-  background-color: $primary-color-candidate;
-  margin-top: -3rem;
-  padding: 0.5rem;
-  @include border;
-  min-width: 60%;
-}
-.search-nomargin {
-  display: flex;
-  justify-content: center;
-  background-color: $primary-color-candidate;
-  padding: 0.5rem;
-  @include border;
-  min-width: 60%;
-}
-.search-nomargin input,
-.search input {
-  border: 1px solid #d8d8d8;
-  margin-right: 0.5rem;
-  @include border;
-  flex: 1;
-  font-size: 1rem;
-  text-indent: 0.5rem;
-}
-.imageHomepage {
-  min-width: 80%;
-}
-.search-nomargin input:focus,
-.search input:focus {
-  outline: none;
-}
 
-.search-nomargin button,
-.search button {
-  font-size: 100%;
-  border: none;
-  color: #444444;
-  padding: 1rem;
-  @include border;
-  background-color: $primary-color-candidate;
-  &:hover {
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-  }
-}
+    .teaserLeft {
+      padding: 1rem;
+      align-items: center;
+      display: flex;
+      width: 50%;
+      flex-direction: column;
+      gap: 10vh;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid $special-color-candidate;
 
-@-webkit-keyframes zoomin {
-  0% {
-    -webkit-transform: scale(1);
-  }
+      h1 {
+        width: 100%;
+        font-weight: bold;
+        display: flex;
+        flex-flow: column nowrap;
+        span {
+          &:nth-of-type(1) {
+            color: $secondary-color-candidate;
+          }
+        }
+      }
+      p {
+      }
+      .searchOffercontainer {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+        width: 80%;
+        .selectOfferTop {
+          h2 {
+            margin-bottom: 1%;
+          }
+        }
+        .selectOfferBot {
+          h2 {
+            margin-bottom: 1%;
+          }
+          margin-bottom: 2%;
+        }
+        .buttonOffer {
+          display: flex;
+          justify-content: flex-end;
+          button {
+            background-color: $secondary-color-candidate;
+            border-color: $secondary-color-candidate;
+            border: solid 2px $secondary-color-candidate;
+            color: $mono-white;
+            text-align: center;
+            line-height: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+          }
+        }
+      }
+    }
+    .teaserRight {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  100% {
-    -webkit-transform: scale(2);
-  }
-}
-button:hover .loupe {
-  -webkit-font-smoothing: subpixel-antialiased;
-  -webkit-backface-visibility: hidden; /* Prevent flickering in some browsers */
-
-  -webkit-animation: zoomin 0.3s forwards;
-}
-.loupe {
-  color: $mono-white;
-}
-@media only screen and (max-width: 750px) {
-  .search,
-  .search-nomargin {
-    width: 80%;
-    margin-top: -2rem;
-  }
-  .containerSearch {
-    img {
-      width: 100%;
+      margin: 0% 5% 5% 2.5%;
+      img {
+        width: 100%;
+      }
     }
   }
-
-  .search-bar {
-    float: left;
+  .teaserBottom {
+    display: flex;
+    justify-content: flex-end;
   }
-
-  .search input,
-  .search-nomargin input {
-    width: 100%;
-    flex: 1 1 auto;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .search,
-  .search-nomargin {
+}
+@media only screen and (max-width: 700px) {
+  .teaserContainer {
+    display: flex;
     flex-direction: column;
-    button {
-      width: auto;
-      float: left;
-      padding: 0.5rem;
+    width: 90%;
+    margin-top: 5dvh;
+
+    .teaserTopContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .teaserLeft {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        h1 {
+          width: 100%;
+          font-weight: bold;
+          display: flex;
+          flex-flow: column nowrap;
+          span {
+            &:nth-of-type(1) {
+              color: $secondary-color-candidate;
+            }
+          }
+        }
+        p {
+        }
+        .searchOffercontainer {
+          display: flex;
+          flex-flow: column nowrap;
+          gap: 1rem;
+          width: 80%;
+          .selectOfferTop {
+            h2 {
+              margin-bottom: 1%;
+            }
+          }
+          .selectOfferBot {
+            h2 {
+              margin-bottom: 1%;
+            }
+            margin-bottom: 2%;
+          }
+          .buttonOffer {
+            display: flex;
+            justify-content: flex-end;
+            button {
+              background-color: $secondary-color-candidate;
+              border-color: $secondary-color-candidate;
+              border: solid 2px $secondary-color-candidate;
+              color: $mono-white;
+              text-align: center;
+              line-height: 0;
+              display: flex;
+              align-items: center;
+              gap: 0.3rem;
+            }
+          }
+        }
+      }
+      .teaserRight {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 100%;
+          margin: 10%;
+        }
+      }
+    }
+    .teaserBottom {
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }

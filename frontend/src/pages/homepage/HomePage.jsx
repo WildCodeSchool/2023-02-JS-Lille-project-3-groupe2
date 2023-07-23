@@ -12,7 +12,10 @@ import VideoYt from "../../components/videoyt/VideoYt";
 export default function HomePage() {
   window.scrollTo(0, 0);
   return (
-    <div className="defaultHomeBody">
+    <div
+      className="defaultHomeBody {
+"
+    >
       <Teaser />
       <JobOffer />
       <ShowMoreBtn />

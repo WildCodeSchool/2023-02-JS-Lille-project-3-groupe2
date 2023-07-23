@@ -1,6 +1,5 @@
 import JobOffer from "../../components/joboffer/JobOffer";
 import SelectOrderOffer from "../../components/selectorderoffer/SelectOrderOffer";
-import Teaser from "../../components/teaser/Teaser";
 import "./OfferPage.scss";
 
 export default function OfferPage() {
@@ -9,7 +8,6 @@ export default function OfferPage() {
     <div className="defaultOfferPage">
       <div className="searchAndOrder">
         {" "}
-        <Teaser image={false} />
         <SelectOrderOffer />
       </div>
 
