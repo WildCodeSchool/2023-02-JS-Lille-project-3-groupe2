@@ -5,7 +5,7 @@ import { BsArrowRightCircle, BsArrowLeftCircle } from "react-icons/bs";
 import axios from "axios";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.css";
-import "primeicons/primeicons.css";
+// import "primeicons/primeicons.css";
 import "./FormCandidate.scss";
 
 export default function FormCandidate() {
