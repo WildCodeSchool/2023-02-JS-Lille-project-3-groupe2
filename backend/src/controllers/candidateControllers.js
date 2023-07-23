@@ -56,7 +56,7 @@ const edit = (req, res) => {
   candidate.id = parseInt(req.params.id, 10);
 
   models.candidate
-    .update(candidate)
+    .updateCandidate(candidate)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

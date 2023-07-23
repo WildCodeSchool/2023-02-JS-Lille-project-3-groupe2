@@ -14,7 +14,7 @@ const ValidateUser = (req, res, next) => {
     registerEmail,
     phoneNumber,
     about,
-    pictureUrl,
+    /* pictureUrl, */
   } = req.body;
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -135,14 +135,14 @@ const ValidateUser = (req, res, next) => {
     errors.push({ field: "about", message: "this field is required" });
   }
 
-  if (pictureUrl == null) {
+  /*  if (pictureUrl == null) {
     errors.push({ field: "pictureUrl", message: "this field is required" });
   } else if (pictureUrl.length >= 100) {
     errors.push({
       field: "PictureUrl",
       message: "Should contain less than 100 characters",
     });
-  }
+  } */
 
   if (errors.length) {
     res.status(422).json({ validationErrors: errors });
