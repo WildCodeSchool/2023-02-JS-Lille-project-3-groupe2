@@ -1,8 +1,72 @@
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 import "./ModifySection.scss";
 
 export default function ModifySection({ onBackButtonClick }) {
+  const { user } = useAuth();
+
+  // Récupérer et mettre à jour les values du context
+
+  // Récupérer les infos
+  const [email, setEmail] = useState(user.userAuth.register_email);
+  const [firstname, setFirstname] = useState(user.userInfos.firstname);
+  const [lastname, setLastname] = useState(user.userInfos.lastname);
+  const [birthdate, setBirthdate] = useState(user.userInfos.birthdate);
+  const [phoneNumber, setPhoneNumber] = useState(user.userInfos.phone_number);
+
+  // Les afficher dans les input au chargement du composant
+  useEffect(() => {
+    setEmail(user.userAuth.register_email);
+    setFirstname(user.userInfos.firstname);
+    setLastname(user.userInfos.lastname);
+    setBirthdate(user.userInfos.birthdate);
+    setPhoneNumber(user.userInfos.phone_number);
+  }, [user]);
+
+  // Mettre à jour les valeurs
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleFirstnameChange = (event) => {
+    setFirstname(event.target.value);
+  };
+
+  const handleLastnameChange = (event) => {
+    setLastname(event.target.value);
+  };
+
+  const handleBirthdateChange = (event) => {
+    setBirthdate(event.target.value);
+  };
+
+  const handlePhoneChange = (event) => {
+    setPhoneNumber(event.target.value);
+  };
+
+  // Envoyer les infos update en base de données
+
+  // const saveChanges = async () => {
+  //   try {
+  //     const updatedUser = {
+  //       ...user,
+  //       userInfos: {
+  //         ...user.userInfos,
+  //         firstname: firstname,
+  //         lastname: lastname,
+  //         register_email: email,
+
+  //       },
+  //     };
+
+  //     await axios.put("/user", updatedUser);
+  //     setUser(updatedUser);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const [selectedSection, setSelectedSection] = useState("");
 
   const handleSectionChange = (event) => {
@@ -22,6 +86,8 @@ export default function ModifySection({ onBackButtonClick }) {
           <input
             id="email"
             type="email"
+            value={email}
+            onChange={handleEmailChange}
             placeholder="johndoe@exemple.com ..."
           />
           <label htmlFor="password">Votre mot de passe actuel :</label>
@@ -41,15 +107,29 @@ export default function ModifySection({ onBackButtonClick }) {
             <label htmlFor="picture">Image de profil :</label>
             <input id="picture" type="file" />
             <label htmlFor="lastname">Nom :</label>
-            <input id="lastname" type="text" placeholder="Doe ..." />
+            <input
+              id="lastname"
+              type="text"
+              value={lastname}
+              onChange={handleLastnameChange}
+              placeholder="Doe ..."
+            />
             <label htmlFor="firstname">Prénom :</label>
-            <input id="firstname" type="text" placeholder="John ..." />
+            <input
+              id="firstname"
+              type="text"
+              value={firstname}
+              onChange={handleFirstnameChange}
+              placeholder="John ..."
+            />
           </div>
           <div className="right-container-profile">
             <label htmlFor="birthdate">Date de naissance :</label>
             <input
               id="birthdate"
               type="date"
+              value={birthdate}
+              onChange={handleBirthdateChange}
               min="1900-01-01"
               max="2005-07-27"
               pattern="\d{4}-\d{2}-\d{2}"
@@ -58,6 +138,8 @@ export default function ModifySection({ onBackButtonClick }) {
             <input
               id="phonenumber"
               type="number"
+              value={phoneNumber}
+              onChange={handlePhoneChange}
               placeholder="0606060606 ..."
             />
             <label htmlFor="about">A propos de vous :</label>
