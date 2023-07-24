@@ -32,34 +32,56 @@ WHERE b.candidate_ID = ?;
     }
   }
 
-  async add(candidateId, offerId) {
+  async add(bookmarData) {
     const query =
-      "INSERT INTO bookmarks (candidate_ID, offer_ID, enterprise_ID, bookmark_date) VALUES (?, ?, ?, ?)";
+      "INSERT INTO bookmarks (candidate_ID, offer_ID, enterprise_ID, bookmark_date) VALUES (?, ?, ?, NOW())";
     try {
-      await this.database.query(query, [candidateId, offerId]);
-
-      await this.database.commit();
+      const result = await this.database.query(query, [
+        bookmarData.candidate_ID,
+        bookmarData.offer_ID,
+        bookmarData.enterprise_ID,
+      ]);
+      return result;
     } catch (error) {
-      await this.database.rollback();
+      console.error(error);
       throw error;
     }
   }
 
-  update(bookmarks) {
-    return this.database.query(
-      `
-      UPDATE ${this.table} SET bookmarks_date = ? WHERE id = ?`,
-      [bookmarks.bookmarks_date, bookmarks.id]
-    );
+  async updateBookmark(bookmarkData) {
+    const query = `
+    UPDATE bookmarks
+    SET offer_ID = ?, enterprise_ID = ?, bookmark_date = NOW()
+    WHERE candidate_ID = ?;
+  `;
+    try {
+      const result = await this.database.query(query, [
+        bookmarkData.offer_ID,
+        bookmarkData.enterprise_ID,
+        bookmarkData.candidate_ID,
+      ]);
+      return result;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
-  // link with candidate????
 
-  delete(id) {
-    return this.database.query(
-      `
-      DELETE FROM ${this.table} WHERE id = ?`,
-      [id]
-    );
+  async removeBookmark(bookmarData) {
+    const query = `
+    DELETE FROM bookmarks
+    WHERE candidate_ID = ? AND offer_ID = ?;
+  `;
+    try {
+      const result = await this.database.query(query, [
+        bookmarData.candidate_ID,
+        bookmarData.offer_ID,
+      ]);
+      return result; // ou vous pouvez retourner un message de succès
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }
 

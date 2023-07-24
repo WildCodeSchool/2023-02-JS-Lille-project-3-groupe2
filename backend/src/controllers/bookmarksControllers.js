@@ -35,7 +35,7 @@ const edit = (req, res) => {
   bookmarks.id = parseInt(req.params.id, 10);
 
   models.bookmarks
-    .update(bookmarks)
+    .updateBookmark(bookmarks)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -72,7 +72,7 @@ const destroy = (req, res) => {
   bookmarks.id = parseInt(req.params.id, 10);
 
   models.bookmarks
-    .delete(bookmarks)
+    .removeBookmark(bookmarks)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

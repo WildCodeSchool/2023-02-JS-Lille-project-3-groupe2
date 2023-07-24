@@ -37,21 +37,48 @@ class CandidacyManager extends AbstractManager {
     }
   }
 
+  async createCandidacy(candidateId, offerId, candidacyData) {
+    const query = `
+    INSERT INTO candidacy (candidate_ID, offer_ID, email_contact, application_date, cv_url, motivation_letter_url)
+    VALUES (?, ?, ?, NOW(), ?, ?);
+  `;
+    try {
+      const result = await this.database.query(query, [
+        candidateId,
+        offerId,
+        candidacyData.email_contact,
+        candidacyData.cv_url,
+        candidacyData.motivation_letter_url,
+      ]);
+      return result; // ou vous pouvez retourner un message de succès
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
   // update a candidacy
 
-  update(candidacy) {
-    return this.database.query(
-      `
-      UPDATE ${this.table} SET email_contact = ?, candidacy_date = ?, status = ?, cv_url = ?, motivation_letter_url = ? WHERE id = ?`,
-      [
-        candidacy.email_contact,
-        candidacy.application_date,
-        candidacy.status,
-        candidacy.cv_url,
-        candidacy.motivation_letter_url,
-        candidacy.id,
-      ]
-    );
+  async updateCandidacy(candidateId, candidacyId, candidacyData) {
+    const query = `
+    UPDATE candidacy
+    SET application_date = NOW(),
+        cv_url = ?,
+        motivation_letter_url = ?
+    WHERE ID = ? AND candidate_ID = ?;
+  `;
+    try {
+      const result = await this.database.query(query, [
+        candidacyData.cv_url,
+        candidacyData.motivation_letter_url,
+        candidacyId,
+        candidateId,
+      ]);
+      return result; // ou vous pouvez retourner un message de succès
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   // delete a candidacy

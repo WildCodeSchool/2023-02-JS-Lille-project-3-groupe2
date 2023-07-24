@@ -26,6 +26,7 @@ router.get("/candidate", candidateControllers.browse);
 router.get("/candidate/:id", candidateControllers.read);
 router.put("/offer/:id", offerControllers.edit);
 router.post("candidate/:id/bookmarks", bookmarksControllers.create);
+router.post("/candidate/:id/candicacy", candidacyControllers.create);
 router.delete("candidate/:id/bookmarks", bookmarksControllers.destroy);
 router.put(
   "candidate/:id",
