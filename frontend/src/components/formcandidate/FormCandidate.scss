@@ -247,6 +247,7 @@
         border: none;
         background-color: transparent;
         color: $primary-color-candidate;
+        box-shadow: none;
 
         &:hover {
           color: $special-color-candidate;
