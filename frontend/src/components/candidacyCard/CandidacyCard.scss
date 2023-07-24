@@ -1,0 +1,28 @@
+@import "../../Utils.scss";
+
+.candidacyCardGlboalContainer {
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0.5em;
+  border: 1px solid $special-color-candidate;
+  flex-grow: 1;
+  margin-bottom: 1em;
+  height: 3em;
+  
+} 
+.candidacyCardSecondTitle{
+  width: 33%;
+  text-align: center;
+}
+
+.candidacyCardApplicationDate{
+  width: 33%;
+  text-align: center;
+}
+
+.candidacyCardStatus{
+  width: 33%;
+  text-align: center;
+}
