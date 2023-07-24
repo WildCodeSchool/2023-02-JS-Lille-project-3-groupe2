@@ -5,6 +5,14 @@ import api from "../services/api";
 const authContext = createContext();
 
 export function AuthProvider({ children }) {
+  const registerUser = async (form) => {
+    try {
+      await api.post("/register", form);
+    } catch (error) {
+      console.error(error.response.data.error);
+    }
+  };
+
   const [isLogin, setIsLogin] = useState(false);
   const { Provider } = authContext;
   const [user, setUser] = useState({
@@ -36,6 +44,7 @@ export function AuthProvider({ children }) {
       const userAuth = authResult.data;
       const { userInfos } = loginResult.data;
       setUser({ userAuth, userInfos });
+      setIsLogin(true);
       return { userAuth, userInfos };
     } catch (error) {
       return error;
@@ -49,8 +58,8 @@ export function AuthProvider({ children }) {
         password,
       });
       const { userAuth, userInfos } = result.data;
-      // console.log({ userAuth, userInfos });
       setUser({ userAuth, userInfos });
+      setIsLogin(true);
       return { userAuth, userInfos };
     } catch (err) {
       console.error(err);
@@ -58,7 +67,8 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    setIsLogin(false);
     setUser({
       userAuth: {
         ID: null,
@@ -78,7 +88,7 @@ export function AuthProvider({ children }) {
         picture_url: null,
       },
     });
-    api.get("/logout");
+    await api.get("/logout");
   };
 
   const value = {
@@ -89,6 +99,7 @@ export function AuthProvider({ children }) {
     logout,
     isLogin,
     setIsLogin,
+    registerUser,
   };
 
   return <Provider value={value}>{children}</Provider>;

@@ -1,50 +1,122 @@
-import BurgerButton from "../burgerbutton/BurgerButton";
 import "./Navbar.scss";
-import externaticCandidate from "../../assets/externatic_logo_candidate.png";
-import externaticEnterprise from "../../assets/externatic_logo_enterprise.png";
-import LoginButton from "../loginbutton/LoginButton";
+import { Link, useNavigate } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
+import { motion } from "framer-motion";
+import logo from "../../assets/externatic_logo_candidate.png";
 import { useAuth } from "../../contexts/AuthContext";
-import DisconnectButton from "../disconnectbutton/DisconnectButton";
 
 export default function Navbar() {
-  const { user } = useAuth();
-  const type = user.userAuth.account_type;
-  // We need to make parents div too not account for  burger button which is absolute
-  if (type === "candidat")
+  const navigate = useNavigate();
+  const { isLogin, user, logout } = useAuth();
+  if (user.userAuth.account_type === "candidat")
     return (
-      <nav className="navbar_default">
-        <BurgerButton type="default" />
-        <img
-          className="logo_navbar"
-          src={externaticCandidate}
-          alt="externatic_logo"
-        />
-        <DisconnectButton />
-      </nav>
-    );
-  if (type === "entreprise")
-    return (
-      <nav className="navbar_enterprise">
-        <BurgerButton type="enterprise" />
-
-        <img
-          className="logo_navbar"
-          src={externaticEnterprise}
-          alt="externatic_logo"
-        />
-        <LoginButton />
-      </nav>
+      <div className="navbarContainer">
+        <div className="logoNavbar">
+          <img src={logo} alt="externatic_logo" />
+        </div>
+        <div className="menuNavbar">
+          <ul>
+            <li>
+              {" "}
+              <Link to="/candidate">Accueil</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/candidate/offer">Offres</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/candidate/about">À propos</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/candidate/contact">Contact</Link>
+            </li>
+          </ul>
+        </div>
+        {!isLogin ? (
+          <div className="loginNavbar">
+            {" "}
+            <Link to="/login">
+              <button type="button"> Sign in</button>
+            </Link>
+            <Link to="/register">
+              <button type="button"> Sign up</button>
+            </Link>
+          </div>
+        ) : (
+          <div className="userNavContainer">
+            {" "}
+            <p>{user.userInfos.firstname}</p>
+            <p> {user.userInfos.lastname}</p>
+            <span>
+              <motion.button
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                {" "}
+                <FiLogOut />
+              </motion.button>
+            </span>
+          </div>
+        )}
+      </div>
     );
   return (
-    <nav className="navbar_default">
-      <BurgerButton type="default" />
-
-      <img
-        className="logo_navbar"
-        src={externaticCandidate}
-        alt="externatic_logo"
-      />
-      <LoginButton />
-    </nav>
+    <div className="navbarContainer">
+      <div className="logoNavbar">
+        <img src={logo} alt="externatic_logo" />
+      </div>
+      <div className="menuNavbar">
+        <ul>
+          <li>
+            {" "}
+            <Link to="/">Accueil</Link>
+          </li>
+          <li>
+            {" "}
+            <Link to="/offer">Offres</Link>
+          </li>
+          <li>
+            {" "}
+            <Link to="/about">À propos</Link>
+          </li>
+          <li>
+            {" "}
+            <Link to="/contact">Contact</Link>
+          </li>
+        </ul>
+      </div>
+      {!isLogin ? (
+        <div className="loginNavbar">
+          {" "}
+          <Link to="/login">
+            <button type="button"> Sign in</button>
+          </Link>
+          <Link to="/register">
+            <button type="button"> Sign up</button>
+          </Link>
+        </div>
+      ) : (
+        <div className="userNavContainer">
+          {" "}
+          <p>{user.userInfos.firstname}</p>
+          <p> {user.userInfos.lastname}</p>
+          <span>
+            <motion.button
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {" "}
+              <FiLogOut />
+            </motion.button>
+          </span>
+        </div>
+      )}
+    </div>
   );
 }

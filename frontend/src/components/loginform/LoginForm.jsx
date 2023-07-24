@@ -1,27 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./LoginForm.scss";
 import iconGoogle from "../../assets/iconGoogle.png";
 import iconLinkedin from "../../assets/iconLinkedin.png";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function LoginForm() {
-  const { login, setIsLoggedIn } = useAuth();
+  const { login } = useAuth();
   const [accountToSend, setAccountToSend] = useState({
     email: "",
     password: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ email: "", password: "" });
-
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError({ email: "", password: "" }); // Reset both email and password errors
-
+    setError({ email: "", password: "" });
     try {
       await login(accountToSend.email, accountToSend.password);
-      setIsLoggedIn(true);
+      navigate("/candidate");
     } catch (err) {
       console.error(err);
       if (err.response) {

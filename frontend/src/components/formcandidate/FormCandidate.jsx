@@ -1,29 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Carousel } from "primereact/carousel";
 import { Button } from "primereact/button";
 import { BsArrowRightCircle, BsArrowLeftCircle } from "react-icons/bs";
-import axios from "axios";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.css";
 // import "primeicons/primeicons.css";
 import "./FormCandidate.scss";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function FormCandidate() {
-  const [activeStep, setActiveStep] = useState([0]);
+  const navigate = useNavigate();
+  const { registerUser } = useAuth();
+  const [activeStep, setActiveStep] = useState(0);
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [registerFormData, setRegisterFormData] = useState({
-    registerEmail: "",
-    password: "",
-    confirmPassword: "",
-    accountType: "candidat",
-    authID: 15,
     lastname: "",
     firstname: "",
     birthdate: "",
-    phoneNumber: "0606060606",
+    phoneNumber: "",
     about: "",
     pictureUrl: "",
-    streetNumber: "",
+    streetNumber: "119",
     streetType: "",
     streetName: "",
     city: "",
@@ -31,22 +30,21 @@ export default function FormCandidate() {
     department: "",
     region: "",
     country: "",
-    candidateID: 7,
+    registerEmail: "",
+    password: "",
+    accountType: "candidat",
   });
 
-  // Password match check onBlur
+  const [passwordMatch, setPasswordMatch] = useState();
 
-  const [passwordMatch, setPasswordMatch] = useState(null);
-
-  const handlePasswordBlur = () => {
-    const { password, confirmPassword } = registerFormData;
-    setPasswordMatch(password === confirmPassword);
-  };
-
-  const handleConfirmPasswordBlur = () => {
-    const { password, confirmPassword } = registerFormData;
-    setPasswordMatch(password === confirmPassword);
-  };
+  useEffect(() => {
+    if (confirmPassword.length === 0) {
+      setPasswordMatch();
+    } else {
+      const { password } = registerFormData;
+      setPasswordMatch(password === confirmPassword);
+    }
+  }, [confirmPassword, registerFormData.password]);
 
   const handleChangeData = (event) => {
     setRegisterFormData((previousData) => ({
@@ -55,19 +53,10 @@ export default function FormCandidate() {
     }));
   };
 
-  const handleFormSubmit = () => {
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/register`, registerFormData)
-      .then(() => {})
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
   const steps = [
     {
       // Envoyer dans la table AUTH
-      label: "Etape 1/5",
+      label: "Etape 1/4",
       content: (
         <div className="mail-password-container">
           <h1>Choisissez vos identifiants</h1>
@@ -75,6 +64,7 @@ export default function FormCandidate() {
             <div className="mail-input">
               <label htmlFor="email">Email :</label>
               <input
+                required
                 type="email"
                 id="email"
                 name="registerEmail"
@@ -86,12 +76,12 @@ export default function FormCandidate() {
             <div className="password-input">
               <label htmlFor="password">Mot de passe :</label>
               <input
+                required
                 type="password"
                 id="password"
                 name="password"
                 value={registerFormData.password}
                 onChange={handleChangeData}
-                onBlur={handlePasswordBlur}
                 placeholder="Insérer votre mot de passe ..."
               />
             </div>
@@ -100,32 +90,42 @@ export default function FormCandidate() {
                 Confirmer le mot de passe :
               </label>
               <input
+                required
                 type="password"
                 id="confirmpassword"
                 name="confirmPassword"
-                value={registerFormData.confirmPassword}
-                onChange={handleChangeData}
-                onBlur={handleConfirmPasswordBlur}
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                }}
                 placeholder="Confirmer votre mot de passe ..."
               />
+              {!passwordMatch && passwordMatch !== false && (
+                <span style={{ visibility: "hidden" }}>e</span>
+              )}
+              {passwordMatch === false && (
+                <span style={{ color: "red" }}>
+                  Les mots de passe ne correspondent pas.
+                </span>
+              )}
+              {passwordMatch && passwordMatch === true && (
+                <span
+                  style={{
+                    color: "green",
+                    position: "relative",
+                  }}
+                >
+                  Les mots de passe sont identiques.
+                </span>
+              )}
             </div>
-            {passwordMatch === false && (
-              <div style={{ color: "red" }}>
-                Les mots de passe ne correspondent pas.
-              </div>
-            )}
-            {passwordMatch === true && (
-              <div style={{ color: "green" }}>
-                Les mots de passe sont identiques.
-              </div>
-            )}
           </div>
         </div>
       ),
     },
     {
       // Envoyer dans la table CANDIDATE
-      label: "Etape 2/5",
+      label: "Etape 2/4",
       content: (
         <div className="name-birthday-container">
           <h1>Dites-nous en plus à propos de vous !</h1>
@@ -133,6 +133,7 @@ export default function FormCandidate() {
             <div className="firstname-input">
               <label htmlFor="firstname"> Prénom :</label>
               <input
+                required
                 type="text"
                 id="firstname"
                 name="firstname"
@@ -144,6 +145,7 @@ export default function FormCandidate() {
             <div className="lastname-input">
               <label htmlFor="lastname">Nom :</label>
               <input
+                required
                 type="text"
                 id="lastname"
                 name="lastname"
@@ -156,6 +158,7 @@ export default function FormCandidate() {
             <div className="birthday-input">
               <label htmlFor="birthdate">Date de naissance :</label>
               <input
+                required
                 type="date"
                 id="birthdate"
                 name="birthdate"
@@ -172,7 +175,7 @@ export default function FormCandidate() {
     },
     {
       // Envoyer dans la table ADDRESS
-      label: "Etape 3/5",
+      label: "Etape 3/4",
       content: (
         <div className="address-container">
           <h1>N'oubliez pas votre adresse postale</h1>
@@ -181,6 +184,7 @@ export default function FormCandidate() {
               <div className="number-way-input">
                 <label htmlFor="numberway">N° de voirie :</label>
                 <input
+                  required
                   type="number"
                   id="numberway"
                   name="streetNumber"
@@ -192,6 +196,7 @@ export default function FormCandidate() {
               <div className="type-way-input">
                 <label htmlFor="typeway">Type de voirie :</label>
                 <input
+                  required
                   type="text"
                   id="typeway"
                   name="streetType"
@@ -203,6 +208,7 @@ export default function FormCandidate() {
               <div className="name-way-input">
                 <label htmlFor="nameway">Nom de la voirie :</label>
                 <input
+                  required
                   type="text"
                   id="nameway"
                   name="streetName"
@@ -214,6 +220,7 @@ export default function FormCandidate() {
               <div className="country-input">
                 <label htmlFor="country">Pays :</label>
                 <input
+                  required
                   type="text"
                   id="country"
                   name="country"
@@ -227,6 +234,7 @@ export default function FormCandidate() {
               <div className="region-input">
                 <label htmlFor="region">Région :</label>
                 <input
+                  required
                   type="text"
                   id="region"
                   name="region"
@@ -238,6 +246,7 @@ export default function FormCandidate() {
               <div className="department-input">
                 <label htmlFor="department">Département :</label>
                 <input
+                  required
                   type="text"
                   id="department"
                   name="department"
@@ -249,6 +258,7 @@ export default function FormCandidate() {
               <div className="city-input">
                 <label htmlFor="city">Ville :</label>
                 <input
+                  required
                   type="text"
                   id="city"
                   name="city"
@@ -260,6 +270,7 @@ export default function FormCandidate() {
               <div className="postal-code-input">
                 <label htmlFor="postalcode">Code postal :</label>
                 <input
+                  required
                   type="number"
                   id="postalcode"
                   name="postalCode"
@@ -273,49 +284,15 @@ export default function FormCandidate() {
         </div>
       ),
     },
+
     {
-      // Envoyer dans la table CONTRACT
-      label: "Etape 4/5",
-      content: (
-        <div className="contract-check-container">
-          <h1>Que recherchez-vous sur notre plateforme ?</h1>
-          <div className="all-fourth-input">
-            <div className="container-left1">
-              <div className="cdi-input">
-                <input id="cdi" type="checkbox" value="contract" />
-                <label htmlFor="cdi">CDI</label>
-              </div>
-              <div className="cdd-input">
-                <input id="cdd" type="checkbox" value="contract" />
-                <label htmlFor="cdd">CDD</label>
-              </div>
-              <div className="interim-input">
-                <input id="interim" type="checkbox" value="contract" />
-                <label htmlFor="interim">INTERIM</label>
-              </div>
-            </div>
-            <div className="container-right1">
-              <div className="alternance-input">
-                <input id="alternance" type="checkbox" value="contract" />
-                <label htmlFor="alternance">ALTERNANCE</label>
-              </div>
-              <div className="stage-input">
-                <input id="stage" type="checkbox" value="contract" />
-                <label htmlFor="stage">STAGE</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      label: "Etape 5/5",
+      label: "Etape 4/4",
       content: (
         <div className="rgpd-check-container">
           <h1>Dernière étape !</h1>
           <div className="all-fifth-input">
             <div className="rgpd-input">
-              <input type="checkbox" id="rgpd" value="rgpd" />
+              <input type="checkbox" id="rgpd" value="rgpd" required />
               <label htmlFor="rgpd">
                 En soumettant ce formulaire, vous consentez à ce que vos données
                 personnelles soient traitées conformément au Règlement général
@@ -333,17 +310,29 @@ export default function FormCandidate() {
     },
   ];
 
-  const handleNext = () => {
-    setActiveStep((prevStep) => prevStep + 1);
+  const handleNext = async (e) => {
+    e.preventDefault();
+    if (activeStep === 0) {
+      if (!passwordMatch) {
+        return;
+      }
+      setActiveStep((prevStep) => prevStep + 1);
+    } else {
+      setActiveStep((prevStep) => prevStep + 1);
+    }
+
+    if (activeStep === steps.length - 1) {
+      try {
+        await registerUser(registerFormData);
+        navigate("/login");
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
 
   const handlePrev = () => {
     setActiveStep((prevStep) => prevStep - 1);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Effectuez ici la logique de soumission du formulaire
   };
 
   const renderCarouselItem = (stepIndex) => {
@@ -362,7 +351,7 @@ export default function FormCandidate() {
 
   return (
     <div className="container-register-candidate">
-      <form className="form-candidate-container" onSubmit={handleSubmit}>
+      <form className="form-candidate-container" onSubmit={handleNext}>
         <Carousel
           value={[activeStep]}
           numVisible={1}
@@ -380,26 +369,31 @@ export default function FormCandidate() {
 
         {/* Boutons de navigation */}
         <div className="btn-navigation">
-          {activeStep !== 0 && (
+          {activeStep > 0 && activeStep < steps.length ? (
             <Button
+              type="button"
               label={<BsArrowLeftCircle />}
-              onClick={handlePrev}
+              onClick={(e) => handlePrev(e)}
               className="p-button-secondary"
             />
+          ) : (
+            <div className="p-button-secondary" />
           )}
-          {activeStep !== steps.length - 1 ? (
+          {activeStep < steps.length - 1 ? (
             <Button
+              type="submit"
               label={<BsArrowRightCircle />}
-              onClick={handleNext}
               className="p-button-success"
             />
           ) : (
-            <Button
-              type="submit"
-              label="Valider"
-              className="p-button-success"
-              onClick={handleFormSubmit}
-            />
+            activeStep === steps.length - 1 && (
+              <Button
+                type="submit"
+                label="Valider"
+                className="p-button-success"
+                // onClick={(e) => handleSubmit(e)}
+              />
+            )
           )}
         </div>
       </form>

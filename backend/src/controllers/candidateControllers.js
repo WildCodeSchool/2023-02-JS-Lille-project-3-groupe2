@@ -46,6 +46,7 @@ const create = (req, res) => {
         res.status(409).send("Account already exist");
       } else {
         res.sendStatus(500);
+        console.error(err);
       }
     });
 };

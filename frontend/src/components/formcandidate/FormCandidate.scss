@@ -75,6 +75,10 @@
       .birthday-input {
         display: flex;
         flex-direction: column;
+        span {
+          text-align: center;
+          margin-top: 1rem;
+        }
 
         label {
           font-size: large;
@@ -247,6 +251,7 @@
         border: none;
         background-color: transparent;
         color: $primary-color-candidate;
+        box-shadow: none;
 
         &:hover {
           color: $special-color-candidate;

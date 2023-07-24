@@ -6,16 +6,20 @@ import "./PublicLayout.scss";
 import { useAuth } from "../../contexts/AuthContext";
 
 function PublicLayout() {
-  const { user } = useAuth();
+  const { verifyToken } = useAuth();
   const navigate = useNavigate();
-
   useEffect(() => {
-    if (user.userAuth.account_type === "candidat") {
-      navigate("/candidate");
-    } else if (user.userAuth.account_type === "entreprise") {
-      navigate("/entreprise");
-    }
-  }, [user]);
+    (async () => {
+      try {
+        const result = await verifyToken();
+        if (result.userAuth.account_type === "candidat") {
+          navigate("/candidate");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
   return (
     <div className="PublicLayoutContainer">

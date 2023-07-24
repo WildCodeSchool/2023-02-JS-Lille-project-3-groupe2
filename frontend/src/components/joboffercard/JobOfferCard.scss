@@ -1,0 +1,46 @@
+@import "../../Utils.scss";
+.jobOfferCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 25dvw;
+  padding: 1rem;
+  gap: 1rem;
+  .jobOfferCardContentTop {
+    display: flex;
+    flex: 1;
+    width: 100%;
+
+    .jobOfferCardImg {
+      width: 30%;
+      aspect-ratio: 3/2;
+      object-fit: contain;
+      height: 100%;
+    }
+    .jobOfferCardTitle {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      h3 {
+        word-break: break-word;
+      }
+    }
+  }
+  .jobOfferCardContentMid {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    .jobOfferCardLi {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+@media only screen and (max-width: 800px) {
+  .jobOfferCardContainer {
+    width: 60dvw;
+  }
+}
