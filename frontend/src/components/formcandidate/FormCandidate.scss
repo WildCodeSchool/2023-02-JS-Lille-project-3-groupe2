@@ -75,6 +75,10 @@
       .birthday-input {
         display: flex;
         flex-direction: column;
+        span {
+          text-align: center;
+          margin-top: 1rem;
+        }
 
         label {
           font-size: large;
