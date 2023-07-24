@@ -37,7 +37,6 @@ const create = (req, res) => {
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(500);
-        console.log(result);
       } else {
         res.status(200).send("Account created");
       }
@@ -47,7 +46,7 @@ const create = (req, res) => {
         res.status(409).send("Account already exist");
       } else {
         res.sendStatus(500);
-        console.log(err);
+        console.error(err);
       }
     });
 };

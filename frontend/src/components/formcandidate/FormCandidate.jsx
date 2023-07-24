@@ -6,9 +6,11 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.css";
 // import "primeicons/primeicons.css";
 import "./FormCandidate.scss";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function FormCandidate() {
+  const navigate = useNavigate();
   const { registerUser } = useAuth();
   const [activeStep, setActiveStep] = useState(0);
 
@@ -63,6 +65,7 @@ export default function FormCandidate() {
             <div className="mail-input">
               <label htmlFor="email">Email :</label>
               <input
+                required
                 type="email"
                 id="email"
                 name="registerEmail"
@@ -74,6 +77,7 @@ export default function FormCandidate() {
             <div className="password-input">
               <label htmlFor="password">Mot de passe :</label>
               <input
+                required
                 type="password"
                 id="password"
                 name="password"
@@ -285,7 +289,8 @@ export default function FormCandidate() {
     },
   ];
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.preventDefault();
     setActiveStep((prevStep) => prevStep + 1);
   };
 
@@ -297,6 +302,7 @@ export default function FormCandidate() {
     e.preventDefault();
     try {
       await registerUser(registerFormData);
+      navigate("/login");
     } catch (error) {
       console.error(error);
     }
@@ -319,12 +325,7 @@ export default function FormCandidate() {
 
   return (
     <div className="container-register-candidate">
-      <form
-        className="form-candidate-container"
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
-      >
+      <form className="form-candidate-container" onSubmit={handleNext}>
         <Carousel
           value={[activeStep]}
           numVisible={1}
@@ -344,8 +345,9 @@ export default function FormCandidate() {
         <div className="btn-navigation">
           {activeStep !== 0 ? (
             <Button
+              type="button"
               label={<BsArrowLeftCircle />}
-              onClick={handlePrev}
+              onClick={(e) => handlePrev(e)}
               className="p-button-secondary"
             />
           ) : (
@@ -353,8 +355,8 @@ export default function FormCandidate() {
           )}
           {activeStep !== steps.length - 1 ? (
             <Button
+              type="submit"
               label={<BsArrowRightCircle />}
-              onClick={handleNext}
               className="p-button-success"
             />
           ) : (

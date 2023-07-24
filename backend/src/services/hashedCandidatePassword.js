@@ -74,8 +74,6 @@ const verifyPassword = async (req, res, next) => {
   }
 };
 const verifyToken = async (req, res, next) => {
-  console.log("ok");
-
   try {
     if (req.cookies) {
       const token = await jwt.verify(req.cookies.token, process.env.JWT_SECRET);
