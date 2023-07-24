@@ -74,21 +74,21 @@ const verifyPassword = async (req, res, next) => {
   }
 };
 const verifyToken = async (req, res, next) => {
+  console.log("ok");
+
   try {
     if (req.cookies) {
       const token = await jwt.verify(req.cookies.token, process.env.JWT_SECRET);
       if (token.role === "candidat") {
-        const [[userInfos]] = await models.candidate.findCandidateByAccountId(
+        const [[user]] = await models.candidate.findCandidateByAccountId(
           token.account_ID
         );
-        res.json({
-          userInfos,
-        });
+        res.json({ userAuth: token, userInfos: user });
       } else if (token.role === "entreprise") {
-        const [userInfos] = await models.enterprise.findEnterpriseByAccountId(
+        const [user] = await models.enterprise.findEnterpriseByAccountId(
           token.account_ID
         );
-        res.json([userInfos]);
+        res.json([user]);
       } else if (token.role === "staff") {
         const [user] = await models.staff.findStaffByAccountId(
           token.account_ID

@@ -69,6 +69,8 @@ const destroy = (req, res) => {
 };
 
 const getUserByEmailWithPasswordAndPassToNext = async (req, res, next) => {
+  console.log("ok");
+
   const { email } = req.body;
   try {
     const [account] = await models.auth.getAccountByEmail(email);

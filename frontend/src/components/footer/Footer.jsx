@@ -1,17 +1,9 @@
 import { FaSquareTwitter, FaLinkedin } from "react-icons/fa6";
 import "./Footer.scss";
-import { useAuth } from "../../contexts/AuthContext";
 
 export default function Footer() {
-  const { user } = useAuth();
-  const type = user.userAuth.account_type;
-
   return (
-    <footer
-      className={
-        type === "candidat" ? "" : type === "entreprise" && "footer_enterprise"
-      }
-    >
+    <footer>
       <div className="footer_part1">
         <p className="footer_text1">
           Externatic, cabinet de recrutement informatique Externatic est un

@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Carousel } from "primereact/carousel";
 import { Button } from "primereact/button";
 import { BsArrowRightCircle, BsArrowLeftCircle } from "react-icons/bs";
-import axios from "axios";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.css";
 // import "primeicons/primeicons.css";
 import "./FormCandidate.scss";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function FormCandidate() {
+  const { registerUser } = useAuth();
   const [activeStep, setActiveStep] = useState(0);
 
   const [registerFormData, setRegisterFormData] = useState({
-    registerEmail: "",
-    password: "",
-    confirmPassword: "",
-    accountType: "candidat",
-    authID: 15,
     lastname: "",
     firstname: "",
     birthdate: "",
-    phoneNumber: "0606060606",
+    phoneNumber: "",
     about: "",
     pictureUrl: "",
-    streetNumber: "",
+    streetNumber: "119",
     streetType: "",
     streetName: "",
     city: "",
@@ -31,21 +27,23 @@ export default function FormCandidate() {
     department: "",
     region: "",
     country: "",
-    candidateID: 7,
+    registerEmail: "",
+    password: "",
+    accountType: "candidat",
   });
 
   // Password match check onBlur
 
-  const [passwordMatch, setPasswordMatch] = useState();
+  // const [passwordMatch, setPasswordMatch] = useState();
 
-  useEffect(() => {
-    if (registerFormData.confirmPassword.length === 0) {
-      setPasswordMatch();
-    } else {
-      const { password, confirmPassword } = registerFormData;
-      setPasswordMatch(password === confirmPassword);
-    }
-  }, [registerFormData.confirmPassword]);
+  // useEffect(() => {
+  //   if (registerFormData.confirmPassword.length === 0) {
+  //     setPasswordMatch();
+  //   } else {
+  //     const { password, confirmPassword } = registerFormData;
+  //     setPasswordMatch(password === confirmPassword);
+  //   }
+  // }, [registerFormData.password]);
 
   const handleChangeData = (event) => {
     setRegisterFormData((previousData) => ({
@@ -54,19 +52,10 @@ export default function FormCandidate() {
     }));
   };
 
-  const handleFormSubmit = () => {
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/register`, registerFormData)
-      .then(() => {})
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
   const steps = [
     {
       // Envoyer dans la table AUTH
-      label: "Etape 1/5",
+      label: "Etape 1/4",
       content: (
         <div className="mail-password-container">
           <h1>Choisissez vos identifiants</h1>
@@ -93,7 +82,7 @@ export default function FormCandidate() {
                 placeholder="Insérer votre mot de passe ..."
               />
             </div>
-            <div className="confirm-password-input">
+            {/* <div className="confirm-password-input">
               <label htmlFor="confirmpassword">
                 Confirmer le mot de passe :
               </label>
@@ -105,8 +94,8 @@ export default function FormCandidate() {
                 onChange={handleChangeData}
                 placeholder="Confirmer votre mot de passe ..."
               />
-            </div>
-            {passwordMatch === false && (
+            </div> */}
+            {/* {passwordMatch === false && (
               <div style={{ color: "red" }}>
                 Les mots de passe ne correspondent pas.
               </div>
@@ -115,14 +104,14 @@ export default function FormCandidate() {
               <div style={{ color: "green" }}>
                 Les mots de passe sont identiques.
               </div>
-            )}
+            )} */}
           </div>
         </div>
       ),
     },
     {
       // Envoyer dans la table CANDIDATE
-      label: "Etape 2/5",
+      label: "Etape 2/4",
       content: (
         <div className="name-birthday-container">
           <h1>Dites-nous en plus à propos de vous !</h1>
@@ -169,7 +158,7 @@ export default function FormCandidate() {
     },
     {
       // Envoyer dans la table ADDRESS
-      label: "Etape 3/5",
+      label: "Etape 3/4",
       content: (
         <div className="address-container">
           <h1>N'oubliez pas votre adresse postale</h1>
@@ -270,43 +259,9 @@ export default function FormCandidate() {
         </div>
       ),
     },
+
     {
-      // Envoyer dans la table CONTRACT
-      label: "Etape 4/5",
-      content: (
-        <div className="contract-check-container">
-          <h1>Que recherchez-vous sur notre plateforme ?</h1>
-          <div className="all-fourth-input">
-            <div className="container-left1">
-              <div className="cdi-input">
-                <input id="cdi" type="checkbox" value="contract" />
-                <label htmlFor="cdi">CDI</label>
-              </div>
-              <div className="cdd-input">
-                <input id="cdd" type="checkbox" value="contract" />
-                <label htmlFor="cdd">CDD</label>
-              </div>
-              <div className="interim-input">
-                <input id="interim" type="checkbox" value="contract" />
-                <label htmlFor="interim">INTERIM</label>
-              </div>
-            </div>
-            <div className="container-right1">
-              <div className="alternance-input">
-                <input id="alternance" type="checkbox" value="contract" />
-                <label htmlFor="alternance">ALTERNANCE</label>
-              </div>
-              <div className="stage-input">
-                <input id="stage" type="checkbox" value="contract" />
-                <label htmlFor="stage">STAGE</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      label: "Etape 5/5",
+      label: "Etape 4/4",
       content: (
         <div className="rgpd-check-container">
           <h1>Dernière étape !</h1>
@@ -338,8 +293,13 @@ export default function FormCandidate() {
     setActiveStep((prevStep) => prevStep - 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await registerUser(registerFormData);
+    } catch (error) {
+      console.error(error);
+    }
     // Effectuez ici la logique de soumission du formulaire
   };
 
@@ -359,7 +319,12 @@ export default function FormCandidate() {
 
   return (
     <div className="container-register-candidate">
-      <form className="form-candidate-container" onSubmit={handleSubmit}>
+      <form
+        className="form-candidate-container"
+        onSubmit={(event) => {
+          event.preventDefault();
+        }}
+      >
         <Carousel
           value={[activeStep]}
           numVisible={1}
@@ -397,7 +362,7 @@ export default function FormCandidate() {
               type="submit"
               label="Valider"
               className="p-button-success"
-              onClick={handleFormSubmit}
+              onClick={(e) => handleSubmit(e)}
             />
           )}
         </div>

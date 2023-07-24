@@ -6,6 +6,9 @@
   margin: 0;
   line-height: 1.2;
 }
+a {
+  text-decoration: none;
+}
 button {
   font-size: clamp(1rem, 1.4vw, 1.4rem);
   font-weight: normal;

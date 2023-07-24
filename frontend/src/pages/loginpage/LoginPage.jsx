@@ -3,7 +3,7 @@ import "./LoginPage.scss";
 
 export default function LoginPage() {
   return (
-    <div className="LoginPageContainer">
+    <div className="loginPageContainer">
       <LoginForm />
     </div>
   );

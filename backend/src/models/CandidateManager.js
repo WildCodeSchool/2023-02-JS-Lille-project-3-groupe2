@@ -89,6 +89,7 @@ class CandidateManager extends AbstractManager {
   }
 
   async add(candidate) {
+    console.log(candidate);
     const query1 =
       "INSERT INTO auth (register_email, password, account_type) VALUES ( ?, ?, ?)";
     const query2 =

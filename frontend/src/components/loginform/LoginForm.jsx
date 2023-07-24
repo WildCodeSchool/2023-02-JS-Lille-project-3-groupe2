@@ -6,7 +6,7 @@ import iconLinkedin from "../../assets/iconLinkedin.png";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function LoginForm() {
-  const { login, setIsLoggedIn } = useAuth();
+  const { login } = useAuth();
   const [accountToSend, setAccountToSend] = useState({
     email: "",
     password: "",
@@ -18,10 +18,8 @@ export default function LoginForm() {
     e.preventDefault();
     setLoading(true);
     setError({ email: "", password: "" }); // Reset both email and password errors
-
     try {
-      await login(accountToSend.email, accountToSend.password);
-      setIsLoggedIn(true);
+      const result = await login(accountToSend.email, accountToSend.password);
     } catch (err) {
       console.error(err);
       if (err.response) {
