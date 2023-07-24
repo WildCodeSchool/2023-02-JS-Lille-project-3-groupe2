@@ -112,3 +112,17 @@
     }
   }
 }
+.error-message {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #f44336;
+  color: #fff;
+  padding: 0.5rem;
+  transition: opacity 0.2s, visibility 0s 0.2s;
+}
+
+.error-message.active {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s;
+}

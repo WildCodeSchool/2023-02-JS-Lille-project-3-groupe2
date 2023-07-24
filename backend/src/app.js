@@ -2,14 +2,36 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+require("dotenv").config();
+const mysql = require("mysql2/promise");
 
 // create express app
 
 const express = require("express");
+const cookieParser = require("cookie-parser");
 
 const app = express();
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../public")));
 
 // use some application-level middlewares
+const database = mysql.createPool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
+
+database
+  .getConnection()
+  .then(() => {
+    console.info("Serveur is ok !!!");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 app.use(express.json());
 
@@ -19,6 +41,7 @@ app.use(
   cors({
     origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
     optionsSuccessStatus: 200,
+    credentials: true,
   })
 );
 

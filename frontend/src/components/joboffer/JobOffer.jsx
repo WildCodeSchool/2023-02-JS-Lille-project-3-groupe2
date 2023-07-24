@@ -1,76 +1,50 @@
-import React from "react";
-import Auchan from "../../assets/Auchan.jpg";
-import Adeo from "../../assets/Adeo.png";
-import Goweb from "../../assets/goweb1.jpg";
-import Lyreco from "../../assets/lyreco2.jpeg";
-import Ibm from "../../assets/ibm1.jpg";
-import Wcs from "../../assets/wcs.png";
+import React, { useEffect, useState } from "react";
 import "../../Utils.scss";
 import JobOfferCard from "../joboffercard/JobOfferCard";
-import "./JobOffer.scss";
-import "../showmorebtn/ShowMoreBtn.scss";
 
-const testJobOfferData = [
-  {
-    image: Auchan,
-    nameCompany: "Auchan",
-    jobTitle: "Dev Fullstack JS",
-    city: "Croix (59)",
-    experienceTime: "2 ans",
-  },
-  {
-    image: Adeo,
-    nameCompany: "Adéo",
-    jobTitle: "Dev Fullstack Java",
-    city: "Lezennes (59)",
-    experienceTime: "1 an d'entretien",
-  },
-  {
-    image: Goweb,
-    nameCompany: "Goweb",
-    jobTitle: "Alternant Dev back-end",
-    city: "Roubaix (59)",
-    experienceTime: "10 ans et être un génie",
-  },
-  {
-    image: Lyreco,
-    nameCompany: "Lyreco",
-    jobTitle: "Dev Fullstack JS",
-    city: "Raisme (59)",
-    experienceTime: "2 ans",
-  },
-  {
-    image: Ibm,
-    nameCompany: "IBM",
-    jobTitle: "stage Dev Fullstack JS",
-    city: "Lomme (59)",
-    experienceTime: "Formation",
-  },
-  {
-    image: Wcs,
-    nameCompany: "WCS",
-    jobTitle: "Alternance Dev JS",
-    city: "Lomme (59)",
-    experienceTime: "Formation",
-  },
-];
+import "../showmorebtn/ShowMoreBtn.scss";
+import api from "../../services/api";
+
 export default function JobOffer() {
+  const [jobOffer, setJobOffer] = useState([]);
+  const getJobOffer = async () => {
+    try {
+      const result = await api.get("/offer");
+      setJobOffer(result.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getJobOffer();
+  }, []);
+  const calculateAverageSalary = (min, max) => (min + max) / 2;
   return (
     <div className="AjustJobOfferCardAndBtn">
       <h2>
         Des offres d'emploi <span>à votre image</span>
       </h2>
       <div className="JobOfferContainer">
-        {testJobOfferData.map((item) => (
-          <JobOfferCard
-            key={item.nameCompany}
-            image={item.image}
-            nameCompany={item.nameCompany}
-            jobTitle={item.jobTitle}
-            city={item.city}
-            experienceTime={item.experienceTime}
-          />
-        ))}
+        {jobOffer
+          .slice() // Create a copy of the array to avoid modifying the original state
+          .sort((a, b) => {
+            const averageA = calculateAverageSalary(a.min_salary, a.max_salary);
+            const averageB = calculateAverageSalary(b.min_salary, b.max_salary);
+            return averageB - averageA;
+          })
+          .map((item) => (
+            <JobOfferCard
+              key={item.nameCompany}
+              image={item.logo_url}
+              nameCompany={item.trade_name
+                .toLowerCase()
+                .replace(/^\w/, (c) => c.toUpperCase())}
+              jobTitle={item.title}
+              city={item.city}
+              salary={`${item.min_salary}€ - ${item.max_salary}€`}
+              date={item.offer_date}
+            />
+          ))}
       </div>
     </div>
   );

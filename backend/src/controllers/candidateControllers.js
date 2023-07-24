@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.item
+  models.candidate
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,8 +13,9 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.item
+  models.candidate
     .find(req.params.id)
+
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -28,20 +29,39 @@ const read = (req, res) => {
     });
 };
 
+const create = (req, res) => {
+  const candidate = req.body;
+  models.candidate
+    .add(candidate)
+
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(500);
+      } else {
+        res.status(200).send("Account created");
+      }
+    })
+    .catch((err) => {
+      if (err.code === "ER_DUP_ENTRY") {
+        res.status(409).send("Account already exist");
+      } else {
+        res.sendStatus(500);
+      }
+    });
+};
+
 const edit = (req, res) => {
-  const item = req.body;
+  const candidate = req.body;
 
-  // TODO validations (length, format...)
+  candidate.id = parseInt(req.params.id, 10);
 
-  item.id = parseInt(req.params.id, 10);
-
-  models.item
-    .update(item)
+  models.candidate
+    .update(candidate)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        res.send(204);
       }
     })
     .catch((err) => {
@@ -50,15 +70,15 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
-  const item = req.body;
-
-  // TODO validations (length, format...)
-
-  models.item
-    .insert(item)
+const getAllMyBookmarks = (req, res) => {
+  models.candidate
+    .getBookmarks(req.params.id)
     .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.send(204);
+      }
     })
     .catch((err) => {
       console.error(err);
@@ -67,13 +87,16 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.item
-    .delete(req.params.id)
+  const candidate = req.body;
+  candidate.id = parseInt(req.params.id, 10);
+
+  models.candidate
+    .delete(candidate)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        res.send(204);
       }
     })
     .catch((err) => {
@@ -86,6 +109,7 @@ module.exports = {
   browse,
   read,
   edit,
-  add,
+  create,
   destroy,
+  getAllMyBookmarks,
 };
