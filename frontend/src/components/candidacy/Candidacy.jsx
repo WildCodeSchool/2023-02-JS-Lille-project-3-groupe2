@@ -32,7 +32,7 @@ export default function Candidacy() {
   const [candidacy, setCandidacy] = useState([]);
   const getCandidacy = async () => {
     try {
-      const result = await api.get("/candidacy/candidate/:id");
+      const result = await api.get("/candidate/:id/candidacy");
       setCandidacy(result.data);
     } catch (error) {
       console.error(error);

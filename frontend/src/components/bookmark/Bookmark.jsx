@@ -8,7 +8,7 @@ export default function Bookmark() {
   const [bookmark, setBookmark] = useState([]);
   const getBookmark = async () => {
     try {
-      const result = await api.get("/bookmark/:id");
+      const result = await api.get("/candidate/:id/bookmark");
       setBookmark(result.data);
     } catch (error) {
       console.error(error);
