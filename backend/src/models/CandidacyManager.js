@@ -19,14 +19,22 @@ class CandidacyManager extends AbstractManager {
     ]);
   }
 
-  getCandidaciesByCandidateId(candidateId) {
-    return this.database.query(
-      `SELECT *
-    FROM candidacy
-    WHERE candidate_ID = ?;
-    `,
-      [candidateId]
-    );
+  async getCandidaciesByCandidateId(candidateId) {
+    const query = `
+    SELECT e.social_denomination AS enterprise_title, c.application_date, c.status
+    FROM candidacy c
+    JOIN offer o ON c.offer_ID = o.ID
+    JOIN enterprise e ON o.enterprise_ID = e.ID
+    WHERE c.candidate_ID = ?;
+  `;
+
+    try {
+      const [rows] = await this.database.query(query, [candidateId]);
+      return rows;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   }
 
   // update a candidacy
