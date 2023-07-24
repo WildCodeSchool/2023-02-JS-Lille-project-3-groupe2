@@ -8,8 +8,7 @@ export default function BookmarkAndCandidacy() {
   return (
     <div className="bookmarkAndCandidacyGlobalContainer">
       <Bookmark />
-      <br />
-      <br /> <Candidacy />
+      <Candidacy />
     </div>
   );
 }

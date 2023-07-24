@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../Utils.scss";
 import "./bookmark.scss";
 import BookmarkCard from "../bookmarkCard/BookmarkCard";
 
 export default function Bookmark() {
-  const [bookmark] = useState([]);
+  /* const [bookmark] = useState([]); */
 
   const bookmarkArray = [
     {
