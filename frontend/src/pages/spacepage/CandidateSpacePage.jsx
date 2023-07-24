@@ -11,10 +11,14 @@ export default function CandidateSpacePage() {
     setShowModifySection(true);
   };
 
+  const handleBackButtonClick = () => {
+    setShowModifySection(false);
+  };
+
   return (
     <div className="CandidateSpacePageContainer">
       {showModifySection ? (
-        <ModifySection />
+        <ModifySection onBackButtonClick={handleBackButtonClick} />
       ) : (
         <div>
           <CardSection />

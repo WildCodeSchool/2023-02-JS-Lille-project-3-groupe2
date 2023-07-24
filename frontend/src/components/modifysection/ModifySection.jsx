@@ -1,11 +1,16 @@
-import "./ModifySection.scss";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
+import "./ModifySection.scss";
 
-export default function ModifySection() {
+export default function ModifySection({ onBackButtonClick }) {
   const [selectedSection, setSelectedSection] = useState("");
 
   const handleSectionChange = (event) => {
     setSelectedSection(event.target.value);
+  };
+
+  const handleSubmitModify = (e) => {
+    e.preventDefault();
   };
 
   const sectionContents = {
@@ -112,7 +117,26 @@ export default function ModifySection() {
       <div className="section-part-container">
         {sectionContents[selectedSection]}
       </div>
-      <div>{selectedSection && <p>Vous êtes dans : {selectedSection}</p>}</div>
+      <div className="btn-preview-submit">
+        <button
+          className="btn-modify"
+          type="button"
+          onClick={onBackButtonClick}
+        >
+          Retour
+        </button>
+        <button
+          className="btn-modify"
+          type="submit"
+          onClick={handleSubmitModify}
+        >
+          Enregistrer
+        </button>
+      </div>
     </div>
   );
 }
+
+ModifySection.propTypes = {
+  onBackButtonClick: PropTypes.func.isRequired,
+};
