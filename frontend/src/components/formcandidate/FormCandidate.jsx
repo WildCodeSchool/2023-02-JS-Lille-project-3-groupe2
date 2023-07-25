@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function FormCandidate() {
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { registerUser } = useAuth();
   const [activeStep, setActiveStep] = useState(0);
@@ -323,10 +324,14 @@ export default function FormCandidate() {
 
     if (activeStep === steps.length - 1) {
       try {
-        await registerUser(registerFormData);
-        navigate("/login");
-      } catch (error) {
-        console.error(error);
+        const result = await registerUser(registerFormData);
+        if (result !== 409) {
+          navigate("/login");
+        } else {
+          setError("Un compte est déjà lié à cet email");
+        }
+      } catch (err) {
+        console.error(err);
       }
     }
   };
@@ -348,7 +353,23 @@ export default function FormCandidate() {
       </div>
     );
   };
-
+  if (error) {
+    return (
+      <div className="container-register-candidate">
+        <h2>Une erreur est survenue</h2>
+        <span>{error}</span>
+        <button
+          type="button"
+          onClick={() => {
+            setActiveStep(0);
+            setError(null);
+          }}
+        >
+          Retour
+        </button>
+      </div>
+    );
+  }
   return (
     <div className="container-register-candidate">
       <form className="form-candidate-container" onSubmit={handleNext}>

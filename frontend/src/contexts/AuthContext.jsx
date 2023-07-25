@@ -3,17 +3,13 @@ import propTypes from "prop-types";
 import api from "../services/api";
 
 const authContext = createContext();
-
 export function AuthProvider({ children }) {
   const registerUser = async (form) => {
     try {
-      const result = await api.post("/register", form);
-      return result;
+      await api.post("/register", form);
+      return "/login";
     } catch (error) {
-      if (error.response.data.status === 409) {
-        return "Un compte est déjà lié à cette adresse";
-      }
-      return error;
+      return error.response.status;
     }
   };
 
