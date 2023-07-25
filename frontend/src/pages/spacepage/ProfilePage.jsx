@@ -21,11 +21,11 @@ export default function ProfilePage() {
       {showModifySection ? (
         <ModifySection onBackButtonClick={handleBackButtonClick} />
       ) : (
-        <div>
+        <>
           <CardSection />
           <ButtonModify onClick={handleModifyButtonClick} />
           <BookmarkAndCandidacy />
-        </div>
+        </>
       )}
     </div>
   );

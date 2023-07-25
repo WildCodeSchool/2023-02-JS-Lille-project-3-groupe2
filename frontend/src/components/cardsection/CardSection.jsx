@@ -18,6 +18,7 @@ export default function CardSection() {
           />
         </div>
         <p>[ Parlez-nous de vous ! ]</p>
+        <p>{user.userInfos.about}</p>
       </div>
       <div className="container-right-profil">
         <div className="title-information">
@@ -32,7 +33,16 @@ export default function CardSection() {
           </div>
           <div className="information">
             <h2>Adresse :</h2>
-            <p>46 Rue des Champignons 59000 Lille</p>
+            <p>
+              {`${user.userAddress.street_number} 
+               ${user.userAddress.street_type}
+               ${user.userAddress.street_name}
+               ${user.userAddress.city}
+               ${user.userAddress.postal_code}
+               ${user.userAddress.department}
+               ${user.userAddress.region}
+               ${user.userAddress.country}`}
+            </p>
           </div>
           <div className="information">
             <h2>Téléphone :</h2>
