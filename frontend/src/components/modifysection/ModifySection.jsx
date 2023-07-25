@@ -90,8 +90,6 @@ export default function ModifySection({ onBackButtonClick }) {
             onChange={handleEmailChange}
             placeholder="johndoe@exemple.com ..."
           />
-          <label htmlFor="password">Votre mot de passe actuel :</label>
-          <input id="password" type="password" />
           <label htmlFor="newpassword">Nouveau mot de passe :</label>
           <input id="newpassword" type="password" />
           <label htmlFor="newpassword">Confirmer mot de passe :</label>

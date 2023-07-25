@@ -1,7 +1,10 @@
 import { AiOutlineSmile } from "react-icons/ai";
+import { useAuth } from "../../contexts/AuthContext";
 import "./CardSection.scss";
 
 export default function CardSection() {
+  const { user } = useAuth();
+
   return (
     <div className="card-section-profil">
       <div className="container-left-profil">
@@ -14,7 +17,7 @@ export default function CardSection() {
             alt="profil"
           />
         </div>
-        <p>[ Ajouter une citation qui parle de vous ! ]</p>
+        <p>[ Parlez-nous de vous ! ]</p>
       </div>
       <div className="container-right-profil">
         <div className="title-information">
@@ -23,7 +26,9 @@ export default function CardSection() {
         <h1>. . .</h1>
         <div className="container-global-information">
           <div className="name-information">
-            <h2>Tessa Fondeur</h2>
+            <h2>
+              {user.userInfos.firstname} {user.userInfos.lastname}
+            </h2>
           </div>
           <div className="information">
             <h2>Adresse :</h2>
@@ -31,15 +36,11 @@ export default function CardSection() {
           </div>
           <div className="information">
             <h2>Téléphone :</h2>
-            <p>06 06 06 06 06</p>
+            <p>{user.userInfos.phone_number}</p>
           </div>
           <div className="information">
             <h2>Email :</h2>
-            <p>tessa.fondeur@gmail.com</p>
-          </div>
-          <div className="information">
-            <h2>Mot de passe :</h2>
-            <p>********</p>
+            <p>{user.userAuth.register_email}</p>
           </div>
         </div>
       </div>
