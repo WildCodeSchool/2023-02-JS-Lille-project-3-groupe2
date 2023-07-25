@@ -1,0 +1,85 @@
+@import "../../Utils.scss";
+
+.card-section-profil {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50vw;
+  gap: 5vw;
+  padding: 3rem;
+  margin: 5rem 0 2rem 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid $special-color-candidate;
+
+  .container-left-profil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+
+    h1 {
+      font-size: xx-large;
+      margin-bottom: 3rem;
+
+      span {
+        font-size: xx-large;
+        color: $primary-color-candidate;
+      }
+    }
+
+    .picture-profile {
+      width: 10vw;
+      margin-bottom: 2rem;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    p {
+      font-size: larger;
+    }
+  }
+
+  .container-right-profil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 55%;
+
+    h1 {
+      font-size: xx-large;
+      color: $primary-color-candidate;
+      margin-bottom: 1rem;
+    }
+
+    .container-global-information {
+      .name-information {
+        h2 {
+          font-size: x-large;
+          color: $secondary-color-candidate;
+          margin-bottom: 1.5rem;
+        }
+      }
+
+      .information {
+        margin-bottom: 1.5rem;
+
+        h2 {
+          font-size: x-large;
+          margin-bottom: 1rem;
+        }
+
+        p {
+          font-size: larger;
+        }
+      }
+    }
+  }
+}

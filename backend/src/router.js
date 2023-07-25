@@ -35,6 +35,12 @@ router.get("/enterprise", enterpriseControllers.browse);
 
 router.delete("/candidate/:id", candidateControllers.destroy);
 
+router.put(
+  "/candidate/:id",
+  // hashedCandidatePassword,
+  candidateControllers.edit
+);
+
 router.post(
   "/register",
   // ValidateUser.ValidateUser,
