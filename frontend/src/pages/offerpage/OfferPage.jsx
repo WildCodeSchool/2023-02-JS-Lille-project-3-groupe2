@@ -1,3 +1,4 @@
+import DescriptionOffer from "../../components/description-offer/DescriptionOffer";
 import JobOffer from "../../components/joboffer/JobOffer";
 import SelectOrderOffer from "../../components/selectorderoffer/SelectOrderOffer";
 import "./OfferPage.scss";
@@ -10,7 +11,8 @@ export default function OfferPage() {
         {" "}
         <SelectOrderOffer />
       </div>
-
+      {/* Need a page for description OFfer */}
+      <DescriptionOffer />
       <JobOffer />
     </div>
   );
