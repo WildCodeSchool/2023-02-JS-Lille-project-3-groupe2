@@ -44,10 +44,10 @@ const AuthManager = require("./AuthManager");
 models.auth = new AuthManager();
 models.auth.setDatabase(pool);
 
-const AdressManager = require("./AdressManager");
+const AddressManager = require("./AddressManager");
 
-models.adress = new AdressManager();
-models.adress.setDatabase(pool);
+models.address = new AddressManager();
+models.address.setDatabase(pool);
 
 const CandidacyManager = require("./CandidacyManager");
 

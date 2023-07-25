@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.adress
+  models.address
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,7 +13,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.adress
+  models.address
     .findById(req.params.id)
 
     .then(([rows]) => {
@@ -30,12 +30,12 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const adress = req.body;
+  const address = req.body;
 
-  adress.id = parseInt(req.params.id, 10);
+  address.id = parseInt(req.params.id, 10);
 
-  models.adress
-    .update(adress)
+  models.address
+    .update(address)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -50,11 +50,11 @@ const edit = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  const adress = req.body;
-  adress.id = parseInt(req.params.id, 10);
+  const address = req.body;
+  address.id = parseInt(req.params.id, 10);
 
-  models.adress
-    .delete(adress)
+  models.address
+    .delete(address)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

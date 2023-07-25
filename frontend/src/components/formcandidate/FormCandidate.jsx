@@ -13,25 +13,25 @@ export default function FormCandidate() {
   const navigate = useNavigate();
   const { registerUser } = useAuth();
   const [activeStep, setActiveStep] = useState(0);
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("password");
 
   const [registerFormData, setRegisterFormData] = useState({
-    lastname: "",
-    firstname: "",
-    birthdate: "",
-    phoneNumber: "",
+    lastname: "loumachi",
+    firstname: "sacha",
+    birthdate: "1997-11-16",
+    phoneNumber: "06 75 30 11 41",
     about: "",
     pictureUrl: "",
-    streetNumber: "119",
-    streetType: "",
-    streetName: "",
-    city: "",
-    postalCode: "",
-    department: "",
-    region: "",
-    country: "",
-    registerEmail: "",
-    password: "",
+    streetNumber: "22",
+    streetType: "Rue",
+    streetName: "Poincarré",
+    city: "Lille",
+    postalCode: "59000",
+    department: "Nord",
+    region: "Haut de France",
+    country: "France",
+    registerEmail: "test@example.com",
+    password: "password",
     accountType: "candidat",
   });
 
@@ -62,7 +62,7 @@ export default function FormCandidate() {
           <h1>Choisissez vos identifiants</h1>
           <div className="all-first-input">
             <div className="mail-input">
-              <label htmlFor="email">Email :</label>
+              <label htmlFor="email"> Email : *</label>
               <input
                 required
                 type="email"
@@ -74,7 +74,7 @@ export default function FormCandidate() {
               />
             </div>
             <div className="password-input">
-              <label htmlFor="password">Mot de passe :</label>
+              <label htmlFor="password">Mot de passe : *</label>
               <input
                 required
                 type="password"
@@ -87,7 +87,7 @@ export default function FormCandidate() {
             </div>
             <div className="confirm-password-input">
               <label htmlFor="confirmpassword">
-                Confirmer le mot de passe :
+                Confirmer le mot de passe : *
               </label>
               <input
                 required
@@ -131,7 +131,7 @@ export default function FormCandidate() {
           <h1>Dites-nous en plus à propos de vous !</h1>
           <div className="all-second-input">
             <div className="firstname-input">
-              <label htmlFor="firstname"> Prénom :</label>
+              <label htmlFor="firstname"> Prénom : *</label>
               <input
                 required
                 type="text"
@@ -143,7 +143,7 @@ export default function FormCandidate() {
               />
             </div>
             <div className="lastname-input">
-              <label htmlFor="lastname">Nom :</label>
+              <label htmlFor="lastname">Nom : *</label>
               <input
                 required
                 type="text"
@@ -156,7 +156,7 @@ export default function FormCandidate() {
             </div>
 
             <div className="birthday-input">
-              <label htmlFor="birthdate">Date de naissance :</label>
+              <label htmlFor="birthdate">Date de naissance : *</label>
               <input
                 required
                 type="date"
@@ -182,7 +182,7 @@ export default function FormCandidate() {
           <div className="all-third-input">
             <div className="container-right">
               <div className="number-way-input">
-                <label htmlFor="numberway">N° de voirie :</label>
+                <label htmlFor="numberway">N° de voirie : *</label>
                 <input
                   required
                   type="number"
@@ -194,7 +194,7 @@ export default function FormCandidate() {
                 />
               </div>
               <div className="type-way-input">
-                <label htmlFor="typeway">Type de voirie :</label>
+                <label htmlFor="typeway">Type de voirie : *</label>
                 <input
                   required
                   type="text"
@@ -206,7 +206,7 @@ export default function FormCandidate() {
                 />
               </div>
               <div className="name-way-input">
-                <label htmlFor="nameway">Nom de la voirie :</label>
+                <label htmlFor="nameway">Nom de la voirie : *</label>
                 <input
                   required
                   type="text"
@@ -218,7 +218,7 @@ export default function FormCandidate() {
                 />
               </div>
               <div className="country-input">
-                <label htmlFor="country">Pays :</label>
+                <label htmlFor="country">Pays : *</label>
                 <input
                   required
                   type="text"
@@ -232,7 +232,7 @@ export default function FormCandidate() {
             </div>
             <div className="container-left">
               <div className="region-input">
-                <label htmlFor="region">Région :</label>
+                <label htmlFor="region">Région : *</label>
                 <input
                   required
                   type="text"
@@ -244,7 +244,7 @@ export default function FormCandidate() {
                 />
               </div>
               <div className="department-input">
-                <label htmlFor="department">Département :</label>
+                <label htmlFor="department">Département : *</label>
                 <input
                   required
                   type="text"
@@ -256,7 +256,7 @@ export default function FormCandidate() {
                 />
               </div>
               <div className="city-input">
-                <label htmlFor="city">Ville :</label>
+                <label htmlFor="city">Ville : *</label>
                 <input
                   required
                   type="text"
@@ -268,7 +268,7 @@ export default function FormCandidate() {
                 />
               </div>
               <div className="postal-code-input">
-                <label htmlFor="postalcode">Code postal :</label>
+                <label htmlFor="postalcode">Code postal : *</label>
                 <input
                   required
                   type="number"
