@@ -1,0 +1,29 @@
+@import "../../Utils.scss";
+
+.bookmarkCardSubContainer {
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0.5em;
+  border: 1px solid $special-color-candidate;
+  flex-grow: 1;
+  margin-bottom: 1em;
+  height: 3em;
+  @include shadow;
+  
+} 
+.bookmarkCardSecondTitle{
+  width: 33%;
+  text-align: center;
+}
+
+.bookmarkCardApplicationDate{
+  width: 33%;
+  text-align: center;
+}
+
+.bookmarkCardStatus{
+  width: 33%;
+  text-align: center;
+}
