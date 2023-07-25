@@ -18,11 +18,7 @@ export default function Navbar() {
           <ul>
             <li>
               {" "}
-              <Link to="/candidate">Accueil</Link>
-            </li>
-            <li>
-              {" "}
-              <Link to="/candidate/offer">Offres</Link>
+              <Link to="/">Accueil</Link>
             </li>
             <li>
               {" "}
@@ -30,11 +26,11 @@ export default function Navbar() {
             </li>
             <li>
               {" "}
-              <Link to="/candidate/about">À propos</Link>
+              <Link to="/offer">Offres</Link>
             </li>
             <li>
               {" "}
-              <Link to="/candidate/contact">Contact</Link>
+              <Link to="/aboutus">À propos</Link>
             </li>
           </ul>
         </div>
@@ -87,11 +83,7 @@ export default function Navbar() {
           </li>
           <li>
             {" "}
-            <Link to="/about">À propos</Link>
-          </li>
-          <li>
-            {" "}
-            <Link to="/contact">Contact</Link>
+            <Link to="/aboutus">À propos</Link>
           </li>
         </ul>
       </div>

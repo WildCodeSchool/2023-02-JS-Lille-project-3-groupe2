@@ -1,9 +1,7 @@
-/* import React, { useState } from "react"; */
+import React, { useEffect, useState } from "react";
 import "../../Utils.scss";
 import "./Candidacy.scss";
-import { useEffect, useState } from "react";
 import api from "../../services/api";
-import CandidacyCard from "../candidacyCard/CandidacyCard";
 
 export default function Candidacy() {
   const [candidacy, setCandidacy] = useState([]);
@@ -20,21 +18,47 @@ export default function Candidacy() {
     getCandidacy();
   }, []);
 
+  const handleViewDetails = (candidacyId) => {
+    // Do something when the button is clicked, e.g., show more details for the candidacy with the given ID.
+    console.info(`View details for candidacy ID: ${candidacyId}`);
+  };
+
   return (
     <div className="candidacyGlobalContainer">
       <div className="candidacyTitleContainer">
         <h1 className="candidacyMainTitle">Mes Candidatures</h1>
       </div>
-      <div className="candidacyMapContainer">
-        {candidacy.map((item) => (
-          <CandidacyCard
-            key={item.application_date}
-            socialDenomination={item.enterprise_title}
-            applicationDate={item.application_date}
-            status={item.status}
-          />
-        ))}
-      </div>
+      <table className="candidacyTable">
+        {/* Added a table element */}
+        <thead>
+          <tr>
+            <th>Entreprise</th>
+            <th>Titre de l'offre</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th> {/* Added a new table header for actions */}
+          </tr>
+        </thead>
+        <tbody>
+          {candidacy.map((item) => (
+            <tr key={item.application_date}>
+              <td>{item.enterprise_title}</td>
+              <td>{item.title}</td>
+              <td>{item.application_date}</td>
+              <td>{item.status}</td>
+
+              <td>
+                <button
+                  type="button"
+                  onClick={() => handleViewDetails(item.candidacyId)}
+                >
+                  View Details
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

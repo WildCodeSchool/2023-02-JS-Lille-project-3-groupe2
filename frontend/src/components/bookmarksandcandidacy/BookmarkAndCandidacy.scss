@@ -1,5 +1,7 @@
-.bookmarkAndCandidacyGlobalContainer{
+@import "../../Utils.scss";
+.bookmarkAndCandidacyGlobalContainer {
   display: flex;
   flex-direction: column;
-  gap: 3em
+  gap: 3em;
+  min-width: 90vw;
 }

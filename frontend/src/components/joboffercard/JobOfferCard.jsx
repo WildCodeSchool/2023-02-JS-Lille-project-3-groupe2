@@ -6,6 +6,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoSchoolOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import "./JobOfferCard.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function JobOfferCard({
   image,
@@ -14,8 +15,16 @@ export default function JobOfferCard({
   city,
   salary,
 }) {
+  const navigate = useNavigate();
+  const showDetails = () => {
+    navigate("/preview");
+  };
   return (
-    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={() => showDetails()}
+    >
       <div className="jobOfferCardContainer">
         <div className="jobOfferCardContentTop">
           <img className="jobOfferCardImg" src={image} alt="logo" />

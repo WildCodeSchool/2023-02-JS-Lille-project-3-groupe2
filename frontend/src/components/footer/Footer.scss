@@ -26,9 +26,13 @@ footer {
     justify-content: space-evenly;
     margin-bottom: 2rem;
     z-index: 100;
-
     .footer_text2 {
       margin-left: 5%;
+      list-style-type: none;
+      a {
+        color: $mono-white;
+        text-decoration: underline;
+      }
     }
     .footer_text3 {
       word-wrap: break-word;

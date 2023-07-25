@@ -1,24 +1,28 @@
 import { FaSquareTwitter, FaLinkedin } from "react-icons/fa6";
 import "./Footer.scss";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
     <footer>
       <div className="footer_part1">
         <p className="footer_text1">
-          Externatic, cabinet de recrutement informatique Externatic est un
-          cabinet dédié au recrutement de profils d’experts, ingénieurs et
-          managers dans le domaine de l’informatique
+          Externatic, cabinet de recrutement informatique est un cabinet dédié
+          au recrutement de profils d’experts, ingénieurs et managers dans le
+          domaine de l’informatique
         </p>
       </div>
       <div className="footer_part2">
         <ul className="footer_text2">
-          <li>Informations</li>
-          <li>Fiches métiers</li>
-          <li>Mentions légales</li>
-          <li>Politique de confidentialité</li>
-          <li>Politique de cookies</li>
-          <li>Plan du site</li>
+          <Link to="/cgu">
+            <li>Mentions légales</li>
+          </Link>
+          <Link to="/privacy">
+            <li>Politique de confidentialité</li>
+          </Link>
+          <Link to="/cookies">
+            <li>Politique de cookies</li>
+          </Link>
         </ul>
         <div>
           <ul className="footer_text3">
