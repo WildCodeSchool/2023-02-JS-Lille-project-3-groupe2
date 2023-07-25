@@ -28,27 +28,23 @@ class CandidateManager extends AbstractManager {
 
   async updateCandidate(candidate) {
     const updateQuery1 =
-      "UPDATE auth SET register_email = ?, password = ?, account_type = ? WHERE auth_ID = ?";
+      "UPDATE candidate SET lastname = ?, firstname = ?, birthdate = ? WHERE ID = ?";
     const updateQuery2 =
-      "UPDATE candidate SET lastname = ?, firstname = ?, birthdate = ?, phone_number = ?, about = ?, picture_url = ? WHERE ID = ?";
+      "UPDATE candidate SET phone_number = ?, about = ?, picture_url = ? WHERE ID = ?";
     const updateQuery3 =
       "UPDATE address SET street_number = ?, street_type = ?, street_name = ?, city = ?, postal_code = ?, department = ?, region = ?, country = ? WHERE candidate_ID = ?";
 
     try {
       const { candidateID } = candidate;
-      const { authID } = candidate;
 
       await this.database.query(updateQuery1, [
-        candidate.registerEmail,
-        candidate.hashedPassword,
-        candidate.accountType,
-        authID,
-      ]);
-
-      await this.database.query(updateQuery2, [
         candidate.lastname,
         candidate.firstname,
         candidate.birthdate,
+        candidateID,
+      ]);
+
+      await this.database.query(updateQuery2, [
         candidate.phoneNumber,
         candidate.about,
         candidate.pictureUrl,
@@ -138,27 +134,17 @@ class CandidateManager extends AbstractManager {
   // delete a candidate
 
   async deleteCandidate(candidateID) {
-    const deleteQuery1 = "DELETE FROM address WHERE candidate_ID = ?";
-    const deleteQuery2 = "DELETE FROM candidate WHERE ID = ?";
-    const deleteQuery3 = "DELETE FROM auth WHERE auth_ID = ?";
-
     try {
-      // Assume you have candidateID from somewhere.
       const authIDQuery = "SELECT auth_ID FROM candidate WHERE ID = ?";
-      const [authIDResult] = await this.database.query(authIDQuery, [
-        candidateID,
+      const [result1] = await this.database.query(authIDQuery, [candidateID]);
+
+      const deleteCandidateQuery = "DELETE FROM candidate WHERE ID = ?";
+      const deleteAuthQuery = "DELETE FROM auth WHERE ID = ?";
+      await this.database.query(deleteCandidateQuery, [candidateID]);
+      const result2 = await this.database.query(deleteAuthQuery, [
+        result1[0].auth_ID,
       ]);
-
-      if (authIDResult.length === 0) {
-        // Candidat non trouvé
-        throw new Error("Le candidat n'existe pas dans la base de données.");
-      }
-
-      const authID = authIDResult[0].auth_ID;
-
-      await this.database.query(deleteQuery1, [candidateID]);
-      await this.database.query(deleteQuery2, [candidateID]);
-      await this.database.query(deleteQuery3, [authID]);
+      return result2;
     } catch (err) {
       console.error(err);
       throw err;

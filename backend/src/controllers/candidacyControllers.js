@@ -28,13 +28,25 @@ const read = (req, res) => {
     });
 };
 
+const create = (req, res) => {
+  models.candidacy
+    .createCandidacy()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const edit = (req, res) => {
   const candidacy = req.body;
 
   candidacy.id = parseInt(req.params.id, 10);
 
   models.candidacy
-    .update(candidacy)
+    .updateCandidacy(candidacy)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -70,6 +82,7 @@ const destroy = (req, res) => {
 module.exports = {
   browse,
   read,
+  create,
   edit,
   destroy,
 };
