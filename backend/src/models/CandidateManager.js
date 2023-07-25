@@ -28,7 +28,7 @@ class CandidateManager extends AbstractManager {
 
   async updateCandidate(candidate) {
     const updateQuery1 =
-      "UPDATE auth SET register_email = ?, password = ? WHERE auth_ID = ?";
+      "UPDATE candidate SET lastname = ?, firstname = ?, birthdate = ? WHERE ID = ?";
     const updateQuery2 =
       "UPDATE candidate SET phone_number = ?, about = ?, picture_url = ? WHERE ID = ?";
     const updateQuery3 =
@@ -36,12 +36,12 @@ class CandidateManager extends AbstractManager {
 
     try {
       const { candidateID } = candidate;
-      const { authID } = candidate;
 
       await this.database.query(updateQuery1, [
-        candidate.registerEmail,
-        candidate.hashedPassword,
-        authID,
+        candidate.lastname,
+        candidate.firstname,
+        candidate.birthdate,
+        candidateID,
       ]);
 
       await this.database.query(updateQuery2, [
