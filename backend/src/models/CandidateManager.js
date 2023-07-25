@@ -26,47 +26,49 @@ class CandidateManager extends AbstractManager {
   }
   // update candidate information
 
-  async update(candidateId, updatedData) {
+  async updateCandidate(candidate) {
+    const updateQuery1 =
+      "UPDATE auth SET register_email = ?, password = ?, account_type = ? WHERE auth_ID = ?";
+    const updateQuery2 =
+      "UPDATE candidate SET lastname = ?, firstname = ?, birthdate = ?, phone_number = ?, about = ?, picture_url = ? WHERE ID = ?";
+    const updateQuery3 =
+      "UPDATE address SET street_number = ?, street_type = ?, street_name = ?, city = ?, postal_code = ?, department = ?, region = ?, country = ? WHERE candidate_ID = ?";
+
     try {
-      await this.database.beginTransaction();
+      const { candidateID } = candidate;
+      const { authID } = candidate;
 
-      const updateCandidateQuery = `
-        UPDATE candidates
-        SET lastname = ?, firstname = ?, birthdate = ?, phoneNumber = ?
-        WHERE ID = ?`;
+      await this.database.query(updateQuery1, [
+        candidate.registerEmail,
+        candidate.hashedPassword,
+        candidate.accountType,
+        authID,
+      ]);
 
-      const updateAddressQuery = `
-        UPDATE address
-        SET street_number = ?, street_type = ?, street_name = ?, city = ?, postal_code = ?, department = ?, region = ?, country = ?
-        WHERE candidate_ID = ?`;
+      await this.database.query(updateQuery2, [
+        candidate.lastname,
+        candidate.firstname,
+        candidate.birthdate,
+        candidate.phoneNumber,
+        candidate.about,
+        candidate.pictureUrl,
+        candidateID,
+      ]);
 
-      const candidateParams = [
-        updatedData.lastname,
-        updatedData.firstname,
-        updatedData.birthdate,
-        updatedData.phoneNumber,
-        candidateId,
-      ];
-
-      const addressParams = [
-        updatedData.street_number,
-        updatedData.street_type,
-        updatedData.street_name,
-        updatedData.city,
-        updatedData.postal_code,
-        updatedData.department,
-        updatedData.region,
-        updatedData.country,
-        candidateId,
-      ];
-
-      await this.database.query(updateCandidateQuery, candidateParams);
-      await this.database.query(updateAddressQuery, addressParams);
-
-      await this.database.commit();
-    } catch (error) {
-      await this.database.rollback();
-      throw error;
+      await this.database.query(updateQuery3, [
+        candidate.streetNumber,
+        candidate.streetType,
+        candidate.streetName,
+        candidate.city,
+        candidate.postalCode,
+        candidate.department,
+        candidate.region,
+        candidate.country,
+        candidateID,
+      ]);
+    } catch (err) {
+      console.error(err);
+      throw err;
     }
   }
 
@@ -135,12 +137,32 @@ class CandidateManager extends AbstractManager {
 
   // delete a candidate
 
-  delete(id) {
-    return this.database.query(
-      `
-      DELETE FROM ${this.table} WHERE id = ?`,
-      [id]
-    );
+  async deleteCandidate(candidateID) {
+    const deleteQuery1 = "DELETE FROM address WHERE candidate_ID = ?";
+    const deleteQuery2 = "DELETE FROM candidate WHERE ID = ?";
+    const deleteQuery3 = "DELETE FROM auth WHERE auth_ID = ?";
+
+    try {
+      // Assume you have candidateID from somewhere.
+      const authIDQuery = "SELECT auth_ID FROM candidate WHERE ID = ?";
+      const [authIDResult] = await this.database.query(authIDQuery, [
+        candidateID,
+      ]);
+
+      if (authIDResult.length === 0) {
+        // Candidat non trouvé
+        throw new Error("Le candidat n'existe pas dans la base de données.");
+      }
+
+      const authID = authIDResult[0].auth_ID;
+
+      await this.database.query(deleteQuery1, [candidateID]);
+      await this.database.query(deleteQuery2, [candidateID]);
+      await this.database.query(deleteQuery3, [authID]);
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   }
 }
 

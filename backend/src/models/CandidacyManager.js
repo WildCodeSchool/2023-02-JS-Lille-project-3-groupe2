@@ -19,6 +19,16 @@ class CandidacyManager extends AbstractManager {
     ]);
   }
 
+  getCandidaciesByCandidateId(candidateId) {
+    return this.database.query(
+      `SELECT *
+    FROM candidacy
+    WHERE candidate_ID = ?;
+    `,
+      [candidateId]
+    );
+  }
+
   // update a candidacy
 
   update(candidacy) {

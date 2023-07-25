@@ -26,12 +26,12 @@ router.get("/candidate/:id", candidateControllers.read);
 router.get("/candidate/:id/bookmarks", candidateControllers.getAllMyBookmarks);
 router.post("candidate/:id/bookmarks", bookmarksController.create);
 router.delete("candidate/:id/bookmarks", bookmarksController.destroy);
-router.get("/enterprise", enterpriseControllers.browse);
-/* router.put(
-  "/candidate/:id",
-  hashedCandidatePassword,
+router.put(
+  "candidate/:id",
+  hashedCandidatePassword.hashCandidatePassword,
   candidateControllers.edit
-); */
+);
+router.get("/enterprise", enterpriseControllers.browse);
 
 router.post(
   "/register",
