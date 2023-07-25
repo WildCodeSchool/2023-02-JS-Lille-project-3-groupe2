@@ -1,0 +1,81 @@
+@import "../../Utils.scss";
+
+.our-job-descriptions {
+  text-align: justify;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+.our-job-descriptions h1 {
+  color: $primary-color-candidate;
+  text-align: center;
+}
+.our-job-descriptions h2 {
+  color: $secondary-color-candidate;
+}
+.our-job-descriptions img {
+  height: 390px;
+  width: 520px;
+}
+.container-job-description {
+  // background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container-img-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.container-img-list-1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.container-img-list-2 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.container-img-list-3 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.data-job {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.data-job h3 {
+  text-align: center;
+  color: $special-color-candidate;
+}
+.data-job-ul {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 980px) {
+  .our-job-descriptions img {
+    height: 300px;
+    width: 300px;
+  }
+  .container-img-list {
+    flex-direction: column-reverse;
+  }
+  .container-img-list-1 {
+    flex-direction: column;
+  }
+  .container-img-list-2 {
+    flex-direction: column-reverse;
+  }
+  .container-img-list-3 {
+    flex-direction: column;
+  }
+}
