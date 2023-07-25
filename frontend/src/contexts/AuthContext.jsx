@@ -7,9 +7,13 @@ const authContext = createContext();
 export function AuthProvider({ children }) {
   const registerUser = async (form) => {
     try {
-      await api.post("/register", form);
+      const result = await api.post("/register", form);
+      return result;
     } catch (error) {
-      console.error(error.response.data.error);
+      if (error.response.data.status === 409) {
+        return "Un compte est déjà lié à cette adresse";
+      }
+      return error;
     }
   };
 
@@ -33,6 +37,16 @@ export function AuthProvider({ children }) {
       phone_number: null,
       picture_url: null,
     },
+    userAddress: {
+      street_number: null,
+      street_type: null,
+      street_name: null,
+      city: null,
+      postal_code: null,
+      department: null,
+      region: null,
+      country: null,
+    },
   });
 
   const verifyToken = async () => {
@@ -42,10 +56,10 @@ export function AuthProvider({ children }) {
         `/auth/${loginResult.data.userInfos.auth_ID}`
       );
       const userAuth = authResult.data;
-      const { userInfos } = loginResult.data;
-      setUser({ userAuth, userInfos });
+      const { userInfos, userAddress } = loginResult.data;
+      setUser({ userAuth, userInfos, userAddress });
       setIsLogin(true);
-      return { userAuth, userInfos };
+      return { userAuth, userInfos, userAddress };
     } catch (error) {
       return error;
     }
@@ -57,10 +71,11 @@ export function AuthProvider({ children }) {
         email,
         password,
       });
-      const { userAuth, userInfos } = result.data;
-      setUser({ userAuth, userInfos });
+      const { userAuth, userInfos, userAddress } = result.data;
+      setUser({ userAuth, userInfos, userAddress });
       setIsLogin(true);
-      return { userAuth, userInfos };
+
+      return { userAuth, userInfos, userAddress };
     } catch (err) {
       console.error(err);
       throw err;
@@ -86,6 +101,16 @@ export function AuthProvider({ children }) {
         lastname: null,
         phone_number: null,
         picture_url: null,
+      },
+      userAddress: {
+        street_number: null,
+        street_type: null,
+        street_name: null,
+        city: null,
+        postal_code: null,
+        department: null,
+        region: null,
+        country: null,
       },
     });
     await api.get("/logout");

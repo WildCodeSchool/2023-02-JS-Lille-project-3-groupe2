@@ -36,13 +36,18 @@ const verifyPassword = async (req, res, next) => {
       delete req.body.password;
       delete req.user.password;
       if (req.user.account_type.toLowerCase() === "candidat") {
-        const [candidate] = await models.candidate.findCandidateByAccountId(
+        const [[candidate]] = await models.candidate.findCandidateByAccountId(
           req.user.ID
         );
-        if (candidate[0] == null) {
+        const [[address]] = await models.address.findByCandidateId(
+          candidate.ID
+        );
+
+        if (candidate == null || address == null) {
           res.sendStatus(404);
         } else {
-          [req.userInfos] = candidate;
+          req.userInfos = candidate;
+          req.userAddress = address;
           /* res.json({ user: req.user, account: candidate }); */
           next();
         }
@@ -81,7 +86,8 @@ const verifyToken = async (req, res, next) => {
         const [[user]] = await models.candidate.findCandidateByAccountId(
           token.account_ID
         );
-        res.json({ userAuth: token, userInfos: user });
+        const [[address]] = await models.address.findByCandidateId(user.ID);
+        res.json({ userAuth: token, userInfos: user, userAddress: address });
       } else if (token.role === "entreprise") {
         const [user] = await models.enterprise.findEnterpriseByAccountId(
           token.account_ID
@@ -127,9 +133,11 @@ const sendToken = async (req, res) => {
       maxAge: 120 * 60 * 1000,
       httpOnly: true,
     });
+
     res.json({
       userInfos: req.userInfos,
       userAuth: req.user,
+      userAddress: req.userAddress,
     });
   } catch (err) {
     console.error(err);

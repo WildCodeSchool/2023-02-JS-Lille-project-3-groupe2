@@ -1,8 +1,8 @@
 const AbstractManager = require("./AbstractManager");
 
-class AdressManager extends AbstractManager {
+class AddressManager extends AbstractManager {
   constructor() {
-    super({ table: "adress" });
+    super({ table: "address" });
   }
 
   findAll() {
@@ -15,20 +15,27 @@ class AdressManager extends AbstractManager {
     ]);
   }
 
-  update(adress) {
+  findByCandidateId(id) {
+    return this.database.query(
+      `SELECT * FROM ${this.table} WHERE candidate_ID = ?`,
+      [id]
+    );
+  }
+
+  update(address) {
     return this.database.query(
       `
       UPDATE ${this.table} SET street_number = ?, street_type = ?, street_name = ?, city = ?, postal_code = ?, department = ?, region = ?, country = ? WHERE id = ?`,
       [
-        adress.street_number,
-        adress.street_type,
-        adress.street_name,
-        adress.city,
-        adress.postal_code,
-        adress.department,
-        adress.region,
-        adress.country,
-        adress.id,
+        address.street_number,
+        address.street_type,
+        address.street_name,
+        address.city,
+        address.postal_code,
+        address.department,
+        address.region,
+        address.country,
+        address.id,
       ]
     );
   }
@@ -42,4 +49,4 @@ class AdressManager extends AbstractManager {
   }
 }
 
-module.exports = AdressManager;
+module.exports = AddressManager;
