@@ -20,7 +20,7 @@ export default function LoginForm() {
     setError({ email: "", password: "" });
     try {
       await login(accountToSend.email, accountToSend.password);
-      navigate("/candidate");
+      navigate("/");
     } catch (err) {
       console.error(err);
       if (err.response) {

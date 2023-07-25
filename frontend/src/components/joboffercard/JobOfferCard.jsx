@@ -17,7 +17,7 @@ export default function JobOfferCard({
 }) {
   const navigate = useNavigate();
   const showDetails = () => {
-    navigate("/preview");
+    navigate("/preview/1");
   };
   return (
     <motion.button
