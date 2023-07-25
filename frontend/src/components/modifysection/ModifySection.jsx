@@ -1,71 +1,143 @@
 import PropTypes from "prop-types";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import "./ModifySection.scss";
 
 export default function ModifySection({ onBackButtonClick }) {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  // console.log("🚀 ~ file: ModifySection.jsx:8 ~ ModifySection ~ user:", user);
+
+  const { ID } = user.userInfos;
 
   // Récupérer et mettre à jour les values du context
 
   // Récupérer les infos
   const [email, setEmail] = useState(user.userAuth.register_email);
   const [firstname, setFirstname] = useState(user.userInfos.firstname);
+  // console.log("🚀 ~ file: ModifySection.jsx:18 ~ ModifySection ~ firstname:", firstname)
   const [lastname, setLastname] = useState(user.userInfos.lastname);
+  // console.log("🚀 ~ file: ModifySection.jsx:20 ~ ModifySection ~ lastname:", lastname)
   const [birthdate, setBirthdate] = useState(user.userInfos.birthdate);
   const [phoneNumber, setPhoneNumber] = useState(user.userInfos.phone_number);
+  const [city, setCity] = useState(user.userAddress.city);
+  const [department, setDepartment] = useState(user.userAddress.department);
+  const [postalcode, setPostalcode] = useState(user.userAddress.postal_code);
+  const [region, setRegion] = useState(user.userAddress.region);
+  const [streetname, setStreetname] = useState(user.userAddress.street_name);
+  const [streettype, setStreettype] = useState(user.userAddress.street_type);
+  const [streetnumber, setStreetnumber] = useState(
+    user.userAddress.street_number
+  );
+  const [country, setCountry] = useState(user.userAddress.country);
 
   // Les afficher dans les input au chargement du composant
-  useEffect(() => {
-    setEmail(user.userAuth.register_email);
-    setFirstname(user.userInfos.firstname);
-    setLastname(user.userInfos.lastname);
-    setBirthdate(user.userInfos.birthdate);
-    setPhoneNumber(user.userInfos.phone_number);
-  }, [user]);
+  // useEffect(() => {
+  //   setEmail(user.userAuth.register_email);
+  //   setFirstname(user.userInfos.firstname);
+  //   setLastname(user.userInfos.lastname);
+  //   setBirthdate(user.userInfos.birthdate);
+  //   setPhoneNumber(user.userInfos.phone_number);
+  //   setDepartment(user.userAddress.department);
+  //   setPostalcode(user.userAddress.postal_code);
+  //   setRegion(user.userAddress.region);
+  //   setStreetname(user.userAddress.street_name);
+  //   setStreettype(user.userAddress.street_type);
+  //   setStreetnumber(user.userAddress.street_number);
+  //   setCountry(user.userAddress.country);
+  // }, [user]);
 
   // Mettre à jour les valeurs
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
-
   const handleFirstnameChange = (event) => {
     setFirstname(event.target.value);
   };
-
   const handleLastnameChange = (event) => {
     setLastname(event.target.value);
   };
-
   const handleBirthdateChange = (event) => {
     setBirthdate(event.target.value);
   };
-
   const handlePhoneChange = (event) => {
     setPhoneNumber(event.target.value);
   };
+  const handleCityChange = (event) => {
+    setCity(event.target.value);
+  };
+  const handleCountryChange = (event) => {
+    setCountry(event.target.value);
+  };
+  const handleDepartmentChange = (event) => {
+    setDepartment(event.target.value);
+  };
+  const handlePostalcodeChange = (event) => {
+    setPostalcode(event.target.value);
+  };
+  const handleRegionChange = (event) => {
+    setRegion(event.target.value);
+  };
+  const handleStreetnameChange = (event) => {
+    setStreetname(event.target.value);
+  };
+  const handleStreetnumberChange = (event) => {
+    setStreetnumber(event.target.value);
+  };
+  const handleStreettypeChange = (event) => {
+    setStreettype(event.target.value);
+  };
+  let updatedUser = {};
 
+  const update = async () => {
+    await axios.put(
+      `${import.meta.env.VITE_BACKEND_URL}/candidate/${ID}`,
+      updatedUser
+    );
+    setUser(updatedUser);
+  };
+  useEffect(() => {
+    if (updatedUser.length > 0) {
+      update();
+    }
+  }, [updatedUser]);
   // Envoyer les infos update en base de données
-
-  // const saveChanges = async () => {
-  //   try {
-  //     const updatedUser = {
-  //       ...user,
-  //       userInfos: {
-  //         ...user.userInfos,
-  //         firstname: firstname,
-  //         lastname: lastname,
-  //         register_email: email,
-
-  //       },
-  //     };
-
-  //     await axios.put("/user", updatedUser);
-  //     setUser(updatedUser);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const saveChanges = async () => {
+    try {
+      updatedUser = {
+        ...user,
+        // userAuth: {
+        //   ...user.userAuth,
+        //   ID,
+        //   account_type: account_type,
+        //   active: active,
+        //   creation_date: creation_date,
+        //   password: password,
+        //   register_email: register_email,
+        // },
+        userInfos: {
+          ...user.userInfos,
+          lastname,
+          firstname,
+          birthdate,
+          phone_number: phoneNumber,
+        },
+        userAdress: {
+          ...user.userAdress,
+          street_number: streetnumber,
+          street_type: streettype,
+          street_name: streetname,
+          city,
+          postal_code: postalcode,
+          department,
+          region,
+          country,
+        },
+      };
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const [selectedSection, setSelectedSection] = useState("");
 
@@ -73,9 +145,9 @@ export default function ModifySection({ onBackButtonClick }) {
     setSelectedSection(event.target.value);
   };
 
-  const handleSubmitModify = (e) => {
-    e.preventDefault();
-  };
+  // const handleSubmitModify = (e) => {
+  //   e.preventDefault();
+  // };
 
   const sectionContents = {
     "Vos Identifiants": (
@@ -156,23 +228,71 @@ export default function ModifySection({ onBackButtonClick }) {
         <div className="container-address-all">
           <div className="left-container-address">
             <label htmlFor="numberway">N° de voirie :</label>
-            <input id="numberway" type="number" placeholder="32 ..." />
+            <input
+              id="numberway"
+              type="number"
+              value={streetnumber}
+              onChange={handleStreetnumberChange}
+              placeholder="32 ..."
+            />
             <label htmlFor="typeway">Type de voirie :</label>
-            <input id="typeway" type="text" placeholder="Rue / Boulevard ..." />
+            <input
+              id="typeway"
+              type="text"
+              value={streettype}
+              onChange={handleStreettypeChange}
+              placeholder="Rue / Boulevard ..."
+            />
             <label htmlFor="nameway">Nom de voirie :</label>
-            <input id="nameway" type="text" placeholder="De la mouette ..." />
+            <input
+              id="nameway"
+              type="text"
+              value={streetname}
+              onChange={handleStreetnameChange}
+              placeholder="De la mouette ..."
+            />
             <label htmlFor="postalcode">Code Postal :</label>
-            <input id="postalcode" type="number" placeholder="59000 ..." />
+            <input
+              id="postalcode"
+              type="number"
+              value={postalcode}
+              onClick={handlePostalcodeChange}
+              placeholder="59000 ..."
+            />
           </div>
           <div className="right-container-address">
             <label htmlFor="city">Ville :</label>
-            <input id="city" type="text" placeholder="Lille ..." />
+            <input
+              id="city"
+              type="text"
+              value={city}
+              onChange={handleCityChange}
+              placeholder="Lille ..."
+            />
             <label htmlFor="region">Région :</label>
-            <input id="region" type="text" placeholder="Haut-de-France ..." />
+            <input
+              id="region"
+              type="text"
+              value={region}
+              onChange={handleRegionChange}
+              placeholder="Haut-de-France ..."
+            />
             <label htmlFor="department">Département :</label>
-            <input id="department" type="text" placeholder="Nord ..." />
+            <input
+              id="department"
+              type="text"
+              value={department}
+              onChange={handleDepartmentChange}
+              placeholder="Nord ..."
+            />
             <label htmlFor="country">Pays :</label>
-            <input id="country" type="text" placeholder="France ..." />
+            <input
+              id="country"
+              type="text"
+              value={country}
+              onChange={handleCountryChange}
+              placeholder="France ..."
+            />
           </div>
         </div>
       </div>
@@ -205,11 +325,7 @@ export default function ModifySection({ onBackButtonClick }) {
         >
           Retour
         </button>
-        <button
-          className="btn-modify"
-          type="submit"
-          onClick={handleSubmitModify}
-        >
+        <button className="btn-modify" type="submit" onClick={saveChanges}>
           Enregistrer
         </button>
       </div>
