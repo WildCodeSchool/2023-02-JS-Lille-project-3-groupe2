@@ -24,7 +24,7 @@ WHERE b.candidate_ID = ?;
 `;
 
     try {
-      const [rows] = await this.database.query(query, [candidateId]);
+      const rows = await this.database.query(query, [candidateId]);
       return rows;
     } catch (err) {
       console.error(err);
