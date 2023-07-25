@@ -22,7 +22,7 @@ router.get("/auth/:id", authController.read);
 router.get("/offer", offerControllers.browse);
 router.get("/offer/:id", offerControllers.read);
 router.get("/candidate/:id/candidacy", candidacyControllers.read);
-router.get("/candidate/:id/bookmark", bookmarksControllers.read);
+router.get("/candidate/:id/bookmarks", bookmarksControllers.read);
 router.get("/candidate", candidateControllers.browse);
 router.get("/candidate/:id", candidateControllers.read);
 router.put("/offer/:id", offerControllers.edit);

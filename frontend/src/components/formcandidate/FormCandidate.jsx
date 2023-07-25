@@ -102,7 +102,7 @@ export default function FormCandidate() {
                 placeholder="Confirmer votre mot de passe ..."
               />
               {!passwordMatch && passwordMatch !== false && (
-                <span style={{ visibility: "hidden" }}>e</span>
+                <span style={{ visibility: "hidden" }}>null</span>
               )}
               {passwordMatch === false && (
                 <span style={{ color: "red" }}>

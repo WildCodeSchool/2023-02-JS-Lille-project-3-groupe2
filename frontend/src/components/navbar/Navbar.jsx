@@ -26,6 +26,10 @@ export default function Navbar() {
             </li>
             <li>
               {" "}
+              <Link to="/candidate/profile">Mon profil</Link>
+            </li>
+            <li>
+              {" "}
               <Link to="/candidate/about">À propos</Link>
             </li>
             <li>

@@ -70,22 +70,6 @@ class CandidateManager extends AbstractManager {
 
   // get all bookmarks for a candidate
 
-  async getBookmarks(candidateId) {
-    try {
-      const query = `
-      SELECT o.ID, o.title, o.descriptions, o.offer_date
-      FROM externatic.offer o
-      INNER JOIN externatic.bookmarks b ON o.ID = b.offer_ID
-      WHERE b.candidate_ID = ? `;
-
-      const results = await this.database.query(query, [candidateId]);
-      return results;
-    } catch (error) {
-      await this.database.rollback();
-      throw error;
-    }
-  }
-
   async add(candidate) {
     const query1 =
       "INSERT INTO auth (register_email, password, account_type) VALUES ( ?, ?, ?)";
