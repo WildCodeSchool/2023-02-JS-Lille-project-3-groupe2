@@ -7,7 +7,7 @@ import iconLinkedin from "../../assets/iconLinkedin.png";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function LoginForm() {
-  const { login } = useAuth();
+  const { login, setIsLogin } = useAuth();
   const [accountToSend, setAccountToSend] = useState({
     email: "",
     password: "",
@@ -21,7 +21,9 @@ export default function LoginForm() {
     setError({ email: "", password: "" });
     try {
       await login(accountToSend.email, accountToSend.password);
+
       navigate("/");
+      setIsLogin(true);
       Swal.fire({
         position: "top-end",
         icon: "success",
