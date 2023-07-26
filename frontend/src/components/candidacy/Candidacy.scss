@@ -1,42 +1,64 @@
 @import "../../Utils.scss";
+
 .candidacyGlobalContainer {
-}
 
-.candidacyMainTitle {
-  font-size: 24px;
-  text-align: center;
-}
+  display: flex;
+  flex-direction: column;
 
-/* Added table styles */
-.candidacyTable {
-  width: 100%;
-  border-collapse: separate; /* Use separate border spacing */
-  border-spacing: 0 10px; /* Set the vertical and horizontal spacing */
-  margin-top: 20px;
-}
+  .candidacyTitleContainer {
+    margin: 3rem 0 2rem 0;
+    text-align: center;
 
-.candidacyTable th,
-.candidacyTable td {
-  border: 1px solid #000;
-  padding: 10px;
-  text-align: center;
-}
+    .candidacyMainTitle {
+      font-size: clamp(1.25rem, 1.5vw, 1.8rem);
+      font-weight: bold;
+    }
+  }
 
-.candidacyTable th {
-  background-color: #f0f0f0;
-  &:nth-of-type(1) {
-    width: 20%;
+  /* Added table styles */
+  .candidacyTable {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid $special-color-candidate;
+    border-collapse: separate;
+    /* Use separate border spacing */
+    border-spacing: 0 10px;
+    /* Set the vertical and horizontal spacing */
+    margin-top: 2rem;
   }
-  &:nth-of-type(2) {
-    width: 40%;
+
+  .candidacyTable th,
+  .candidacyTable td {
+    padding: 0.7rem;
+    text-align: center;
   }
-  &:nth-of-type(3) {
-    width: 15%;
-  }
-  &:nth-of-type(4) {
-    width: 15%;
-  }
-  &:nth-of-type(5) {
-    width: 10%;
+
+  .candidacyTable th {
+    color: $primary-color-candidate;
+    border-bottom: solid 1px $secondary-color-candidate;
+
+    &:nth-of-type(1) {
+      width: 20%;
+    }
+
+    &:nth-of-type(2) {
+      width: 40%;
+    }
+
+    &:nth-of-type(3) {
+      width: 15%;
+    }
+
+    &:nth-of-type(4) {
+      width: 15%;
+    }
+
+    &:nth-of-type(5) {
+      width: 10%;
+    }
   }
 }
