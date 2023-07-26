@@ -6,6 +6,7 @@
   .title-values-mobile {
     color: $secondary-color-enterprise;
   }
+
   .title-values-desktop {
     color: $primary-color-enterprise;
   }
@@ -36,7 +37,10 @@
   flex-direction: row;
   color: $secondary-color-candidate;
   align-content: center;
+
   h2 {
+    font-size: clamp(1.25rem, 1.5vw, 1.8rem);
+    font-weight: bold;
     margin: 0 1rem 1rem 0;
   }
 }
@@ -48,16 +52,18 @@
 }
 
 .presentation-text-mobile {
+
+  .p-mobile {
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    font-weight: normal;
+    margin-bottom: 5rem;
+    line-height: 1.5rem;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
 }
-.p-mobile {
-  font-size: 1.3rem;
-  // letter-spacing: 0.1rem;
-  margin-bottom: 5rem;
-  line-height: 1.5rem;
-  text-align: justify;
-  text-justify: inter-word;
-  hyphens: auto;
-}
+
 //media query and CSS for DESKTOP
 
 .container-values-desktop {
@@ -93,7 +99,8 @@
 
   h2 {
     margin: 1rem;
-    font-size: 2rem;
+    font-size: clamp(1.25rem, 1.5vw, 1.8rem);
+    font-weight: bold;
   }
 }
 
@@ -116,9 +123,9 @@
 }
 
 .p-desktop {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
+  font-weight: normal;
   margin: 1rem 2rem 2rem 2rem;
-  // letter-spacing: 0.1rem;
   line-height: 1.9rem;
   text-align: justify;
   text-justify: inter-word;

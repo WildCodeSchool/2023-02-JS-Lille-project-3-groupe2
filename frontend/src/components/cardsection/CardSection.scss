@@ -2,7 +2,7 @@
 
 .card-section-profil {
   display: flex;
-  width: 90vw;
+  width: 80vw;
   gap: 5vw;
   padding: 3rem;
   background: rgba(255, 255, 255, 0.2);
@@ -20,10 +20,13 @@
     width: 50%;
 
     h1 {
-      font-size: xx-large;
+      font-size: clamp(1.5rem, 2.2vw, 2.5rem);
+      font-weight: bolder;
       margin-bottom: 3rem;
+
       span {
-        font-size: xx-large;
+        font-size: clamp(1.5rem, 2.2vw, 2.5rem);
+        font-weight: bolder;
         color: $primary-color-candidate;
       }
     }
@@ -38,7 +41,8 @@
     }
 
     p {
-      font-size: larger;
+      font-size: clamp(1rem, 1.4vw, 1.4rem);
+      font-weight: normal;
     }
   }
 
@@ -50,7 +54,8 @@
     width: 55%;
 
     h1 {
-      font-size: xx-large;
+      font-size: clamp(1.5rem, 2.2vw, 2.5rem);
+      font-weight: bolder;
       color: $primary-color-candidate;
       margin-bottom: 1rem;
     }
@@ -58,7 +63,8 @@
     .container-global-information {
       .name-information {
         h2 {
-          font-size: x-large;
+          font-size: clamp(1.25rem, 1.5vw, 1.8rem);
+          font-weight: bold;
           color: $secondary-color-candidate;
           margin-bottom: 1.5rem;
         }
@@ -68,12 +74,14 @@
         margin-bottom: 1.5rem;
 
         h2 {
-          font-size: x-large;
+          font-size: clamp(1.25rem, 1.5vw, 1.8rem);
+          font-weight: bold;
           margin-bottom: 1rem;
         }
 
         p {
-          font-size: larger;
+          font-size: clamp(1rem, 1.4vw, 1.4rem);
+          font-weight: normal;
         }
       }
     }

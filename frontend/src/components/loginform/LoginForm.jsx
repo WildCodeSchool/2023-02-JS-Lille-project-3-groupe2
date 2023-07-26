@@ -104,7 +104,7 @@ export default function LoginForm() {
               className="btn-validate-login"
               disabled={loading}
             >
-              {loading ? "Chargement..." : "VALIDER"}
+              {loading ? "Chargement..." : "Valider"}
             </button>
           </div>
         </div>

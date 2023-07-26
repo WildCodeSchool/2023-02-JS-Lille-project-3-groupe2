@@ -6,9 +6,11 @@
   margin: 0;
   line-height: 1.2;
 }
+
 a {
   text-decoration: none;
 }
+
 button {
   font-size: clamp(1rem, 1.4vw, 1.4rem);
   font-weight: normal;
@@ -16,10 +18,12 @@ button {
   border-radius: 0.5rem;
   cursor: pointer;
 }
+
 p {
   font-size: clamp(1rem, 1.4vw, 1.4rem);
   font-weight: normal;
 }
+
 h1 {
   font-size: clamp(1.5rem, 2.2vw, 2.5rem);
   font-weight: bolder;
@@ -29,10 +33,17 @@ h1 {
     font-weight: bolder;
   }
 }
+
 h2 {
   font-size: clamp(1.25rem, 1.5vw, 1.8rem);
   font-weight: bold;
+
+  span {
+    font-size: clamp(1.25rem, 1.5vw, 1.8rem);
+    font-weight: bold;
+  }
 }
+
 $primary-color-candidate: #611959;
 $secondary-color-candidate: #922685;
 $special-color-candidate: #b22ea3;
@@ -49,9 +60,11 @@ $antique-white: rgb(253, 249, 243);
 @mixin title {
   font-weight: 900;
 }
+
 @mixin under_title {
   font-weight: 600;
 }
+
 @mixin text {
   font-weight: 500;
 }
