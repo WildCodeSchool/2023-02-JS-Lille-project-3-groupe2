@@ -56,4 +56,14 @@
       width: 10%;
     }
   }
+
+  .bookmarkTable button {
+    background: none;
+    border: none;
+    color: $primary-color-candidate;
+
+    &:hover {
+      color: $special-color-candidate;
+    }
+  }
 }

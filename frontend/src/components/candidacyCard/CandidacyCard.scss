@@ -1,7 +1,6 @@
 @import "../../Utils.scss";
 
 .candidacyCardGlboalContainer {
-  
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,19 +10,18 @@
   margin-bottom: 1em;
   height: 3em;
   @include shadow;
-  
-} 
-.candidacyCardSecondTitle{
+}
+.candidacyCardSecondTitle {
   width: 33%;
   text-align: center;
 }
 
-.candidacyCardApplicationDate{
+.candidacyCardApplicationDate {
   width: 33%;
   text-align: center;
 }
 
-.candidacyCardStatus{
+.candidacyCardStatus {
   width: 33%;
   text-align: center;
 }

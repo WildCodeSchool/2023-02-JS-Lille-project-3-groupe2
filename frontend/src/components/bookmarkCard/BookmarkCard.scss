@@ -1,7 +1,6 @@
 @import "../../Utils.scss";
 
 .bookmarkCardSubContainer {
-  
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,19 +10,18 @@
   margin-bottom: 1em;
   height: 3em;
   @include shadow;
-  
-} 
-.bookmarkCardSecondTitle{
+}
+.bookmarkCardSecondTitle {
   width: 33%;
   text-align: center;
 }
 
-.bookmarkCardApplicationDate{
+.bookmarkCardApplicationDate {
   width: 33%;
   text-align: center;
 }
 
-.bookmarkCardStatus{
+.bookmarkCardStatus {
   width: 33%;
   text-align: center;
 }

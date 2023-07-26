@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { AiFillEye } from "react-icons/ai";
 import "../../Utils.scss";
 import "./Candidacy.scss";
 import api from "../../services/api";
@@ -52,7 +53,7 @@ export default function Candidacy() {
                   type="button"
                   onClick={() => handleViewDetails(item.candidacyId)}
                 >
-                  View Details
+                  <AiFillEye />
                 </button>
               </td>
             </tr>
