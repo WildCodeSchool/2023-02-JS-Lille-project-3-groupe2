@@ -22,14 +22,7 @@ function Router() {
   const { verifyToken } = useAuth();
   React.useEffect(() => {
     (async () => {
-      try {
-        const result = await verifyToken();
-        if (result.response.status === 404) {
-          return;
-        }
-      } catch (error) {
-        console.error(error);
-      }
+      await verifyToken();
     })();
   }, []);
 

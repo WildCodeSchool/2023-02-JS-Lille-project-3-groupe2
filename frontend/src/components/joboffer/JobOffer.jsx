@@ -43,7 +43,7 @@ export default function JobOffer() {
           })
           .map((item) => (
             <motion.button
-              key={item.trade_name}
+              key={item.ID}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => showDetails(item.ID)}

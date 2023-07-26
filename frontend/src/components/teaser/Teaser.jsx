@@ -3,7 +3,7 @@ import Select from "react-select";
 import { BsSearch } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import career from "../../assets/career.svg";
 import api from "../../services/api";
 
@@ -14,47 +14,53 @@ export default function Teaser() {
   const placeOptions = options.place;
 
   const getOptions = async () => {
-    const result = await axios.get(api.get("/offer"));
-    const cityArray = result.data.map((item) => ({
-      value: item.city,
-      label: item.city,
-    }));
-    const regionArray = result.data.map((item) => ({
-      value: item.region,
-      label: item.region,
-    }));
-    const postalCodeArray = result.data.map((item) => ({
-      value: item.postal_code,
-      label: item.postal_code,
-    }));
-    const departmentArray = result.data.map((item) => ({
-      value: item.department,
-      label: item.department,
-    }));
-    const typeArray = result.data.map((item) => ({
-      value: item.title,
-      label: item.title,
-    }));
+    try {
+      const result = await api.get("/offer");
+      const cityArray = result.data.map((item) => ({
+        value: item.city,
+        label: item.city,
+      }));
+      const regionArray = result.data.map((item) => ({
+        value: item.region,
+        label: item.region,
+      }));
+      const postalCodeArray = result.data.map((item) => ({
+        value: item.postal_code,
+        label: item.postal_code,
+      }));
+      const departmentArray = result.data.map((item) => ({
+        value: item.department,
+        label: item.department,
+      }));
+      const typeArray = result.data.map((item) => ({
+        value: item.title,
+        label: item.title,
+      }));
 
-    const placeSet = new Set(
-      [
-        ...cityArray,
-        ...regionArray,
-        ...postalCodeArray,
-        ...departmentArray,
-      ].map(JSON.stringify)
-    );
-    const uniquePlaceArray = Array.from(placeSet).map(JSON.parse);
+      const placeSet = new Set(
+        [
+          ...cityArray,
+          ...regionArray,
+          ...postalCodeArray,
+          ...departmentArray,
+        ].map(JSON.stringify)
+      );
+      const uniquePlaceArray = Array.from(placeSet).map(JSON.parse);
 
-    const unique = {
-      place: uniquePlaceArray,
-      type: [...new Set(typeArray)],
-    };
-    setOptions((prev) => ({
-      ...prev,
-      type: unique.type,
-      place: unique.place,
-    }));
+      const unique = {
+        place: uniquePlaceArray,
+        type: [...new Set(typeArray)],
+      };
+      setOptions((prev) => ({
+        ...prev,
+        type: unique.type,
+        place: unique.place,
+      }));
+
+      return options;
+    } catch (error) {
+      return error;
+    }
   };
 
   useEffect(() => {
@@ -103,16 +109,12 @@ export default function Teaser() {
               />
             </div>
             <div className="buttonOffer">
-              {" "}
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                {" "}
-                <button type="button">
-                  Rechercher
-                  <BsSearch />
-                </button>
+                Rechercher
+                <BsSearch />
               </motion.button>
             </div>
           </div>
