@@ -54,20 +54,16 @@ router.post(
 );
 
 /// route pour la photo de profile
-router.post(
+router.put(
   "/candidate/:id/picture_url",
   upload.single("picture_url"),
   (req, res) => {
-    // On récupère le nom du fichier original
     const { originalname } = req.file;
-
-    // On récupère le nom du fichier renommé
     const { filename } = req.file;
-
-    // On utilise la fonction rename de fs pour renommer le fichier
+    const newName = `${uuidv4()}-${originalname}`;
     fs.rename(
       `./public/uploads/${filename}`,
-      `./public/uploads/${uuidv4()}-${originalname}`,
+      `./public/uploads/${newName}`,
       (err) => {
         if (err) throw err;
         res.send("File uploaded");
@@ -99,7 +95,6 @@ router.post(
   upload.single("motivation_letter_url"),
   (req, res) => {
     const { originalname } = req.file;
-
     const { filename } = req.file;
 
     fs.rename(

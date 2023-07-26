@@ -5,7 +5,7 @@ const models = require("../models");
 const hashCandidatePassword = async (req, res, next) => {
   const { password } = req.body;
   try {
-    if (password.length) {
+    if (password) {
       // Hash the candidate's password using Argon2id
       const hashedPassword = await argon2.hash(password, {
         type: argon2.argon2id,

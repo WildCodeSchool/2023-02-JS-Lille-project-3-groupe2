@@ -21,7 +21,7 @@ class CandidacyManager extends AbstractManager {
 
   async getCandidaciesByCandidateId(candidateId) {
     const query = `
-    SELECT e.social_denomination AS enterprise_title, c.application_date, c.status, o.title
+    SELECT e.social_denomination AS enterprise_title, c.application_date, c.status, o.title, o.ID as offer_ID
     FROM candidacy c
     JOIN offer o ON c.offer_ID = o.ID
     JOIN enterprise e ON o.enterprise_ID = e.ID

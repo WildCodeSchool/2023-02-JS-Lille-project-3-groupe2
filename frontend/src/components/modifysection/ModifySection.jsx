@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthContext";
 import "./ModifySection.scss";
@@ -40,6 +40,21 @@ export default function ModifySection({ onBackButtonClick }) {
     country: user.userAddress.country,
     address_id: user.userAddress.ID,
   });
+  const pictureRef = useRef();
+
+  const pushAvatar = async () => {
+    try {
+      const formData = new FormData();
+      await formData.append("picture_url", pictureRef.current.files[0]);
+      const response = await api.put(
+        `/candidate/${updateUser.user_id}/picture_url`,
+        formData
+      );
+      console.info(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -54,6 +69,7 @@ export default function ModifySection({ onBackButtonClick }) {
     setShowPassword((prev) => !prev);
   };
   const putUser = async () => {
+    await pushAvatar();
     await api.put(`/candidate/${updateUser.user_id}`, updateUser);
     await setUser((prev) => ({
       ...prev, // Use the existing `prev` object as the starting point
@@ -124,7 +140,7 @@ export default function ModifySection({ onBackButtonClick }) {
         <div className="container-all-profile">
           <div className="left-container-profile">
             <label htmlFor="picture_url">Image de profil :</label>
-            <input id="picture_url" type="file" />
+            <input ref={pictureRef} id="picture_url" type="file" />
             <label htmlFor="lastname">Nom :</label>
             <input
               id="lastname"
