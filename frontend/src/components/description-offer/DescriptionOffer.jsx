@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./DescriptionOffer.scss";
 import { FiMapPin } from "react-icons/fi";
-import { IoSchoolOutline } from "react-icons/io5";
+import { BiDollar } from "react-icons/bi";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 
@@ -49,7 +49,7 @@ export default function DescriptionOffer() {
           </h3>
           <h3>
             <span>
-              <IoSchoolOutline />
+              <BiDollar />
             </span>{" "}
             {jobDescription.min_salary}€ - {jobDescription.max_salary}€{" "}
           </h3>

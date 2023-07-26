@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import { RiDeleteBinFill } from "react-icons/ri";
-import ViewOfferModal from "../modalviewoffer/ViewOfferModal";
 import "../../Utils.scss";
 import "./bookmark.scss";
 import api from "../../services/api";
 
 export default function Bookmark() {
   const [bookmark, setBookmark] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedCandidacy, setSelectedCandidacy] = useState(null);
 
   const getBookmark = async () => {
     try {
@@ -23,14 +20,8 @@ export default function Bookmark() {
     getBookmark();
   }, []);
   const handleViewDetails = (candidacyId) => {
-    setSelectedCandidacy(bookmark);
-    setModalIsOpen(true);
     // Do something when the button is clicked, e.g., show more details for the candidacy with the given ID.
     console.info(`View details for candidacy ID: ${candidacyId}`);
-  };
-
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
   };
 
   return (
@@ -70,12 +61,6 @@ export default function Bookmark() {
           ))}
         </tbody>
       </table>
-      {modalIsOpen && (
-        <ViewOfferModal
-          candidacy={selectedCandidacy}
-          onClose={handleCloseModal}
-        />
-      )}
     </div>
   );
 }
