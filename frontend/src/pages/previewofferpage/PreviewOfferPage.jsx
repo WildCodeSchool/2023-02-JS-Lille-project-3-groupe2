@@ -4,7 +4,7 @@ import DescriptionOffer from "../../components/description-offer/DescriptionOffe
 export default function PreviewOfferPage() {
   return (
     <div className="previewOfferPageContainer">
-      <DescriptionOffer />;
+      <DescriptionOffer />
     </div>
   );
 }
