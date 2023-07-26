@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../../Utils.scss";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import JobOfferCard from "../joboffercard/JobOfferCard";
-
 import "../showmorebtn/ShowMoreBtn.scss";
 import api from "../../services/api";
 import "./JobOffer.scss";
@@ -16,10 +17,17 @@ export default function JobOffer() {
       console.error(error);
     }
   };
+  const navigate = useNavigate();
+  const showDetails = (id) => {
+    navigate(`/preview/${id}`);
+  };
+
   useEffect(() => {
     getJobOffer();
   }, []);
+
   const calculateAverageSalary = (min, max) => (min + max) / 2;
+
   return (
     <div className="AjustJobOfferCardAndBtn">
       <h2>
@@ -34,17 +42,24 @@ export default function JobOffer() {
             return averageB - averageA;
           })
           .map((item) => (
-            <JobOfferCard
-              key={item.nameCompany}
-              image={item.logo_url}
-              nameCompany={item.trade_name
-                .toLowerCase()
-                .replace(/^\w/, (c) => c.toUpperCase())}
-              jobTitle={item.title}
-              city={item.city}
-              salary={`${item.min_salary}€ - ${item.max_salary}€`}
-              date={item.offer_date}
-            />
+            <motion.button
+              key={item.trade_name}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => showDetails(item.ID)}
+            >
+              <JobOfferCard
+                key={item.ID}
+                image={item.logo_url}
+                nameCompany={item.trade_name
+                  .toLowerCase()
+                  .replace(/^\w/, (c) => c.toUpperCase())}
+                jobTitle={item.title}
+                city={item.city}
+                salary={`${item.min_salary}€ - ${item.max_salary}€`}
+                date={item.offer_date}
+              />{" "}
+            </motion.button>
           ))}
       </div>
     </div>
