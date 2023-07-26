@@ -1,7 +1,6 @@
 import "./DescriptionOffer.scss";
 import { FiMapPin } from "react-icons/fi";
 import { IoSchoolOutline } from "react-icons/io5";
-import PropTypes from "prop-types";
 
 export default function DescriptionOffer() {
   return (

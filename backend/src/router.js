@@ -30,7 +30,11 @@ router.put("/candidate/:id/candidacy", candidacyControllers.edit);
 router.post("/candidate/:id/bookmarks", bookmarksControllers.create);
 router.post("/candidate/:id/candicacy", candidacyControllers.create);
 router.delete("/candidate/:id/bookmarks", bookmarksControllers.destroy);
-router.put("/candidate/:id", candidateControllers.edit);
+router.put(
+  "/candidate/:id",
+  hashedCandidatePassword.hashCandidatePassword,
+  candidateControllers.edit
+);
 router.get("/enterprise", enterpriseControllers.browse);
 
 router.delete("/candidate/:id", candidateControllers.destroy);

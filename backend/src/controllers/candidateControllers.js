@@ -69,6 +69,22 @@ const edit = (req, res) => {
     });
 };
 
+const getAllMyBookmarks = (req, res) => {
+  models.candidate
+    .getBookmarks(req.params.id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.send(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const destroy = (req, res) => {
   const candidate = parseInt(req.params.id, 10);
 
@@ -93,4 +109,5 @@ module.exports = {
   edit,
   create,
   destroy,
+  getAllMyBookmarks,
 };

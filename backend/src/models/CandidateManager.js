@@ -28,40 +28,38 @@ class CandidateManager extends AbstractManager {
 
   async updateCandidate(candidate) {
     const updateQuery1 =
-      "UPDATE candidate SET lastname = ?, firstname = ?, birthdate = ? WHERE ID = ?";
-    const updateQuery2 =
-      "UPDATE candidate SET phone_number = ?, about = ?, picture_url = ? WHERE ID = ?";
+      "UPDATE candidate SET lastname = ?, firstname = ?, birthdate = ?, phone_number = ?, about = ?, picture_url = ? WHERE ID = ?";
     const updateQuery3 =
       "UPDATE address SET street_number = ?, street_type = ?, street_name = ?, city = ?, postal_code = ?, department = ?, region = ?, country = ? WHERE candidate_ID = ?";
-
+    const updateQuery2 = "UPDATE auth SET password = ? WHERE ID = ?";
     try {
-      const { candidateID } = candidate;
-
       await this.database.query(updateQuery1, [
         candidate.lastname,
         candidate.firstname,
         candidate.birthdate,
-        candidateID,
-      ]);
-
-      await this.database.query(updateQuery2, [
-        candidate.phoneNumber,
+        candidate.phone_number,
         candidate.about,
-        candidate.pictureUrl,
-        candidateID,
+        candidate.picture_url,
+        candidate.id,
       ]);
-
-      await this.database.query(updateQuery3, [
-        candidate.streetNumber,
-        candidate.streetType,
-        candidate.streetName,
+      if (candidate.hashedPassword && candidate.hashedPassword.length > 0)
+        await this.database.query(updateQuery2, [
+          candidate.hashedPassword,
+          candidate.auth_ID,
+        ]);
+      const resultTwo = await this.database.query(updateQuery3, [
+        candidate.street_number,
+        candidate.street_type,
+        candidate.street_name,
         candidate.city,
-        candidate.postalCode,
+        candidate.postal_code,
         candidate.department,
         candidate.region,
         candidate.country,
-        candidateID,
+        candidate.id,
       ]);
+
+      return resultTwo;
     } catch (err) {
       console.error(err);
       throw err;
