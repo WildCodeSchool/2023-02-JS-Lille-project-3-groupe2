@@ -19,6 +19,7 @@ export default function Bookmark() {
   useEffect(() => {
     getBookmark();
   }, []);
+
   const handleViewDetails = (candidacyId) => {
     // Do something when the button is clicked, e.g., show more details for the candidacy with the given ID.
     console.info(`View details for candidacy ID: ${candidacyId}`);
