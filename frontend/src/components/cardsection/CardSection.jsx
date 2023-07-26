@@ -1,15 +1,27 @@
-import { AiOutlineSmile } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthContext";
 import "./CardSection.scss";
 
 export default function CardSection() {
   const { user } = useAuth();
+  function formatDateToFrench(dateString) {
+    const date = new Date(dateString);
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      timeZoneName: "short",
+    };
+    return date.toLocaleString("fr-FR", options);
+  }
 
   return (
     <div className="card-section-profil">
       <div className="container-left-profil">
         <h1>
-          Bonjour <span>Tessa</span> ! <AiOutlineSmile />
+          Bonjour <span>{user.userInfos.firstname}</span> !
         </h1>
         <div className="picture-profile">
           <img
@@ -24,7 +36,6 @@ export default function CardSection() {
         <div className="title-information">
           <h1>Informations personnelles</h1>
         </div>
-        <h1>. . .</h1>
         <div className="container-global-information">
           <div className="name-information">
             <h2>
@@ -51,6 +62,13 @@ export default function CardSection() {
           <div className="information">
             <h2>Email :</h2>
             <p>{user.userAuth.register_email}</p>
+          </div>
+          <div className="information">
+            <h2>Date de création :</h2>
+            <p>{formatDateToFrench(user.userAuth.creation_date)}</p>
+          </div>
+          <div className="information">
+            <button type="button">Supprimer mon compte</button>
           </div>
         </div>
       </div>

@@ -25,8 +25,9 @@ export function AuthProvider({ children }) {
       register_email: null,
     },
     userInfos: {
-      about: null,
+      ID: null,
       auth_ID: null,
+      about: null,
       birthdate: null,
       firstname: null,
       lastname: null,
@@ -34,6 +35,8 @@ export function AuthProvider({ children }) {
       picture_url: null,
     },
     userAddress: {
+      ID: null,
+      candidate_ID: null,
       street_number: null,
       street_type: null,
       street_name: null,

@@ -1,0 +1,25 @@
+@import "../../Utils.scss";
+
+.btn-modal-apply {
+  display: flex;
+
+  .btn-apply {
+    width: 8vw;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: $primary-color-candidate;
+    color: $mono-white;
+    font-size: larger;
+    @include shadow;
+  }
+
+  .btn-apply:hover {
+    background-color: $special-color-candidate;
+  }
+
+  .btn-apply:active {
+    box-shadow: none;
+  }
+}
