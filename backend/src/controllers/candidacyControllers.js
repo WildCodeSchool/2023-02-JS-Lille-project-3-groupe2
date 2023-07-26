@@ -29,10 +29,12 @@ const read = (req, res) => {
 };
 
 const create = (req, res) => {
+  const candidacy = req.body;
+  candidacy.id = parseInt(req.params.id, 10);
   models.candidacy
     .createCandidacy()
-    .then(([rows]) => {
-      res.send(rows);
+    .then(([result]) => {
+      res.send(result);
     })
     .catch((err) => {
       console.error(err);
@@ -51,7 +53,7 @@ const edit = (req, res) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.send(204);
+        res.send(result).status(204);
       }
     })
     .catch((err) => {
