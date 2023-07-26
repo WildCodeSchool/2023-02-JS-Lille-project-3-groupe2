@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { AiFillEye } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthContext";
 import "./ModifySection.scss";
 import api from "../../services/api";
@@ -48,7 +49,10 @@ export default function ModifySection({ onBackButtonClick }) {
   const handleSectionChange = (event) => {
     setSelectedSection(event.target.value);
   };
-
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
   const putUser = async () => {
     await api.put(`/candidate/${updateUser.user_id}`, updateUser);
     await setUser((prev) => ({
@@ -102,12 +106,15 @@ export default function ModifySection({ onBackButtonClick }) {
             placeholder="johndoe@exemple.com ..."
           />
           <label htmlFor="password">Nouveau mot de passe :</label>
-          <input
-            id="password"
-            type="password"
-            value={updateUser.password}
-            onChange={(e) => handleChange(e)}
-          />
+          <div className="password">
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              value={updateUser.password}
+              onChange={(e) => handleChange(e)}
+            />
+            <AiFillEye onClick={() => handleShowPassword()} />
+          </div>
         </div>
       </div>
     ),

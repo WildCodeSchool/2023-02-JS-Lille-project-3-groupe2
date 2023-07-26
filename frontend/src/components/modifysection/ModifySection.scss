@@ -44,7 +44,6 @@
       .container-auth-section {
         display: flex;
         flex-direction: column;
-        width: 50%;
         padding: 3rem;
         background: rgba(255, 255, 255, 0.2);
         border-radius: 16px;
@@ -57,6 +56,17 @@
           color: $mono-white;
           border: none;
           outline: none;
+        }
+        .password {
+          svg {
+            position: relative;
+            float: right;
+            margin-left: -25px;
+            margin-top: 15px;
+          }
+          input {
+            width: 100%;
+          }
         }
         label {
           font-size: large;
@@ -148,10 +158,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 30vw;
 
     .btn-modify {
-      width: 8vw;
       background-color: $secondary-color-candidate;
       box-shadow: 0px 5px 7px 1px rgba(0, 0, 0, 0.29);
       border-radius: 25px;
@@ -159,7 +167,8 @@
       padding: 1rem;
       font-size: larger;
       color: $mono-white;
-
+      min-width: 10rem;
+      margin: 0 4vw 0 4vw;
       &:hover {
         background-color: $special-color-candidate;
       }
