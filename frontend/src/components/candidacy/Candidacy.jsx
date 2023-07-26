@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
+import ViewOfferModal from "../modalviewoffer/ViewOfferModal";
+import api from "../../services/api";
 import "../../Utils.scss";
 import "./Candidacy.scss";
-import api from "../../services/api";
 
 export default function Candidacy() {
   const [candidacy, setCandidacy] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedCandidacy, setSelectedCandidacy] = useState(null);
+
   const getCandidacy = async () => {
     try {
       const result = await api.get("/candidate/1/candidacy");
@@ -20,8 +24,14 @@ export default function Candidacy() {
   }, []);
 
   const handleViewDetails = (candidacyId) => {
+    setSelectedCandidacy(candidacy);
+    setModalIsOpen(true);
     // Do something when the button is clicked, e.g., show more details for the candidacy with the given ID.
     console.info(`View details for candidacy ID: ${candidacyId}`);
+  };
+
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
   };
 
   return (
@@ -60,6 +70,12 @@ export default function Candidacy() {
           ))}
         </tbody>
       </table>
+      {modalIsOpen && (
+        <ViewOfferModal
+          candidacy={selectedCandidacy}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 }
