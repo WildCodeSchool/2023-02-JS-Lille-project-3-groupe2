@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { AiFillEye } from "react-icons/ai";
+import { RiDeleteBinFill } from "react-icons/ri";
 import "../../Utils.scss";
 import "./bookmark.scss";
 import api from "../../services/api";
@@ -17,6 +19,7 @@ export default function Bookmark() {
   useEffect(() => {
     getBookmark();
   }, []);
+
   const handleViewDetails = (candidacyId) => {
     // Do something when the button is clicked, e.g., show more details for the candidacy with the given ID.
     console.info(`View details for candidacy ID: ${candidacyId}`);
@@ -49,7 +52,10 @@ export default function Bookmark() {
                   type="button"
                   onClick={() => handleViewDetails(item.bookmark)}
                 >
-                  View Details
+                  <AiFillEye />
+                </button>
+                <button type="button">
+                  <RiDeleteBinFill />
                 </button>
               </td>
             </tr>

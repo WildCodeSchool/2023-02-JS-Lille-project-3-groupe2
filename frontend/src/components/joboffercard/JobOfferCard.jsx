@@ -3,6 +3,7 @@ import "../../Utils.scss";
 
 import Proptypes from "prop-types";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { MdUpdate } from "react-icons/md";
 import "./JobOfferCard.scss";
 
 export default function JobOfferCard({
@@ -42,7 +43,9 @@ export default function JobOfferCard({
           </span>
 
           <span className="jobOfferCardXp">
-            <span>{formatMySQLDateToInputFormat(date)}</span>
+            <span>
+              <MdUpdate /> {formatMySQLDateToInputFormat(date)}
+            </span>
           </span>
         </div>
       </div>

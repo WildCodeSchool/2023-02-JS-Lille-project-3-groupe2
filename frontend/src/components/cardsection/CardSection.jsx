@@ -29,7 +29,7 @@ export default function CardSection() {
             alt="profil"
           />
         </div>
-        <p>[ Parlez-nous de vous ! ]</p>
+        <p>Un mot sur vous :</p>
         <p>{user.userInfos.about}</p>
       </div>
       <div className="container-right-profil">

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { AiFillEye } from "react-icons/ai";
+import api from "../../services/api";
 import "../../Utils.scss";
 import "./Candidacy.scss";
-import api from "../../services/api";
 
 export default function Candidacy() {
   const [candidacy, setCandidacy] = useState([]);
+
   const getCandidacy = async () => {
     try {
       const result = await api.get("/candidate/1/candidacy");
@@ -52,7 +54,7 @@ export default function Candidacy() {
                   type="button"
                   onClick={() => handleViewDetails(item.candidacyId)}
                 >
-                  View Details
+                  <AiFillEye />
                 </button>
               </td>
             </tr>
