@@ -19,7 +19,7 @@ export default function JobOffer() {
   };
   const navigate = useNavigate();
   const showDetails = (id) => {
-    navigate(`/preview/${id}`);
+    navigate(`preview/${id}`);
   };
 
   useEffect(() => {

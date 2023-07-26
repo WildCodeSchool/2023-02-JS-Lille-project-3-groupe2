@@ -16,12 +16,12 @@ const hashCandidatePassword = async (req, res, next) => {
 
       // Store the hashed password in the request body
       req.body.hashedPassword = hashedPassword;
-
       // Remove the plain text password from the request body
       delete req.body.password;
       next();
+    } else {
+      next();
     }
-    next();
   } catch (error) {
     res.status(500).json({ error: "Failed to hash candidate password" });
   }
