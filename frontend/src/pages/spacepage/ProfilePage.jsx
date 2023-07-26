@@ -3,7 +3,6 @@ import BookmarkAndCandidacy from "../../components/bookmarksandcandidacy/Bookmar
 import CardSection from "../../components/cardsection/CardSection";
 import ModifySection from "../../components/modifysection/ModifySection";
 import ButtonModify from "../../components/buttonmodification/ButtonModify";
-import ApplyButton from "../../components/applybutton/ApplyButton";
 import "./ProfilePage.scss";
 
 export default function ProfilePage() {
@@ -20,10 +19,7 @@ export default function ProfilePage() {
   return (
     <div className="CandidateSpacePageContainer">
       {showModifySection ? (
-        <>
-          <ApplyButton />
-          <ModifySection onBackButtonClick={handleBackButtonClick} />
-        </>
+        <ModifySection onBackButtonClick={handleBackButtonClick} />
       ) : (
         <>
           <CardSection />

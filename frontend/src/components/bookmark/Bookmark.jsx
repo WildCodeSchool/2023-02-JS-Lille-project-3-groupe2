@@ -4,21 +4,35 @@ import { RiDeleteBinFill } from "react-icons/ri";
 import "../../Utils.scss";
 import "./bookmark.scss";
 import api from "../../services/api";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Bookmark() {
-  const [bookmark, setBookmark] = useState([]);
+  const formatMySQLDateToInputFormat = (mysqlDate) => {
+    // Assuming the MySQL date is in the format "yyyy-mm-ddTHH:mm:ss.sssZ"
+    // Convert it to "yyyy-mm-dd HH:mm:ss" for the input element
+    const dateObject = new Date(mysqlDate);
+    const year = dateObject.getFullYear();
+    const month = String(dateObject.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObject.getDate()).padStart(2, "0");
+    const hours = String(dateObject.getHours()).padStart(2, "0");
+    const minutes = String(dateObject.getMinutes()).padStart(2, "0");
+    const seconds = String(dateObject.getSeconds()).padStart(2, "0");
+    return `Le ${day}/${month}/${year} à ${hours}:${minutes}:${seconds}`;
+  };
 
+  const [bookmark, setBookmark] = useState([]);
+  const { user } = useAuth();
   const getBookmark = async () => {
     try {
-      const result = await api.get("/candidate/1/bookmarks");
-      setBookmark([result.data]);
+      const result = await api.get(`/candidate/${user.userInfos.ID}/bookmarks`);
+      setBookmark(result.data);
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
     getBookmark();
-  }, []);
+  }, [user]);
 
   const handleViewDetails = (candidacyId) => {
     // Do something when the button is clicked, e.g., show more details for the candidacy with the given ID.
@@ -46,7 +60,7 @@ export default function Bookmark() {
             <tr key={item.bookmark_date}>
               <td>{item.enterprise_title}</td>
               <td>{item.offer_title}</td>
-              <td>{item.bookmark_date}</td>
+              <td>{formatMySQLDateToInputFormat(item.bookmark_date)}</td>
               <td>
                 <button
                   type="button"

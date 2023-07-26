@@ -20,7 +20,7 @@ const read = (req, res) => {
       if (rows[0] == null) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        res.send(rows);
       }
     })
     .catch((err) => {
@@ -53,7 +53,6 @@ const create = (req, res) => {
   const bookmarks = req.body;
   models.bookmarks
     .add(bookmarks)
-
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(500);

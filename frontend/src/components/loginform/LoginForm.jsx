@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginForm.scss";
+import Swal from "sweetalert2";
 import iconGoogle from "../../assets/iconGoogle.png";
 import iconLinkedin from "../../assets/iconLinkedin.png";
 import { useAuth } from "../../contexts/AuthContext";
@@ -21,6 +22,13 @@ export default function LoginForm() {
     try {
       await login(accountToSend.email, accountToSend.password);
       navigate("/");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Connexion réussie !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (err) {
       console.error(err);
       if (err.response) {

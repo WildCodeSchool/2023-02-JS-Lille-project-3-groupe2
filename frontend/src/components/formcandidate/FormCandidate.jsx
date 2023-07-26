@@ -7,6 +7,7 @@ import "primereact/resources/primereact.css";
 // import "primeicons/primeicons.css";
 import "./FormCandidate.scss";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function FormCandidate() {
@@ -327,8 +328,20 @@ export default function FormCandidate() {
         const result = await registerUser(registerFormData);
         if (result !== 409) {
           navigate("/login");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Ton compte a bien été créé !",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         } else {
           setError("Un compte est déjà lié à cet email");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Un compte est déjà lié à cet email !",
+          });
         }
       } catch (err) {
         console.error(err);
@@ -357,7 +370,6 @@ export default function FormCandidate() {
     return (
       <div className="container-register-candidate">
         <h2>Une erreur est survenue</h2>
-        <span>{error}</span>
         <button
           type="button"
           onClick={() => {

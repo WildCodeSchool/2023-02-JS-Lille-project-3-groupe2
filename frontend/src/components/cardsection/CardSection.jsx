@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { useAuth } from "../../contexts/AuthContext";
+import api from "../../services/api";
 import "./CardSection.scss";
 
 export default function CardSection() {
-  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { user, setUser, setIsLogin } = useAuth();
   function formatDateToFrench(dateString) {
     const date = new Date(dateString);
     const options = {
@@ -16,7 +20,77 @@ export default function CardSection() {
     };
     return date.toLocaleString("fr-FR", options);
   }
+  const deleteAccount = async () => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
 
+    const result = await swalWithBootstrapButtons.fire({
+      title: "Veux tu vraiment supprimer ton compte ?",
+      text: "Cette action est irreversible !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Oui, supprimer !",
+      cancelButtonText: "Non, annuler !",
+      reverseButtons: true,
+    });
+    if (result.isConfirmed) {
+      swalWithBootstrapButtons.fire(
+        "Compte supprimé !",
+        "Votre compte n'est plus accessible.",
+        "success"
+      );
+      await api.delete(`/candidate/${user.userInfos.ID}`);
+      await api.get("/logout");
+      setUser({
+        userAuth: {
+          ID: null,
+          account_type: null,
+          active: null,
+          creation_date: null,
+          password: null,
+          register_email: null,
+        },
+        userInfos: {
+          ID: null,
+          auth_ID: null,
+          about: null,
+          birthdate: null,
+          firstname: null,
+          lastname: null,
+          phone_number: null,
+          picture_url: null,
+        },
+        userAddress: {
+          ID: null,
+          candidate_ID: null,
+          street_number: null,
+          street_type: null,
+          street_name: null,
+          city: null,
+          postal_code: null,
+          department: null,
+          region: null,
+          country: null,
+        },
+      });
+      setIsLogin(false);
+      navigate("/");
+    } else if (
+      /* Read more about handling dismissals below */
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        "Action annulée",
+        "Ton compte est sain et sauf :)",
+        "error"
+      );
+    }
+  };
   return (
     <div className="card-section-profil">
       <div className="container-left-profil">
@@ -68,7 +142,9 @@ export default function CardSection() {
             <p>{formatDateToFrench(user.userAuth.creation_date)}</p>
           </div>
           <div className="information">
-            <button type="button">Supprimer mon compte</button>
+            <button type="button" onClick={deleteAccount}>
+              Supprimer mon compte
+            </button>
           </div>
         </div>
       </div>

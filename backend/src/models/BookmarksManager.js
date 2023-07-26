@@ -34,7 +34,7 @@ WHERE b.candidate_ID = ?;
 
   async add(bookmarData) {
     const query =
-      "INSERT INTO bookmarks (candidate_ID, offer_ID, enterprise_ID, bookmark_date) VALUES (?, ?, ?, NOW())";
+      "INSERT INTO bookmarks (candidate_ID, offer_ID, enterprise_ID) VALUES (?, ?, ?)";
     try {
       const result = await this.database.query(query, [
         bookmarData.candidate_ID,

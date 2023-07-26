@@ -1,12 +1,10 @@
-import CorporateValues from "../../components/corporateValues/CorporateValues";
-
 import SliderAutomatic from "../../components/sliderautomatic/SliderAutomatic";
 import "./HomePage.scss";
+import CorporateValues from "../../components/corporatevalues/CorporateValues";
 
 import Teaser from "../../components/teaser/Teaser";
 
 import JobOffer from "../../components/joboffer/JobOffer";
-
 import VideoYt from "../../components/videoyt/VideoYt";
 
 export default function HomePage() {

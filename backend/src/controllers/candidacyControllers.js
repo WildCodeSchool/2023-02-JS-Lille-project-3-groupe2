@@ -29,8 +29,10 @@ const read = (req, res) => {
 };
 
 const create = (req, res) => {
+  const candidacy = req.body;
+  candidacy.candidateId = req.params.id;
   models.candidacy
-    .createCandidacy()
+    .createCandidacy(candidacy)
     .then(([rows]) => {
       res.send(rows);
     })

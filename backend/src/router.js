@@ -27,7 +27,7 @@ router.get("/candidate", candidateControllers.browse);
 router.get("/candidate/:id", candidateControllers.read);
 router.put("/offer/:id", offerControllers.edit);
 router.put("/candidate/:id/candidacy", candidacyControllers.edit);
-router.post("/candidate/:id/bookmarks", bookmarksControllers.create);
+router.post("/candidate/bookmarks", bookmarksControllers.create);
 router.post("/candidate/:id/candicacy", candidacyControllers.create);
 router.delete("/candidate/:id/bookmarks", bookmarksControllers.destroy);
 router.put(
@@ -118,7 +118,6 @@ router.post(
 
 router.get("/logout", (req, res) => {
   res.clearCookie("token");
-
   res.sendStatus(204);
 });
 

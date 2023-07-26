@@ -19,7 +19,7 @@ export default function JobOffer() {
   };
   const navigate = useNavigate();
   const showDetails = (id) => {
-    navigate(`preview/${id}`);
+    navigate(`/offer/preview/${id}`);
   };
 
   useEffect(() => {
@@ -50,6 +50,7 @@ export default function JobOffer() {
             >
               <JobOfferCard
                 key={item.ID}
+                offerId={item.ID}
                 image={item.logo_url}
                 nameCompany={item.trade_name
                   .toLowerCase()

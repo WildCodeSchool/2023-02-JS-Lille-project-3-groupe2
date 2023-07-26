@@ -37,18 +37,18 @@ class CandidacyManager extends AbstractManager {
     }
   }
 
-  async createCandidacy(candidateId, offerId, candidacyData) {
+  async createCandidacy(candidacy) {
     const query = `
     INSERT INTO candidacy (candidate_ID, offer_ID, email_contact, application_date, cv_url, motivation_letter_url)
     VALUES (?, ?, ?, NOW(), ?, ?);
   `;
     try {
       const result = await this.database.query(query, [
-        candidateId,
-        offerId,
-        candidacyData.email_contact,
-        candidacyData.cv_url,
-        candidacyData.motivation_letter_url,
+        candidacy.candidateId,
+        candidacy.offerId,
+        candidacy.email_contact,
+        candidacy.cv_url,
+        candidacy.motivation_letter_url,
       ]);
       return result; // ou vous pouvez retourner un message de succès
     } catch (error) {
