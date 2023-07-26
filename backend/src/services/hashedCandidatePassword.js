@@ -19,6 +19,7 @@ const hashCandidatePassword = async (req, res, next) => {
 
       // Remove the plain text password from the request body
       delete req.body.password;
+      next();
     }
     next();
   } catch (error) {
