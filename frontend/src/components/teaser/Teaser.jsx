@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import career from "../../assets/career.svg";
+import api from "../../services/api";
 
 export default function Teaser() {
   const [options, setOptions] = useState({ place: {}, type: {} });
@@ -13,7 +14,7 @@ export default function Teaser() {
   const placeOptions = options.place;
 
   const getOptions = async () => {
-    const result = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/offer`);
+    const result = await axios.get(api.get("/offer"));
     const cityArray = result.data.map((item) => ({
       value: item.city,
       label: item.city,
