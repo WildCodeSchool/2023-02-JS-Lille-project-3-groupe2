@@ -18,7 +18,7 @@ import { useAuth } from "./contexts/AuthContext";
 import PreviewOfferPage from "./pages/previewofferpage/PreviewOfferPage";
 
 function Router() {
-  // AutoLogin From Token
+  // AutoLogin From Tokens
   const { verifyToken } = useAuth();
   React.useEffect(() => {
     (async () => {
@@ -43,7 +43,7 @@ function Router() {
         { path: "register", element: <RegisterPage /> },
         { path: "login", element: <LoginPage /> },
         { path: "offer", element: <OfferPage /> },
-        { path: "preview/:id", element: <PreviewOfferPage /> },
+        { path: "offer/preview/:id", element: <PreviewOfferPage /> },
         { path: "aboutus", element: <AboutUsPage /> },
         { path: "cgu", element: <CguPage /> },
         { path: "cookies", element: <Cookies /> },

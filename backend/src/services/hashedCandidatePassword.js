@@ -5,7 +5,7 @@ const models = require("../models");
 const hashCandidatePassword = async (req, res, next) => {
   const { password } = req.body;
   try {
-    if (password) {
+    if (password.length) {
       // Hash the candidate's password using Argon2id
       const hashedPassword = await argon2.hash(password, {
         type: argon2.argon2id,
@@ -16,11 +16,12 @@ const hashCandidatePassword = async (req, res, next) => {
 
       // Store the hashed password in the request body
       req.body.hashedPassword = hashedPassword;
-
       // Remove the plain text password from the request body
       delete req.body.password;
+      next();
+    } else {
+      next();
     }
-    next();
   } catch (error) {
     res.status(500).json({ error: "Failed to hash candidate password" });
   }
