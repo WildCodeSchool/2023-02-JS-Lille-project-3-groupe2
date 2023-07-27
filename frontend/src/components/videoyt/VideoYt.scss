@@ -1,9 +1,14 @@
 @import "../../Utils.scss";
 
 .title {
+  font-size: clamp(1.5rem, 2.2vw, 2.5rem);
+  font-weight: bolder;
   margin-bottom: 2rem;
   text-align: center;
 }
+
 .title-bold {
+  font-size: clamp(1.5rem, 2.2vw, 2.5rem);
+  font-weight: bolder;
   color: $secondary-color-candidate;
 }

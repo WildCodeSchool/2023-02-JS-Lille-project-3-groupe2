@@ -1,7 +1,9 @@
 @import "../../Utils.scss";
+
 .footer_enterprise {
   background-color: $primary-color-enterprise;
 }
+
 footer {
   display: flex;
   flex-direction: column;
@@ -13,10 +15,12 @@ footer {
   color: $mono-white;
   padding: 2% 0 2% 0;
   z-index: 100;
+
   .footer_part1 {
     width: 80%;
     text-align: center;
     margin-bottom: 2rem;
+    margin-left: 2rem;
     z-index: 100;
   }
 
@@ -26,14 +30,17 @@ footer {
     justify-content: space-evenly;
     margin-bottom: 2rem;
     z-index: 100;
+
     .footer_text2 {
       margin-left: 5%;
       list-style-type: none;
+
       a {
         color: $mono-white;
         text-decoration: underline;
       }
     }
+
     .footer_text3 {
       word-wrap: break-word;
       margin-left: 5%;
@@ -53,22 +60,27 @@ footer {
       text-align: center;
       margin-bottom: 0.5rem;
     }
+
     .footer_icons {
       display: flex;
       justify-content: center;
+
       .footer_icons_1 {
         margin-right: 0.2rem;
       }
+
       .footer_icons_1 {
         margin-left: 0.2rem;
       }
     }
   }
 }
+
 @media only screen and (min-width: 600px) {
   footer {
     display: flex;
     flex-direction: row;
+
     .footer_part1 {
       margin-bottom: 0;
       width: 50%;
@@ -78,21 +90,20 @@ footer {
       align-items: center;
       margin-bottom: 0;
 
-      .footer_text2 {
-      }
-      .footer_text3 {
-      }
+      .footer_text2 {}
+
+      .footer_text3 {}
     }
 
     .footer_part3 {
       width: 30%;
-      .footer_text4 {
-      }
+
+      .footer_text4 {}
+
       .footer_icons {
-        .footer_icons_1 {
-        }
-        .footer_icons_1 {
-        }
+        .footer_icons_1 {}
+
+        .footer_icons_1 {}
       }
     }
   }

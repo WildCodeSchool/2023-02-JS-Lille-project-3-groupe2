@@ -1,4 +1,5 @@
 @import "../../Utils.scss";
+
 .AjustJobOfferCardAndBtn {
   button {
     border-style: dashed;
@@ -8,24 +9,29 @@
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid $special-color-candidate;
   }
+
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   width: 90%;
 
-  h2 {
+  h1 {
     text-align: center;
+    margin-bottom: 2rem;
+
     span {
       color: $secondary-color-candidate;
     }
   }
 }
+
 .JobOfferContainer {
   display: flex;
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
 }
+
 @media only screen and (max-width: 750px) {
   .AjustJobOfferCardAndBtn {
     width: 100%;

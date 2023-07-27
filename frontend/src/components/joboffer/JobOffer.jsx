@@ -30,9 +30,9 @@ export default function JobOffer() {
 
   return (
     <div className="AjustJobOfferCardAndBtn">
-      <h2>
+      <h1>
         Des offres d'emploi <span>à votre image</span>
-      </h2>
+      </h1>
       <div className="JobOfferContainer">
         {jobOffer
           .slice() // Create a copy of the array to avoid modifying the original state
