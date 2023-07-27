@@ -18,11 +18,11 @@ export default function FormCandidate() {
   const [confirmPassword, setConfirmPassword] = useState("password");
 
   const [registerFormData, setRegisterFormData] = useState({
-    lastname: "loumachi",
-    firstname: "sacha",
-    birthdate: "1997-11-16",
+    lastname: "Deloose",
+    firstname: "Jocelyn",
+    birthdate: "1986-01-18",
     phoneNumber: "06 75 30 11 41",
-    about: "",
+    about: "Développeur web fullstack JS",
     pictureUrl: "",
     streetNumber: "22",
     streetType: "Rue",
@@ -32,7 +32,7 @@ export default function FormCandidate() {
     department: "Nord",
     region: "Haut de France",
     country: "France",
-    registerEmail: "test@example.com",
+    registerEmail: "jocelyn@example.com",
     password: "password",
     accountType: "candidat",
   });

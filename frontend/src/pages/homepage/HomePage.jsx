@@ -1,6 +1,6 @@
 import SliderAutomatic from "../../components/sliderautomatic/SliderAutomatic";
 import "./HomePage.scss";
-import CorporateValues from "../../components/corporatevalues/CorporateValues";
+import CorporateValues from "../../components/corporateValues/CorporateValues";
 
 import Teaser from "../../components/teaser/Teaser";
 

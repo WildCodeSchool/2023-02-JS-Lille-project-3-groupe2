@@ -4,12 +4,13 @@ import { BsSearch } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import career from "../../assets/career.svg";
 import api from "../../services/api";
 
 export default function Teaser() {
   const [options, setOptions] = useState({ place: {}, type: {} });
-
+  const navigate = useNavigate();
   const typeOptions = options.type;
   const placeOptions = options.place;
 
@@ -110,6 +111,7 @@ export default function Teaser() {
             </div>
             <div className="buttonOffer">
               <motion.button
+                onClick={() => navigate("/offer")}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
