@@ -4,7 +4,6 @@ import CorporateValues from "../../components/corporateValues/CorporateValues";
 
 import Teaser from "../../components/teaser/Teaser";
 
-import JobOffer from "../../components/joboffer/JobOffer";
 import VideoYt from "../../components/videoyt/VideoYt";
 
 export default function HomePage() {
@@ -15,7 +14,6 @@ export default function HomePage() {
 "
     >
       <Teaser />
-      <JobOffer />
       <CorporateValues />
       <VideoYt />
       <SliderAutomatic />
