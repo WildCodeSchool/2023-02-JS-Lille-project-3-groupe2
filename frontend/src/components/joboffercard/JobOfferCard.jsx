@@ -29,11 +29,13 @@ export default function JobOfferCard({
   return (
     <div className="jobOfferCardContainer">
       <div className="jobOfferCardContentTop">
-        <img className="jobOfferCardImg" src={image} alt="logo" />
+        <div className="jobOfferCardImg">
+          <img src={image} alt="logo" />{" "}
+        </div>
         <div className="jobOfferCardTitle">
           {" "}
           <h3 className="jobOfferCardNameCompany">{nameCompany}</h3>
-          <h5 className="jobOfferCardTitle">{jobTitle}</h5>
+          <h5>{jobTitle}</h5>
         </div>
       </div>
       <div className="jobOfferCardContentMid">

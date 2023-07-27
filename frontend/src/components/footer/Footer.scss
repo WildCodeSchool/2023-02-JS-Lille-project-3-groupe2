@@ -9,12 +9,14 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  font-size: 1rem;
-  font-weight: 900;
   background-color: $primary-color-candidate;
   color: $mono-white;
   padding: 2% 0 2% 0;
   z-index: 100;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-weight: normal;
+
+  font-weight: normal;
 
   .footer_part1 {
     width: 80%;
@@ -90,20 +92,25 @@ footer {
       align-items: center;
       margin-bottom: 0;
 
-      .footer_text2 {}
+      .footer_text2 {
+      }
 
-      .footer_text3 {}
+      .footer_text3 {
+      }
     }
 
     .footer_part3 {
       width: 30%;
 
-      .footer_text4 {}
+      .footer_text4 {
+      }
 
       .footer_icons {
-        .footer_icons_1 {}
+        .footer_icons_1 {
+        }
 
-        .footer_icons_1 {}
+        .footer_icons_1 {
+        }
       }
     }
   }

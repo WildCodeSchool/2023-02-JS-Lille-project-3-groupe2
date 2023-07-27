@@ -20,6 +20,16 @@ export default function CardSection() {
     };
     return date.toLocaleString("fr-FR", options);
   }
+  function formatBirthDate(dateString) {
+    const date = new Date(dateString);
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return date.toLocaleString("fr-FR", options);
+  }
+
   const deleteAccount = async () => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -95,7 +105,9 @@ export default function CardSection() {
     <div className="card-section-profil">
       <div className="container-left-profil">
         <h1>
-          Bonjour <span>{user.userInfos.firstname}</span> !
+          Bonjour{" "}
+          <span>{`${user.userInfos.firstname} ${user.userInfos.lastname}`}</span>{" "}
+          !
         </h1>
         <div className="picture-profile">
           <img
@@ -111,11 +123,11 @@ export default function CardSection() {
           <h1>Informations personnelles</h1>
         </div>
         <div className="container-global-information">
-          <div className="name-information">
-            <h2>
-              {user.userInfos.firstname} {user.userInfos.lastname}
-            </h2>
+          <div className="information">
+            <h2>Date de naissance :</h2>
+            <p>{formatBirthDate(user.userInfos.birthdate)}</p>
           </div>
+
           <div className="information">
             <h2>Adresse :</h2>
             <p>

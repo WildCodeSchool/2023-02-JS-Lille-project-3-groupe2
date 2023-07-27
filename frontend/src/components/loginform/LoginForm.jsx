@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginForm.scss";
 import Swal from "sweetalert2";
-import iconGoogle from "../../assets/iconGoogle.png";
-import iconLinkedin from "../../assets/iconLinkedin.png";
+
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function LoginForm() {
@@ -85,18 +84,6 @@ export default function LoginForm() {
               })
             }
           />
-        </div>
-
-        <div className="container-google-linkedin">
-          <button type="button" className="btn-google-linkedin">
-            <img src={iconGoogle} alt="logo google" />
-          </button>
-
-          <span>ou</span>
-
-          <button type="button" className="btn-google-linkedin">
-            <img src={iconLinkedin} alt="logo linkedin" />
-          </button>
         </div>
 
         <div className="container-text-btnValidate">
